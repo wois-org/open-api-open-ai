@@ -118,7 +118,11 @@ defmodule OpenExAi.MixProject do
         "CONTRIBUTING.md",
         "STYLE_GUIDE.md"
       ],
-      licenses: ["MIT"]
+      licenses: ["MIT"],
+      links: %{
+        "GitHub" => "https://github.com/wois-org/open-api-open-ai.git"
+      }
+
     ]
   end
 end
