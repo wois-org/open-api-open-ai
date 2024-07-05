@@ -48,10 +48,11 @@ defmodule OpenExAi.MixProject do
     [
       main: "readme",
       extras: [
-        "README.md": [title: "Overview"]
-        # "CODE_OF_CONDUCT.md": [title: "Code of Conduct"],
-        # "CONTRIBUTING.md": [title: "Contributing"],
-        # "LICENSE": [title: "License"]
+        "README.md": [title: "Overview"],
+        "CHANGELOG.md": [title: "Changelog"],
+        "CODE_OF_CONDUCT.md": [title: "Code of Conduct"],
+        "CONTRIBUTING.md": [title: "Contributing"],
+        "LICENSE": [title: "License"]
       ],
       groups_for_modules: [
         Client: [

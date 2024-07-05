@@ -2,6 +2,7 @@
 <!-- next-header -->
 
 ## [Unreleased] - ReleaseDate
+- Added missing md docs files 
 
 ## [0.1.2] - 2024-7-5
 - Removed unused schema files
