@@ -25,6 +25,7 @@ replacements = [
 
 config :version_release,
   tag_prefix: "v",
+  hex_publish: true,
   changelog: %{
     creation: :manual,
     minor_patterns: ["added", "changed"],
