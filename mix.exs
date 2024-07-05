@@ -29,7 +29,7 @@ defmodule OpenExAi.MixProject do
       {:ex_doc, "~> 0.29", only: :dev, runtime: false},
       {:oapi_generator, "~> 0.1.1", only: :dev, runtime: false},
       {:httpoison, "~> 2.0"},
-      {:poison, "~> 6.0"},
+      {:poison, "~> 6.0", only: :test},
       {:mox, "~> 1.0", only: :test},
       {:version_release, "0.5.3", only: :dev, runtime: false}
     ]
