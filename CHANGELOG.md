@@ -2,6 +2,10 @@
 <!-- next-header -->
 
 ## [Unreleased] - ReleaseDate
+- Removed unused schema files
+- Updated mix configuration to use poison only for tests
+- Updated mix configuration links
+- Added license doc
 
 ## [0.1.1] - 2024-7-5
 - Configured `oapi_generator` 
