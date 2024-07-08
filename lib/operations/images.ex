@@ -9,7 +9,7 @@ defmodule OpenAi.Images do
   Creates an image given a prompt.
   """
   @spec create_image(OpenAi.Image.CreateRequest.t(), keyword) ::
-          {:ok, OpenAi.Image.Response.t()} | :error
+          {:ok, OpenAi.Image.Response.t()} | {:error, OpenAi.Error.error()}
   def create_image(body, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -29,7 +29,7 @@ defmodule OpenAi.Images do
   Creates an edited or extended image given an original image and a prompt.
   """
   @spec create_image_edit(OpenAi.Image.EditCreateRequest.t(), keyword) ::
-          {:ok, OpenAi.Image.Response.t()} | :error
+          {:ok, OpenAi.Image.Response.t()} | {:error, OpenAi.Error.error()}
   def create_image_edit(body, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -49,7 +49,7 @@ defmodule OpenAi.Images do
   Creates a variation of a given image.
   """
   @spec create_image_variation(OpenAi.Image.VariationCreateRequest.t(), keyword) ::
-          {:ok, OpenAi.Image.Response.t()} | :error
+          {:ok, OpenAi.Image.Response.t()} | {:error, OpenAi.Error.error()}
   def create_image_variation(body, opts \\ []) do
     client = opts[:client] || @default_client
 

@@ -9,7 +9,7 @@ defmodule OpenAi.Chat do
   Creates a model response for the given chat conversation.
   """
   @spec create_chat_completion(OpenAi.Chat.Completion.CreateRequest.t(), keyword) ::
-          {:ok, OpenAi.Chat.Completion.CreateResponse.t()} | :error
+          {:ok, OpenAi.Chat.Completion.CreateResponse.t()} | {:error, OpenAi.Error.error()}
   def create_chat_completion(body, opts \\ []) do
     client = opts[:client] || @default_client
 

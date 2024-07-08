@@ -9,7 +9,7 @@ defmodule OpenAi.Audio do
   Generates audio from the input text.
   """
   @spec create_speech(OpenAi.Audio.Speech.CreateRequest.t(), keyword) ::
-          {:ok, String.t()} | :error
+          {:ok, String.t()} | {:error, OpenAi.Error.error()}
   def create_speech(body, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -32,7 +32,7 @@ defmodule OpenAi.Audio do
           {:ok,
            OpenAi.Audio.Transcription.CreateResponse.Json.t()
            | OpenAi.Audio.Transcription.CreateResponse.VerboseJson.t()}
-          | :error
+          | {:error, OpenAi.Error.error()}
   def create_transcription(body, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -62,7 +62,7 @@ defmodule OpenAi.Audio do
           {:ok,
            OpenAi.Audio.Translation.CreateResponse.Json.t()
            | OpenAi.Audio.Translation.CreateResponse.VerboseJson.t()}
-          | :error
+          | {:error, OpenAi.Error.error()}
   def create_translation(body, opts \\ []) do
     client = opts[:client] || @default_client
 

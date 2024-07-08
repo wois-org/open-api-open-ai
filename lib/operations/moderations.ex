@@ -9,7 +9,7 @@ defmodule OpenAi.Moderations do
   Classifies if text is potentially harmful.
   """
   @spec create_moderation(OpenAi.Moderation.CreateRequest.t(), keyword) ::
-          {:ok, OpenAi.Moderation.CreateResponse.t()} | :error
+          {:ok, OpenAi.Moderation.CreateResponse.t()} | {:error, OpenAi.Error.error()}
   def create_moderation(body, opts \\ []) do
     client = opts[:client] || @default_client
 

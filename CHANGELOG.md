@@ -2,6 +2,7 @@
 <!-- next-header -->
 
 ## [Unreleased] - ReleaseDate
+- Added error that all operations return in case of error
 
 ## [0.1.3] - 2024-7-5
 - Added missing md docs files 

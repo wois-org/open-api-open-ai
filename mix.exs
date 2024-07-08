@@ -26,10 +26,11 @@ defmodule OpenExAi.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:dialyxir, "~> 1.0", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.29", only: :dev, runtime: false},
       {:oapi_generator, "~> 0.1.1", only: :dev, runtime: false},
       {:httpoison, "~> 2.0"},
-      {:poison, "~> 6.0", only: :test},
+      {:poison, "~> 5.0"},
       {:mox, "~> 1.0", only: :test},
       {:version_release, "0.5.3", only: :dev, runtime: false}
     ]
@@ -52,7 +53,7 @@ defmodule OpenExAi.MixProject do
         "CHANGELOG.md": [title: "Changelog"],
         "CODE_OF_CONDUCT.md": [title: "Code of Conduct"],
         "CONTRIBUTING.md": [title: "Contributing"],
-        "LICENSE": [title: "License"]
+        LICENSE: [title: "License"]
       ],
       groups_for_modules: [
         Client: [
@@ -121,9 +122,8 @@ defmodule OpenExAi.MixProject do
       ],
       licenses: ["MIT"],
       links: %{
-        "GitHub" => "https://github.com/wois-org/open-api-open-ai.git"
+        "GitHub" => "https://github.com/wois-org/open-api-open-ai"
       }
-
     ]
   end
 end

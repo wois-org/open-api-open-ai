@@ -8,7 +8,8 @@ defmodule OpenAi.Batch do
   @doc """
   Cancels an in-progress batch. The batch will be in status `cancelling` for up to 10 minutes, before changing to `cancelled`, where it will have partial results (if any) available in the output file.
   """
-  @spec cancel_batch(String.t(), keyword) :: {:ok, OpenAi.Batch.t()} | :error
+  @spec cancel_batch(String.t(), keyword) ::
+          {:ok, OpenAi.Batch.t()} | {:error, OpenAi.Error.error()}
   def cancel_batch(batch_id, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -25,7 +26,7 @@ defmodule OpenAi.Batch do
   @doc """
   Creates and executes a batch from an uploaded file of requests
   """
-  @spec create_batch(map, keyword) :: {:ok, OpenAi.Batch.t()} | :error
+  @spec create_batch(map, keyword) :: {:ok, OpenAi.Batch.t()} | {:error, OpenAi.Error.error()}
   def create_batch(body, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -52,7 +53,8 @@ defmodule OpenAi.Batch do
       
 
   """
-  @spec list_batches(keyword) :: {:ok, OpenAi.Batch.ListResponse.t()} | :error
+  @spec list_batches(keyword) ::
+          {:ok, OpenAi.Batch.ListResponse.t()} | {:error, OpenAi.Error.error()}
   def list_batches(opts \\ []) do
     client = opts[:client] || @default_client
     query = Keyword.take(opts, [:after, :limit])
@@ -71,7 +73,8 @@ defmodule OpenAi.Batch do
   @doc """
   Retrieves a batch.
   """
-  @spec retrieve_batch(String.t(), keyword) :: {:ok, OpenAi.Batch.t()} | :error
+  @spec retrieve_batch(String.t(), keyword) ::
+          {:ok, OpenAi.Batch.t()} | {:error, OpenAi.Error.error()}
   def retrieve_batch(batch_id, opts \\ []) do
     client = opts[:client] || @default_client
 

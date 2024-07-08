@@ -8,7 +8,8 @@ defmodule OpenAi.Assistants do
   @doc """
   Cancels a run that is `in_progress`.
   """
-  @spec cancel_run(String.t(), String.t(), keyword) :: {:ok, OpenAi.Run.t()} | :error
+  @spec cancel_run(String.t(), String.t(), keyword) ::
+          {:ok, OpenAi.Run.t()} | {:error, OpenAi.Error.error()}
   def cancel_run(thread_id, run_id, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -26,7 +27,7 @@ defmodule OpenAi.Assistants do
   Create an assistant with a model and instructions.
   """
   @spec create_assistant(OpenAi.Assistant.CreateRequest.t(), keyword) ::
-          {:ok, OpenAi.Assistant.t()} | :error
+          {:ok, OpenAi.Assistant.t()} | {:error, OpenAi.Error.error()}
   def create_assistant(body, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -46,7 +47,7 @@ defmodule OpenAi.Assistants do
   Create a message.
   """
   @spec create_message(String.t(), OpenAi.Message.CreateRequest.t(), keyword) ::
-          {:ok, OpenAi.Message.t()} | :error
+          {:ok, OpenAi.Message.t()} | {:error, OpenAi.Error.error()}
   def create_message(thread_id, body, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -66,7 +67,7 @@ defmodule OpenAi.Assistants do
   Create a run.
   """
   @spec create_run(String.t(), OpenAi.Run.CreateRequest.t(), keyword) ::
-          {:ok, OpenAi.Run.t()} | :error
+          {:ok, OpenAi.Run.t()} | {:error, OpenAi.Error.error()}
   def create_run(thread_id, body, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -86,7 +87,7 @@ defmodule OpenAi.Assistants do
   Create a thread.
   """
   @spec create_thread(OpenAi.Thread.CreateRequest.t(), keyword) ::
-          {:ok, OpenAi.Thread.t()} | :error
+          {:ok, OpenAi.Thread.t()} | {:error, OpenAi.Error.error()}
   def create_thread(body, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -106,7 +107,7 @@ defmodule OpenAi.Assistants do
   Create a thread and run it in one request.
   """
   @spec create_thread_and_run(OpenAi.Thread.CreateAndRunRequest.t(), keyword) ::
-          {:ok, OpenAi.Run.t()} | :error
+          {:ok, OpenAi.Run.t()} | {:error, OpenAi.Error.error()}
   def create_thread_and_run(body, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -126,7 +127,7 @@ defmodule OpenAi.Assistants do
   Delete an assistant.
   """
   @spec delete_assistant(String.t(), keyword) ::
-          {:ok, OpenAi.Assistant.DeleteResponse.t()} | :error
+          {:ok, OpenAi.Assistant.DeleteResponse.t()} | {:error, OpenAi.Error.error()}
   def delete_assistant(assistant_id, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -144,7 +145,7 @@ defmodule OpenAi.Assistants do
   Deletes a message.
   """
   @spec delete_message(String.t(), String.t(), keyword) ::
-          {:ok, OpenAi.Message.DeleteResponse.t()} | :error
+          {:ok, OpenAi.Message.DeleteResponse.t()} | {:error, OpenAi.Error.error()}
   def delete_message(thread_id, message_id, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -161,7 +162,8 @@ defmodule OpenAi.Assistants do
   @doc """
   Delete a thread.
   """
-  @spec delete_thread(String.t(), keyword) :: {:ok, OpenAi.Thread.DeleteResponse.t()} | :error
+  @spec delete_thread(String.t(), keyword) ::
+          {:ok, OpenAi.Thread.DeleteResponse.t()} | {:error, OpenAi.Error.error()}
   def delete_thread(thread_id, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -178,7 +180,8 @@ defmodule OpenAi.Assistants do
   @doc """
   Retrieves an assistant.
   """
-  @spec get_assistant(String.t(), keyword) :: {:ok, OpenAi.Assistant.t()} | :error
+  @spec get_assistant(String.t(), keyword) ::
+          {:ok, OpenAi.Assistant.t()} | {:error, OpenAi.Error.error()}
   def get_assistant(assistant_id, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -195,7 +198,8 @@ defmodule OpenAi.Assistants do
   @doc """
   Retrieve a message.
   """
-  @spec get_message(String.t(), String.t(), keyword) :: {:ok, OpenAi.Message.t()} | :error
+  @spec get_message(String.t(), String.t(), keyword) ::
+          {:ok, OpenAi.Message.t()} | {:error, OpenAi.Error.error()}
   def get_message(thread_id, message_id, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -212,7 +216,8 @@ defmodule OpenAi.Assistants do
   @doc """
   Retrieves a run.
   """
-  @spec get_run(String.t(), String.t(), keyword) :: {:ok, OpenAi.Run.t()} | :error
+  @spec get_run(String.t(), String.t(), keyword) ::
+          {:ok, OpenAi.Run.t()} | {:error, OpenAi.Error.error()}
   def get_run(thread_id, run_id, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -230,7 +235,7 @@ defmodule OpenAi.Assistants do
   Retrieves a run step.
   """
   @spec get_run_step(String.t(), String.t(), String.t(), keyword) ::
-          {:ok, OpenAi.Run.Step.t()} | :error
+          {:ok, OpenAi.Run.Step.t()} | {:error, OpenAi.Error.error()}
   def get_run_step(thread_id, run_id, step_id, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -247,7 +252,8 @@ defmodule OpenAi.Assistants do
   @doc """
   Retrieves a thread.
   """
-  @spec get_thread(String.t(), keyword) :: {:ok, OpenAi.Thread.t()} | :error
+  @spec get_thread(String.t(), keyword) ::
+          {:ok, OpenAi.Thread.t()} | {:error, OpenAi.Error.error()}
   def get_thread(thread_id, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -276,7 +282,8 @@ defmodule OpenAi.Assistants do
       
 
   """
-  @spec list_assistants(keyword) :: {:ok, OpenAi.Assistant.ListResponse.t()} | :error
+  @spec list_assistants(keyword) ::
+          {:ok, OpenAi.Assistant.ListResponse.t()} | {:error, OpenAi.Error.error()}
   def list_assistants(opts \\ []) do
     client = opts[:client] || @default_client
     query = Keyword.take(opts, [:after, :before, :limit, :order])
@@ -309,7 +316,8 @@ defmodule OpenAi.Assistants do
       
 
   """
-  @spec list_messages(String.t(), keyword) :: {:ok, OpenAi.Message.ListResponse.t()} | :error
+  @spec list_messages(String.t(), keyword) ::
+          {:ok, OpenAi.Message.ListResponse.t()} | {:error, OpenAi.Error.error()}
   def list_messages(thread_id, opts \\ []) do
     client = opts[:client] || @default_client
     query = Keyword.take(opts, [:after, :before, :limit, :order, :run_id])
@@ -341,7 +349,7 @@ defmodule OpenAi.Assistants do
 
   """
   @spec list_run_steps(String.t(), String.t(), keyword) ::
-          {:ok, OpenAi.Run.Step.ListResponse.t()} | :error
+          {:ok, OpenAi.Run.Step.ListResponse.t()} | {:error, OpenAi.Error.error()}
   def list_run_steps(thread_id, run_id, opts \\ []) do
     client = opts[:client] || @default_client
     query = Keyword.take(opts, [:after, :before, :limit, :order])
@@ -372,7 +380,8 @@ defmodule OpenAi.Assistants do
       
 
   """
-  @spec list_runs(String.t(), keyword) :: {:ok, OpenAi.Run.ListResponse.t()} | :error
+  @spec list_runs(String.t(), keyword) ::
+          {:ok, OpenAi.Run.ListResponse.t()} | {:error, OpenAi.Error.error()}
   def list_runs(thread_id, opts \\ []) do
     client = opts[:client] || @default_client
     query = Keyword.take(opts, [:after, :before, :limit, :order])
@@ -392,7 +401,7 @@ defmodule OpenAi.Assistants do
   Modifies an assistant.
   """
   @spec modify_assistant(String.t(), OpenAi.Assistant.UpdateRequest.t(), keyword) ::
-          {:ok, OpenAi.Assistant.t()} | :error
+          {:ok, OpenAi.Assistant.t()} | {:error, OpenAi.Error.error()}
   def modify_assistant(assistant_id, body, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -412,7 +421,7 @@ defmodule OpenAi.Assistants do
   Modifies a message.
   """
   @spec modify_message(String.t(), String.t(), OpenAi.Message.UpdateRequest.t(), keyword) ::
-          {:ok, OpenAi.Message.t()} | :error
+          {:ok, OpenAi.Message.t()} | {:error, OpenAi.Error.error()}
   def modify_message(thread_id, message_id, body, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -432,7 +441,7 @@ defmodule OpenAi.Assistants do
   Modifies a run.
   """
   @spec modify_run(String.t(), String.t(), OpenAi.Run.UpdateRequest.t(), keyword) ::
-          {:ok, OpenAi.Run.t()} | :error
+          {:ok, OpenAi.Run.t()} | {:error, OpenAi.Error.error()}
   def modify_run(thread_id, run_id, body, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -452,7 +461,7 @@ defmodule OpenAi.Assistants do
   Modifies a thread.
   """
   @spec modify_thread(String.t(), OpenAi.Thread.UpdateRequest.t(), keyword) ::
-          {:ok, OpenAi.Thread.t()} | :error
+          {:ok, OpenAi.Thread.t()} | {:error, OpenAi.Error.error()}
   def modify_thread(thread_id, body, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -477,7 +486,7 @@ defmodule OpenAi.Assistants do
           String.t(),
           OpenAi.Assistant.Tool.Outputs.RunSubmitRequest.t(),
           keyword
-        ) :: {:ok, OpenAi.Run.t()} | :error
+        ) :: {:ok, OpenAi.Run.t()} | {:error, OpenAi.Error.error()}
   def submit_tool_ouputs_to_run(thread_id, run_id, body, opts \\ []) do
     client = opts[:client] || @default_client
 

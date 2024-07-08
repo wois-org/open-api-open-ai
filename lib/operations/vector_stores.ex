@@ -9,7 +9,7 @@ defmodule OpenAi.VectorStores do
   Cancel a vector store file batch. This attempts to cancel the processing of files in this batch as soon as possible.
   """
   @spec cancel_vector_store_file_batch(String.t(), String.t(), keyword) ::
-          {:ok, OpenAi.VectorStore.File.Batch.t()} | :error
+          {:ok, OpenAi.VectorStore.File.Batch.t()} | {:error, OpenAi.Error.error()}
   def cancel_vector_store_file_batch(vector_store_id, batch_id, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -27,7 +27,7 @@ defmodule OpenAi.VectorStores do
   Create a vector store.
   """
   @spec create_vector_store(OpenAi.VectorStore.CreateRequest.t(), keyword) ::
-          {:ok, OpenAi.VectorStore.t()} | :error
+          {:ok, OpenAi.VectorStore.t()} | {:error, OpenAi.Error.error()}
   def create_vector_store(body, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -47,7 +47,7 @@ defmodule OpenAi.VectorStores do
   Create a vector store file by attaching a [File](/docs/api-reference/files) to a [vector store](/docs/api-reference/vector-stores/object).
   """
   @spec create_vector_store_file(String.t(), OpenAi.VectorStore.File.CreateRequest.t(), keyword) ::
-          {:ok, OpenAi.VectorStore.File.t()} | :error
+          {:ok, OpenAi.VectorStore.File.t()} | {:error, OpenAi.Error.error()}
   def create_vector_store_file(vector_store_id, body, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -70,7 +70,7 @@ defmodule OpenAi.VectorStores do
           String.t(),
           OpenAi.VectorStore.File.Batch.CreateRequest.t(),
           keyword
-        ) :: {:ok, OpenAi.VectorStore.File.Batch.t()} | :error
+        ) :: {:ok, OpenAi.VectorStore.File.Batch.t()} | {:error, OpenAi.Error.error()}
   def create_vector_store_file_batch(vector_store_id, body, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -90,7 +90,7 @@ defmodule OpenAi.VectorStores do
   Delete a vector store.
   """
   @spec delete_vector_store(String.t(), keyword) ::
-          {:ok, OpenAi.VectorStore.DeleteResponse.t()} | :error
+          {:ok, OpenAi.VectorStore.DeleteResponse.t()} | {:error, OpenAi.Error.error()}
   def delete_vector_store(vector_store_id, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -108,7 +108,7 @@ defmodule OpenAi.VectorStores do
   Delete a vector store file. This will remove the file from the vector store but the file itself will not be deleted. To delete the file, use the [delete file](/docs/api-reference/files/delete) endpoint.
   """
   @spec delete_vector_store_file(String.t(), String.t(), keyword) ::
-          {:ok, OpenAi.VectorStore.File.DeleteResponse.t()} | :error
+          {:ok, OpenAi.VectorStore.File.DeleteResponse.t()} | {:error, OpenAi.Error.error()}
   def delete_vector_store_file(vector_store_id, file_id, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -125,7 +125,8 @@ defmodule OpenAi.VectorStores do
   @doc """
   Retrieves a vector store.
   """
-  @spec get_vector_store(String.t(), keyword) :: {:ok, OpenAi.VectorStore.t()} | :error
+  @spec get_vector_store(String.t(), keyword) ::
+          {:ok, OpenAi.VectorStore.t()} | {:error, OpenAi.Error.error()}
   def get_vector_store(vector_store_id, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -143,7 +144,7 @@ defmodule OpenAi.VectorStores do
   Retrieves a vector store file.
   """
   @spec get_vector_store_file(String.t(), String.t(), keyword) ::
-          {:ok, OpenAi.VectorStore.File.t()} | :error
+          {:ok, OpenAi.VectorStore.File.t()} | {:error, OpenAi.Error.error()}
   def get_vector_store_file(vector_store_id, file_id, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -161,7 +162,7 @@ defmodule OpenAi.VectorStores do
   Retrieves a vector store file batch.
   """
   @spec get_vector_store_file_batch(String.t(), String.t(), keyword) ::
-          {:ok, OpenAi.VectorStore.File.Batch.t()} | :error
+          {:ok, OpenAi.VectorStore.File.Batch.t()} | {:error, OpenAi.Error.error()}
   def get_vector_store_file_batch(vector_store_id, batch_id, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -192,7 +193,7 @@ defmodule OpenAi.VectorStores do
 
   """
   @spec list_files_in_vector_store_batch(String.t(), String.t(), keyword) ::
-          {:ok, OpenAi.VectorStore.File.ListResponse.t()} | :error
+          {:ok, OpenAi.VectorStore.File.ListResponse.t()} | {:error, OpenAi.Error.error()}
   def list_files_in_vector_store_batch(vector_store_id, batch_id, opts \\ []) do
     client = opts[:client] || @default_client
     query = Keyword.take(opts, [:after, :before, :filter, :limit, :order])
@@ -225,7 +226,7 @@ defmodule OpenAi.VectorStores do
 
   """
   @spec list_vector_store_files(String.t(), keyword) ::
-          {:ok, OpenAi.VectorStore.File.ListResponse.t()} | :error
+          {:ok, OpenAi.VectorStore.File.ListResponse.t()} | {:error, OpenAi.Error.error()}
   def list_vector_store_files(vector_store_id, opts \\ []) do
     client = opts[:client] || @default_client
     query = Keyword.take(opts, [:after, :before, :filter, :limit, :order])
@@ -256,7 +257,8 @@ defmodule OpenAi.VectorStores do
       
 
   """
-  @spec list_vector_stores(keyword) :: {:ok, OpenAi.VectorStore.ListResponse.t()} | :error
+  @spec list_vector_stores(keyword) ::
+          {:ok, OpenAi.VectorStore.ListResponse.t()} | {:error, OpenAi.Error.error()}
   def list_vector_stores(opts \\ []) do
     client = opts[:client] || @default_client
     query = Keyword.take(opts, [:after, :before, :limit, :order])
@@ -276,7 +278,7 @@ defmodule OpenAi.VectorStores do
   Modifies a vector store.
   """
   @spec modify_vector_store(String.t(), OpenAi.VectorStore.UpdateRequest.t(), keyword) ::
-          {:ok, OpenAi.VectorStore.t()} | :error
+          {:ok, OpenAi.VectorStore.t()} | {:error, OpenAi.Error.error()}
   def modify_vector_store(vector_store_id, body, opts \\ []) do
     client = opts[:client] || @default_client
 

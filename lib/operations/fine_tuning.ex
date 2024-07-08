@@ -9,7 +9,8 @@ defmodule OpenAi.FineTuning do
   Immediately cancel a fine-tune job.
 
   """
-  @spec cancel_fine_tuning_job(String.t(), keyword) :: {:ok, OpenAi.FineTuning.Job.t()} | :error
+  @spec cancel_fine_tuning_job(String.t(), keyword) ::
+          {:ok, OpenAi.FineTuning.Job.t()} | {:error, OpenAi.Error.error()}
   def cancel_fine_tuning_job(fine_tuning_job_id, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -32,7 +33,7 @@ defmodule OpenAi.FineTuning do
 
   """
   @spec create_fine_tuning_job(OpenAi.FineTuning.Job.CreateRequest.t(), keyword) ::
-          {:ok, OpenAi.FineTuning.Job.t()} | :error
+          {:ok, OpenAi.FineTuning.Job.t()} | {:error, OpenAi.Error.error()}
   def create_fine_tuning_job(body, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -59,7 +60,7 @@ defmodule OpenAi.FineTuning do
 
   """
   @spec list_fine_tuning_events(String.t(), keyword) ::
-          {:ok, OpenAi.FineTuning.Job.Event.ListResponse.t()} | :error
+          {:ok, OpenAi.FineTuning.Job.Event.ListResponse.t()} | {:error, OpenAi.Error.error()}
   def list_fine_tuning_events(fine_tuning_job_id, opts \\ []) do
     client = opts[:client] || @default_client
     query = Keyword.take(opts, [:after, :limit])
@@ -86,7 +87,8 @@ defmodule OpenAi.FineTuning do
 
   """
   @spec list_fine_tuning_job_checkpoints(String.t(), keyword) ::
-          {:ok, OpenAi.FineTuning.Job.Checkpoint.ListResponse.t()} | :error
+          {:ok, OpenAi.FineTuning.Job.Checkpoint.ListResponse.t()}
+          | {:error, OpenAi.Error.error()}
   def list_fine_tuning_job_checkpoints(fine_tuning_job_id, opts \\ []) do
     client = opts[:client] || @default_client
     query = Keyword.take(opts, [:after, :limit])
@@ -113,7 +115,7 @@ defmodule OpenAi.FineTuning do
 
   """
   @spec list_paginated_fine_tuning_jobs(keyword) ::
-          {:ok, OpenAi.FineTuning.Job.ListResponse.t()} | :error
+          {:ok, OpenAi.FineTuning.Job.ListResponse.t()} | {:error, OpenAi.Error.error()}
   def list_paginated_fine_tuning_jobs(opts \\ []) do
     client = opts[:client] || @default_client
     query = Keyword.take(opts, [:after, :limit])
@@ -135,7 +137,8 @@ defmodule OpenAi.FineTuning do
   [Learn more about fine-tuning](/docs/guides/fine-tuning)
 
   """
-  @spec retrieve_fine_tuning_job(String.t(), keyword) :: {:ok, OpenAi.FineTuning.Job.t()} | :error
+  @spec retrieve_fine_tuning_job(String.t(), keyword) ::
+          {:ok, OpenAi.FineTuning.Job.t()} | {:error, OpenAi.Error.error()}
   def retrieve_fine_tuning_job(fine_tuning_job_id, opts \\ []) do
     client = opts[:client] || @default_client
 

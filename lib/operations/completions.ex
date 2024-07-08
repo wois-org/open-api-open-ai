@@ -9,7 +9,7 @@ defmodule OpenAi.Completions do
   Creates a completion for the provided prompt and parameters.
   """
   @spec create_completion(OpenAi.Completion.CreateRequest.t(), keyword) ::
-          {:ok, OpenAi.Completion.CreateResponse.t()} | :error
+          {:ok, OpenAi.Completion.CreateResponse.t()} | {:error, OpenAi.Error.error()}
   def create_completion(body, opts \\ []) do
     client = opts[:client] || @default_client
 

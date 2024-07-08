@@ -17,7 +17,8 @@ defmodule OpenAi.Files do
   Please [contact us](https://help.openai.com/) if you need to increase these storage limits.
 
   """
-  @spec create_file(OpenAi.File.CreateRequest.t(), keyword) :: {:ok, OpenAi.File.t()} | :error
+  @spec create_file(OpenAi.File.CreateRequest.t(), keyword) ::
+          {:ok, OpenAi.File.t()} | {:error, OpenAi.Error.error()}
   def create_file(body, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -36,7 +37,8 @@ defmodule OpenAi.Files do
   @doc """
   Delete a file.
   """
-  @spec delete_file(String.t(), keyword) :: {:ok, OpenAi.File.DeleteResponse.t()} | :error
+  @spec delete_file(String.t(), keyword) ::
+          {:ok, OpenAi.File.DeleteResponse.t()} | {:error, OpenAi.Error.error()}
   def delete_file(file_id, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -53,7 +55,7 @@ defmodule OpenAi.Files do
   @doc """
   Returns the contents of the specified file.
   """
-  @spec download_file(String.t(), keyword) :: {:ok, String.t()} | :error
+  @spec download_file(String.t(), keyword) :: {:ok, String.t()} | {:error, OpenAi.Error.error()}
   def download_file(file_id, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -75,7 +77,8 @@ defmodule OpenAi.Files do
     * `purpose`: Only return files with the given purpose.
 
   """
-  @spec list_files(keyword) :: {:ok, OpenAi.File.ListResponse.t()} | :error
+  @spec list_files(keyword) ::
+          {:ok, OpenAi.File.ListResponse.t()} | {:error, OpenAi.Error.error()}
   def list_files(opts \\ []) do
     client = opts[:client] || @default_client
     query = Keyword.take(opts, [:purpose])
@@ -94,7 +97,8 @@ defmodule OpenAi.Files do
   @doc """
   Returns information about a specific file.
   """
-  @spec retrieve_file(String.t(), keyword) :: {:ok, OpenAi.File.t()} | :error
+  @spec retrieve_file(String.t(), keyword) ::
+          {:ok, OpenAi.File.t()} | {:error, OpenAi.Error.error()}
   def retrieve_file(file_id, opts \\ []) do
     client = opts[:client] || @default_client
 

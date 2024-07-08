@@ -129,11 +129,11 @@ config :oapi_generator,
       # extra_fields: [__info__: :map],
       location: "lib/",
       operation_subdirectory: "operations/",
-      schema_subdirectory: "schemas/"
+      schema_subdirectory: "schemas/",
       # schema_use: GitHub.Encoder,
-      # types: [
-      #   error: {GitHub.Error, :t}
-      # ]
+      types: [
+        error: {OpenAi.Error, :error}
+      ]
     ]
   ]
 

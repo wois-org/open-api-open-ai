@@ -222,7 +222,12 @@ defmodule AssistantsTest do
                    type: "image_url",
                    image_url: %{url: "https://example.com/image.jpg", detail: "auto"}
                  },
-                 %{type: "text", text: %{}}
+                 %{
+                   type: "text",
+                   text: %{
+                     value: "content text"
+                   }
+                 }
                ],
                created_at: 123,
                id: "m_abc1234",
