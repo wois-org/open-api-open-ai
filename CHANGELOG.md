@@ -2,6 +2,8 @@
 <!-- next-header -->
 
 ## [Unreleased] - ReleaseDate
+
+## [0.1.6] - 2024-7-8
 - Pass request query parameters in client to handle list requests
 
 ## [0.1.5] - 2024-7-8
@@ -25,7 +27,8 @@
 - Written tests for all operations 
 
 <!-- next-url -->
-[Unreleased]: https://github.com/wois-org/open-api-open-ai/compare/v0.1.5...HEAD
+[Unreleased]: https://github.com/wois-org/open-api-open-ai/compare/v0.1.6...HEAD
+[0.1.6]: https://github.com/wois-org/open-api-open-ai/compare/v0.1.5...v0.1.6
 [0.1.5]: https://github.com/wois-org/open-api-open-ai/compare/v0.1.4...v0.1.5
 [0.1.4]: https://github.com/wois-org/open-api-open-ai/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/wois-org/open-api-open-ai/compare/v0.1.2...v0.1.3
