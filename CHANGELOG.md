@@ -2,6 +2,8 @@
 <!-- next-header -->
 
 ## [Unreleased] - ReleaseDate
+
+## [0.1.4] - 2024-7-8
 - Added error that all operations return in case of error
 
 ## [0.1.3] - 2024-7-5
@@ -19,7 +21,8 @@
 - Written tests for all operations 
 
 <!-- next-url -->
-[Unreleased]: https://github.com/wois-org/open-api-open-ai/compare/v0.1.3...HEAD
+[Unreleased]: https://github.com/wois-org/open-api-open-ai/compare/v0.1.4...HEAD
+[0.1.4]: https://github.com/wois-org/open-api-open-ai/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/wois-org/open-api-open-ai/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/wois-org/open-api-open-ai/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/wois-org/open-api-open-ai/compare/627efb7...v0.1.1
