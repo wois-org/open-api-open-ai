@@ -28,7 +28,8 @@ defmodule OpenAi.Client do
         {"Authorization", "Bearer #{Config.api_key()}"},
         {"Content-Type", "application/json"}
       ],
-      body: params |> Map.get(:body, %{}) |> Poison.encode!()
+      body: params |> Map.get(:body, %{}) |> Poison.encode!(),
+      params: params |> Map.get(:query, %{})
     }
     |> Config.http_client().request()
     |> transform_to_expected_response(expected_response)

@@ -958,6 +958,7 @@ defmodule AssistantsTest do
       expect(HTTPoisonMock, :request, fn request ->
         assert request.method == :get
         assert request.url == "https://api.openai.com/v1/assistants"
+        assert request.params == [limit: 2]
 
         {:ok,
          Mocks.Assistant.list([
@@ -966,7 +967,7 @@ defmodule AssistantsTest do
          ])}
       end)
 
-      {:ok, assistants} = Assistants.list_assistants()
+      {:ok, assistants} = Assistants.list_assistants(limit: 2, other: "other")
 
       assert %Assistant.ListResponse{
                data: [

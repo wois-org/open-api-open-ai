@@ -2,6 +2,7 @@
 <!-- next-header -->
 
 ## [Unreleased] - ReleaseDate
+- Pass request query parameters in client to handle list requests
 
 ## [0.1.5] - 2024-7-8
 - Handle error responses
