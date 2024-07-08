@@ -86,6 +86,22 @@ defmodule AssistantsTest do
                }
              } = response
     end
+
+    test "HTTPoison error" do
+      expect(HTTPoisonMock, :request, fn _request ->
+        {:error, %HTTPoison.Error{reason: "error canceling run"}}
+      end)
+
+      {:error, "error canceling run"} = Assistants.cancel_run("a-abc123", "r-abc123")
+    end
+
+    test "response error" do
+      expect(HTTPoisonMock, :request, fn _request ->
+        {:ok, %HTTPoison.Response{status_code: 400, body: "error canceling run"}}
+      end)
+
+      {:error, "Unexpected status code: 400, body: error canceling run"} = Assistants.cancel_run("a-abc123", "r-abc123")
+    end
   end
 
   describe "create_assistant/1" do

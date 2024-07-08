@@ -2,6 +2,7 @@
 <!-- next-header -->
 
 ## [Unreleased] - ReleaseDate
+- Handle error responses
 
 ## [0.1.4] - 2024-7-8
 - Added error that all operations return in case of error

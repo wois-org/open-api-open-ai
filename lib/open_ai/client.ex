@@ -66,6 +66,21 @@ defmodule OpenAi.Client do
     end
   end
 
+  defp transform_to_expected_response({:ok, %HTTPoison.Response{
+    status_code: response_status_code,
+    body: body
+  }}, _) do
+    {:error, "Unexpected status code: #{response_status_code}, body: #{body}"}
+  end
+
+  defp transform_to_expected_response({:error, %HTTPoison.Error{reason: reason}}, _) do
+    {:error, reason}
+  end
+
+  defp transform_to_expected_response({:error, error}, _) do
+    {:error, error}
+  end
+
   defp transform_value(v, :integer) when is_integer(v), do: {:ok, v}
   defp transform_value(v, :integer), do: {:error, "Expected integer, got #{inspect(v)}"}
   defp transform_value(v, :number) when is_number(v), do: {:ok, v}
