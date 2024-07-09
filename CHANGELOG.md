@@ -2,6 +2,8 @@
 <!-- next-header -->
 
 ## [Unreleased] - ReleaseDate
+
+## [0.2.0] - 2024-7-9
 ### Added
 - Additional headers will be added to request if configured in `http_headers`
 - Mock functions for convince of testing
@@ -30,7 +32,8 @@
 - Written tests for all operations 
 
 <!-- next-url -->
-[Unreleased]: https://github.com/wois-org/open-api-open-ai/compare/v0.1.6...HEAD
+[Unreleased]: https://github.com/wois-org/open-api-open-ai/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/wois-org/open-api-open-ai/compare/v0.1.6...v0.2.0
 [0.1.6]: https://github.com/wois-org/open-api-open-ai/compare/v0.1.5...v0.1.6
 [0.1.5]: https://github.com/wois-org/open-api-open-ai/compare/v0.1.4...v0.1.5
 [0.1.4]: https://github.com/wois-org/open-api-open-ai/compare/v0.1.3...v0.1.4
