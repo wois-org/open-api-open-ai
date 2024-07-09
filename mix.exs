@@ -36,7 +36,8 @@ defmodule OpenExAi.MixProject do
     ]
   end
 
-  defp elixirc_paths(_), do: ["lib", "test/mocks"]
+  defp elixirc_paths(:test), do: ["lib", "test/mocks"]
+  defp elixirc_paths(_), do: ["lib"]
 
   defp aliases do
     [
@@ -113,6 +114,7 @@ defmodule OpenExAi.MixProject do
       description: "OpenAI REST API Client",
       files: [
         "lib",
+        "test/mocks",
         "mix.exs",
         "README.md",
         "LICENSE",
