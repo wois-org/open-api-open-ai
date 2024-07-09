@@ -31,7 +31,7 @@ defmodule OpenAi.CompletionsTest do
 
         assert request.url == "https://api.openai.com/v1/completions"
 
-        {:ok, Mocks.Completion.create()}
+        {:ok, OpenAi.Mocks.Completion.create()}
       end)
 
       {:ok, completion} =

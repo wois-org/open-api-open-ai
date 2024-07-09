@@ -36,8 +36,7 @@ defmodule OpenExAi.MixProject do
     ]
   end
 
-  defp elixirc_paths(:test), do: ["lib", "test/mocks"]
-  defp elixirc_paths(_), do: ["lib"]
+  defp elixirc_paths(_), do: ["lib", "test/mocks"]
 
   defp aliases do
     [
@@ -103,6 +102,7 @@ defmodule OpenExAi.MixProject do
           # OpenAi.Moderations,
           # OpenAi.VectorStores
         ],
+        Testing: ~r/OpenAi.Mocks/,
         Schemas: ~r//
       ]
     ]

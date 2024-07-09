@@ -1,4 +1,4 @@
-defmodule Mocks.VectorStoreFile do
+defmodule OpenAi.Mocks.VectorStoreFile do
   def vector_store_file(data) do
     %{
       id: "vsf-abc123",

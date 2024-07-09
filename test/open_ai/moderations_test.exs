@@ -18,7 +18,7 @@ defmodule OpenAi.ModerationsTest do
         assert request.url ==
                  "https://api.openai.com/v1/moderations"
 
-        {:ok, Mocks.Moderation.create_moderation()}
+        {:ok, OpenAi.Mocks.Moderation.create_moderation()}
       end)
 
       {:ok, response} =

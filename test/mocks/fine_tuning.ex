@@ -1,4 +1,4 @@
-defmodule Mocks.FineTuning do
+defmodule OpenAi.Mocks.FineTuning do
   def job(data) do
     %{
       created_at: 163,

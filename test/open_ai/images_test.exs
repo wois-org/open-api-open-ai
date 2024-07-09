@@ -24,7 +24,7 @@ defmodule OpenAi.ImagesTest do
         assert request.url ==
                  "https://api.openai.com/v1/images/generations"
 
-        {:ok, Mocks.Image.create([], 1)}
+        {:ok, OpenAi.Mocks.Image.create([], 1)}
       end)
 
       {:ok, response} =
@@ -72,7 +72,7 @@ defmodule OpenAi.ImagesTest do
         assert request.url ==
                  "https://api.openai.com/v1/images/edits"
 
-        {:ok, Mocks.Image.create([], 1)}
+        {:ok, OpenAi.Mocks.Image.create([], 1)}
       end)
 
       {:ok, response} =
@@ -118,7 +118,7 @@ defmodule OpenAi.ImagesTest do
         assert request.url ==
                  "https://api.openai.com/v1/images/variations"
 
-        {:ok, Mocks.Image.create([], 1)}
+        {:ok, OpenAi.Mocks.Image.create([], 1)}
       end)
 
       {:ok, response} =

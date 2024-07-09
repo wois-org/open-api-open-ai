@@ -1,4 +1,4 @@
-defmodule Mocks.File do
+defmodule OpenAi.Mocks.File do
   def file(data) do
     %{
       bytes: 139_920,

@@ -17,7 +17,7 @@ defmodule OpenAi.FilesTest do
 
         assert request.url == "https://api.openai.com/v1/files"
 
-        {:ok, Mocks.File.create()}
+        {:ok, OpenAi.Mocks.File.create()}
       end)
 
       {:ok, file} =
@@ -44,7 +44,7 @@ defmodule OpenAi.FilesTest do
         assert request.method == :delete
         assert request.url == "https://api.openai.com/v1/files/f_abc123"
 
-        {:ok, Mocks.File.delete()}
+        {:ok, OpenAi.Mocks.File.delete()}
       end)
 
       {:ok, response} = Files.delete_file("f_abc123")
@@ -63,7 +63,7 @@ defmodule OpenAi.FilesTest do
         assert request.method == :get
         assert request.url == "https://api.openai.com/v1/files/f_abc123/content"
 
-        {:ok, Mocks.File.download()}
+        {:ok, OpenAi.Mocks.File.download()}
       end)
 
       {:ok, content} = Files.download_file("f_abc123")
@@ -78,7 +78,7 @@ defmodule OpenAi.FilesTest do
         assert request.method == :get
         assert request.url == "https://api.openai.com/v1/files"
 
-        {:ok, Mocks.File.list()}
+        {:ok, OpenAi.Mocks.File.list()}
       end)
 
       {:ok, response} = Files.list_files()
@@ -106,7 +106,7 @@ defmodule OpenAi.FilesTest do
         assert request.method == :get
         assert request.url == "https://api.openai.com/v1/files/f_abc123"
 
-        {:ok, Mocks.File.get()}
+        {:ok, OpenAi.Mocks.File.get()}
       end)
 
       {:ok, file} = Files.retrieve_file("f_abc123")

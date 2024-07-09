@@ -2,6 +2,9 @@
 <!-- next-header -->
 
 ## [Unreleased] - ReleaseDate
+### Added
+- Additional headers will be added to request if configured in `http_headers`
+- Mock functions for convince of testing
 
 ## [0.1.6] - 2024-7-8
 - Pass request query parameters in client to handle list requests

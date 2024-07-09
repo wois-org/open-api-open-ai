@@ -20,7 +20,7 @@ defmodule OpenAi.EmbeddingsTest do
 
         assert request.url == "https://api.openai.com/v1/embeddings"
 
-        {:ok, Mocks.Embedding.create_response()}
+        {:ok, OpenAi.Mocks.Embedding.create_response()}
       end)
 
       {:ok, embedding} =

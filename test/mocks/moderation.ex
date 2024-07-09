@@ -1,4 +1,4 @@
-defmodule Mocks.Moderation do
+defmodule OpenAi.Mocks.Moderation do
   def moderation(data) do
     %{
       id: "modr-XXXXX",

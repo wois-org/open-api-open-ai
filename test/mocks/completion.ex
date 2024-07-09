@@ -1,4 +1,4 @@
-defmodule Mocks.Completion do
+defmodule OpenAi.Mocks.Completion do
   def completion(data) do
     %{
       created: 123,

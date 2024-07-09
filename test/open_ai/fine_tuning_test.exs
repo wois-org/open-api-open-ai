@@ -12,7 +12,7 @@ defmodule OpenAi.FineTuningTest do
         assert request.url ==
                  "https://api.openai.com/v1/fine_tuning/jobs/ft:acemeco:suffix:abc123/cancel"
 
-        {:ok, Mocks.FineTuning.cancel_job()}
+        {:ok, OpenAi.Mocks.FineTuning.cancel_job()}
       end)
 
       {:ok, response} = FineTuning.cancel_fine_tuning_job("ft:acemeco:suffix:abc123")
@@ -46,7 +46,7 @@ defmodule OpenAi.FineTuningTest do
         assert request.url ==
                  "https://api.openai.com/v1/fine_tuning/jobs"
 
-        {:ok, Mocks.FineTuning.create_job()}
+        {:ok, OpenAi.Mocks.FineTuning.create_job()}
       end)
 
       {:ok, response} =
@@ -80,7 +80,7 @@ defmodule OpenAi.FineTuningTest do
         assert request.url ==
                  "https://api.openai.com/v1/fine_tuning/jobs/ft:acemeco:suffix:abc123/events"
 
-        {:ok, Mocks.FineTuning.list_job_events()}
+        {:ok, OpenAi.Mocks.FineTuning.list_job_events()}
       end)
 
       {:ok, response} = FineTuning.list_fine_tuning_events("ft:acemeco:suffix:abc123")
@@ -116,7 +116,7 @@ defmodule OpenAi.FineTuningTest do
                  "https://api.openai.com/v1/fine_tuning/jobs/ft:acemeco:suffix:abc123/checkpoints"
 
         {:ok,
-         Mocks.FineTuning.list_job_checkpoints([
+         OpenAi.Mocks.FineTuning.list_job_checkpoints([
            %{id: "ftc:acemeco:suffix:abc123", step_number: 1},
            %{id: "ftc:acemeco:suffix:abc124", step_number: 2}
          ])}
@@ -178,7 +178,7 @@ defmodule OpenAi.FineTuningTest do
                  "https://api.openai.com/v1/fine_tuning/jobs"
 
         {:ok,
-         Mocks.FineTuning.list_jobs([
+         OpenAi.Mocks.FineTuning.list_jobs([
            %{id: "ft:acemeco:suffix:abc123", status: "queued"},
            %{id: "ft:acemeco:suffix:abc124", status: "queued"}
          ])}
@@ -211,7 +211,7 @@ defmodule OpenAi.FineTuningTest do
         assert request.url ==
                  "https://api.openai.com/v1/fine_tuning/jobs/ft:acemeco:suffix:abc123"
 
-        {:ok, Mocks.FineTuning.get_job()}
+        {:ok, OpenAi.Mocks.FineTuning.get_job()}
       end)
 
       {:ok, response} = FineTuning.retrieve_fine_tuning_job("ft:acemeco:suffix:abc123")

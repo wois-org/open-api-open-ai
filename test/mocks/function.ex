@@ -1,4 +1,4 @@
-defmodule Mocks.Function do
+defmodule OpenAi.Mocks.Function do
   def object(data) do
     %{
       name: "Function name",

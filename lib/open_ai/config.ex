@@ -30,4 +30,17 @@ defmodule OpenAi.Config do
   def http_client() do
     Application.get_env(:oapi_open_ai, :http_client, HTTPoison)
   end
+
+  @doc """
+  Returns the HTTP headers to include in the request.
+
+  Will throw if the headers are not a list.
+  """
+  def http_headers!() do
+    Application.get_env(:oapi_open_ai, :http_headers, [])
+    |> case do
+      headers when headers |> is_list() -> headers
+      headers -> throw("Expected a list of headers, got: #{inspect(headers)}")
+    end
+  end
 end

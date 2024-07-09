@@ -10,7 +10,7 @@ defmodule OpenAi.BatchTest do
         assert request.method == :post
         assert request.url == "https://api.openai.com/v1/batches/b_abc123/cancel"
 
-        {:ok, Mocks.Batch.cancel()}
+        {:ok, OpenAi.Mocks.Batch.cancel()}
       end)
 
       {:ok, response} = Batch.cancel_batch("b_abc123")
@@ -36,7 +36,7 @@ defmodule OpenAi.BatchTest do
 
         assert request.url == "https://api.openai.com/v1/batches"
 
-        {:ok, Mocks.Batch.create()}
+        {:ok, OpenAi.Mocks.Batch.create()}
       end)
 
       {:ok, batch} =
@@ -62,7 +62,7 @@ defmodule OpenAi.BatchTest do
         assert request.url == "https://api.openai.com/v1/batches"
 
         {:ok,
-         Mocks.Batch.list([
+         OpenAi.Mocks.Batch.list([
            %{id: "b_abc123"},
            %{id: "b_abc124"}
          ])}
@@ -89,7 +89,7 @@ defmodule OpenAi.BatchTest do
         assert request.method == :get
         assert request.url == "https://api.openai.com/v1/batches/b_abc123"
 
-        {:ok, Mocks.Batch.get()}
+        {:ok, OpenAi.Mocks.Batch.get()}
       end)
 
       {:ok, batch} = Batch.retrieve_batch("b_abc123")

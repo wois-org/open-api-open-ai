@@ -1,4 +1,4 @@
-defmodule Mocks.Model do
+defmodule OpenAi.Mocks.Model do
   def model(data) do
     %{
       id: "davinci",

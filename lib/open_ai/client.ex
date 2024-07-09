@@ -27,9 +27,9 @@ defmodule OpenAi.Client do
       headers: [
         {"Authorization", "Bearer #{Config.api_key()}"},
         {"Content-Type", "application/json"}
-      ],
+      ] ++ Config.http_headers!(),
       body: params |> Map.get(:body, %{}) |> Poison.encode!(),
-      params: params |> Map.get(:query, %{})
+      params: params |> Map.get(:query)
     }
     |> Config.http_client().request()
     |> transform_to_expected_response(expected_response)

@@ -14,7 +14,7 @@ defmodule Operations.VectorStoresTest do
                  "https://api.openai.com/v1/vector_stores/vs_abc123/file_batches/fb_abc123/cancel"
 
         {:ok,
-         Mocks.VectorStoreFileBatch.cancel(%{
+         OpenAi.Mocks.VectorStoreFileBatch.cancel(%{
            id: "vsfb_abc123",
            status: "cancelled"
          })}
@@ -43,7 +43,7 @@ defmodule Operations.VectorStoresTest do
                } = Poison.decode!(request.body)
 
         {:ok,
-         Mocks.VectorStore.create(%{
+         OpenAi.Mocks.VectorStore.create(%{
            name: "vector store test name",
            metadata: %{
              "test" => "test"
@@ -94,7 +94,7 @@ defmodule Operations.VectorStoresTest do
                } = Poison.decode!(request.body)
 
         {:ok,
-         Mocks.VectorStoreFile.create(%{
+         OpenAi.Mocks.VectorStoreFile.create(%{
            id: "vsf_abc123",
            status: "completed"
          })}
@@ -140,7 +140,7 @@ defmodule Operations.VectorStoresTest do
                } = Poison.decode!(request.body)
 
         {:ok,
-         Mocks.VectorStoreFileBatch.create(%{
+         OpenAi.Mocks.VectorStoreFileBatch.create(%{
            id: "vsfb_abc123",
            status: "in_progress"
          })}
@@ -174,7 +174,7 @@ defmodule Operations.VectorStoresTest do
         assert request.method == :delete
         assert request.url == "https://api.openai.com/v1/vector_stores/vs_abc123"
 
-        {:ok, Mocks.VectorStore.delete(%{id: "vs_abc123"})}
+        {:ok, OpenAi.Mocks.VectorStore.delete(%{id: "vs_abc123"})}
       end)
 
       {:ok, vector_store_delete_response} = VectorStores.delete_vector_store("vs_abc123")
@@ -194,7 +194,7 @@ defmodule Operations.VectorStoresTest do
         assert request.url == "https://api.openai.com/v1/vector_stores/vs_abc123"
 
         {:ok,
-         Mocks.VectorStore.get(%{
+         OpenAi.Mocks.VectorStore.get(%{
            id: "vs_abc123",
            metadata: %{
              "test" => "test"
@@ -227,7 +227,7 @@ defmodule Operations.VectorStoresTest do
         assert request.url == "https://api.openai.com/v1/vector_stores/vs_abc123/files/vsf_abc123"
 
         {:ok,
-         Mocks.VectorStoreFile.get(%{
+         OpenAi.Mocks.VectorStoreFile.get(%{
            id: "vsf_abc123",
            status: "completed"
          })}
@@ -251,7 +251,7 @@ defmodule Operations.VectorStoresTest do
                  "https://api.openai.com/v1/vector_stores/vs_abc123/file_batches/vsfb_abc123"
 
         {:ok,
-         Mocks.VectorStoreFileBatch.get(%{
+         OpenAi.Mocks.VectorStoreFileBatch.get(%{
            id: "vsfb_abc123",
            status: "in_progress"
          })}
@@ -276,7 +276,7 @@ defmodule Operations.VectorStoresTest do
                  "https://api.openai.com/v1/vector_stores/vs_abc123/file_batches/vsfb_abc123/files"
 
         {:ok,
-         Mocks.VectorStoreFile.list(
+         OpenAi.Mocks.VectorStoreFile.list(
            [
              %{
                id: "vsf_abc123",
@@ -322,7 +322,7 @@ defmodule Operations.VectorStoresTest do
         assert request.url == "https://api.openai.com/v1/vector_stores/vs_abc123/files"
 
         {:ok,
-         Mocks.VectorStoreFile.list(
+         OpenAi.Mocks.VectorStoreFile.list(
            [
              %{
                id: "vsf_abc123",
@@ -367,7 +367,7 @@ defmodule Operations.VectorStoresTest do
         assert request.url == "https://api.openai.com/v1/vector_stores"
 
         {:ok,
-         Mocks.VectorStore.list(
+         OpenAi.Mocks.VectorStore.list(
            [
              %{
                id: "vs_abc123",
@@ -449,7 +449,7 @@ defmodule Operations.VectorStoresTest do
                } = Poison.decode!(request.body)
 
         {:ok,
-         Mocks.VectorStore.create(%{
+         OpenAi.Mocks.VectorStore.create(%{
            name: "vector store test name",
            metadata: %{
              "test" => "test"

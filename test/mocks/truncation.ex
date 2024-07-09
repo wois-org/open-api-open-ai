@@ -1,4 +1,4 @@
-defmodule Mocks.Truncation do
+defmodule OpenAi.Mocks.Truncation do
   def object(data) do
     %{
       last_messages: 10,

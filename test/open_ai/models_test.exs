@@ -13,7 +13,7 @@ defmodule OpenAi.ModelsTest do
         assert request.url ==
                  "https://api.openai.com/v1/models/text-moderation-latest"
 
-        {:ok, Mocks.Model.delete()}
+        {:ok, OpenAi.Mocks.Model.delete()}
       end)
 
       {:ok, response} = Models.delete_model("text-moderation-latest")
@@ -34,7 +34,7 @@ defmodule OpenAi.ModelsTest do
         assert request.url ==
                  "https://api.openai.com/v1/models"
 
-        {:ok, Mocks.Model.list()}
+        {:ok, OpenAi.Mocks.Model.list()}
       end)
 
       {:ok, response} = Models.list_models()
@@ -65,7 +65,7 @@ defmodule OpenAi.ModelsTest do
         assert request.url ==
                  "https://api.openai.com/v1/models/text-moderation-latest"
 
-        {:ok, Mocks.Model.get()}
+        {:ok, OpenAi.Mocks.Model.get()}
       end)
 
       {:ok, response} = Models.retrieve_model("text-moderation-latest")

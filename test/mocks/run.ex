@@ -1,4 +1,4 @@
-defmodule Mocks.Run do
+defmodule OpenAi.Mocks.Run do
   def object(data) do
     %{
       assistant_id: "a_abcd1234",
@@ -26,15 +26,15 @@ defmodule Mocks.Run do
       metadata: data |> Map.get(:metadata, %{"key" => "value"}),
       required_action: data |> Map.get(:required_action, %{}) |> required_action(),
       response_format:
-        data |> Map.get(:response_format, %{}) |> Mocks.Assistant.response_format(),
-      tool_choice: data |> Map.get(:tool_choice, %{}) |> Mocks.Assistant.tool_choice(),
+        data |> Map.get(:response_format, %{}) |> OpenAi.Mocks.Assistant.response_format(),
+      tool_choice: data |> Map.get(:tool_choice, %{}) |> OpenAi.Mocks.Assistant.tool_choice(),
       tools:
         data
         |> Map.get(:tools, [%{type: "file_search"}, %{type: "function"}, %{}])
-        |> Enum.map(&Mocks.Assistant.tool(&1)),
+        |> Enum.map(&OpenAi.Mocks.Assistant.tool(&1)),
       top_p: 123,
       truncation_strategy:
-        data |> Map.get(:truncation_strategy, %{}) |> Mocks.Truncation.object(),
+        data |> Map.get(:truncation_strategy, %{}) |> OpenAi.Mocks.Truncation.object(),
       usage: data |> Map.get(:usage, %{}) |> completion_usage()
     })
   end

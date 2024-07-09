@@ -1,4 +1,8 @@
-defmodule Mocks.Assistant do
+defmodule OpenAi.Mocks.Assistant do
+  @moduledoc """
+  Mocks for Assistant schema
+  """
+
   def object(data) do
     %{
       created_at: 123,
@@ -81,7 +85,7 @@ defmodule Mocks.Assistant do
     }
     |> Map.merge(data)
     |> Map.merge(%{
-      function: data |> Map.get(:function, %{}) |> Mocks.Function.object()
+      function: data |> Map.get(:function, %{}) |> OpenAi.Mocks.Function.object()
     })
   end
 
@@ -113,7 +117,7 @@ defmodule Mocks.Assistant do
       status_code: 200,
       body:
         data
-        |> Mocks.Run.object()
+        |> OpenAi.Mocks.Run.object()
         |> Poison.encode!()
     }
   end
@@ -133,7 +137,7 @@ defmodule Mocks.Assistant do
       status_code: 200,
       body:
         data
-        |> Mocks.Message.object()
+        |> OpenAi.Mocks.Message.object()
         |> Poison.encode!()
     }
   end
@@ -143,7 +147,7 @@ defmodule Mocks.Assistant do
       status_code: 200,
       body:
         data
-        |> Mocks.Run.object()
+        |> OpenAi.Mocks.Run.object()
         |> Poison.encode!()
     }
   end
@@ -153,7 +157,7 @@ defmodule Mocks.Assistant do
       status_code: 200,
       body:
         data
-        |> Mocks.Thread.object()
+        |> OpenAi.Mocks.Thread.object()
         |> Poison.encode!()
     }
   end
@@ -163,7 +167,7 @@ defmodule Mocks.Assistant do
       status_code: 200,
       body:
         data
-        |> Mocks.Run.object()
+        |> OpenAi.Mocks.Run.object()
         |> Poison.encode!()
     }
   end
@@ -183,7 +187,7 @@ defmodule Mocks.Assistant do
       status_code: 200,
       body:
         data
-        |> Mocks.Message.delete_response()
+        |> OpenAi.Mocks.Message.delete_response()
         |> Poison.encode!()
     }
   end
@@ -193,7 +197,7 @@ defmodule Mocks.Assistant do
       status_code: 200,
       body:
         data
-        |> Mocks.Thread.delete_response()
+        |> OpenAi.Mocks.Thread.delete_response()
         |> Poison.encode!()
     }
   end
@@ -213,7 +217,7 @@ defmodule Mocks.Assistant do
       status_code: 200,
       body:
         data
-        |> Mocks.Message.object()
+        |> OpenAi.Mocks.Message.object()
         |> Poison.encode!()
     }
   end
@@ -223,7 +227,7 @@ defmodule Mocks.Assistant do
       status_code: 200,
       body:
         data
-        |> Mocks.Run.object()
+        |> OpenAi.Mocks.Run.object()
         |> Poison.encode!()
     }
   end
@@ -233,7 +237,7 @@ defmodule Mocks.Assistant do
       status_code: 200,
       body:
         data
-        |> Mocks.Run.step()
+        |> OpenAi.Mocks.Run.step()
         |> Poison.encode!()
     }
   end
@@ -243,7 +247,7 @@ defmodule Mocks.Assistant do
       status_code: 200,
       body:
         data
-        |> Mocks.Thread.object()
+        |> OpenAi.Mocks.Thread.object()
         |> Poison.encode!()
     }
   end
@@ -271,7 +275,7 @@ defmodule Mocks.Assistant do
   def list_messages(data \\ [], count \\ 2) do
     data =
       Enum.map(1..count, fn index ->
-        Mocks.Message.object(data |> Enum.at(index - 1, %{}))
+        OpenAi.Mocks.Message.object(data |> Enum.at(index - 1, %{}))
       end)
 
     %HTTPoison.Response{
@@ -291,7 +295,7 @@ defmodule Mocks.Assistant do
   def list_run_steps(data \\ [], count \\ 2) do
     data =
       Enum.map(1..count, fn index ->
-        Mocks.Run.step(data |> Enum.at(index - 1, %{}))
+        OpenAi.Mocks.Run.step(data |> Enum.at(index - 1, %{}))
       end)
 
     %HTTPoison.Response{
@@ -311,7 +315,7 @@ defmodule Mocks.Assistant do
   def list_runs(data \\ [], count \\ 2) do
     data =
       Enum.map(1..count, fn index ->
-        Mocks.Run.object(data |> Enum.at(index - 1, %{}))
+        OpenAi.Mocks.Run.object(data |> Enum.at(index - 1, %{}))
       end)
 
     %HTTPoison.Response{
@@ -343,7 +347,7 @@ defmodule Mocks.Assistant do
       status_code: 200,
       body:
         data
-        |> Mocks.Message.object()
+        |> OpenAi.Mocks.Message.object()
         |> Poison.encode!()
     }
   end
@@ -353,7 +357,7 @@ defmodule Mocks.Assistant do
       status_code: 200,
       body:
         data
-        |> Mocks.Run.object()
+        |> OpenAi.Mocks.Run.object()
         |> Poison.encode!()
     }
   end
@@ -363,7 +367,7 @@ defmodule Mocks.Assistant do
       status_code: 200,
       body:
         data
-        |> Mocks.Thread.object()
+        |> OpenAi.Mocks.Thread.object()
         |> Poison.encode!()
     }
   end
@@ -373,7 +377,7 @@ defmodule Mocks.Assistant do
       status_code: 200,
       body:
         data
-        |> Mocks.Run.object()
+        |> OpenAi.Mocks.Run.object()
         |> Poison.encode!()
     }
   end

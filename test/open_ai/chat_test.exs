@@ -79,7 +79,7 @@ defmodule OpenAi.ChatTest do
 
         assert request.url == "https://api.openai.com/v1/chat/completions"
 
-        {:ok, Mocks.ChatCompletion.create()}
+        {:ok, OpenAi.Mocks.ChatCompletion.create()}
       end)
 
       {:ok, completion} =

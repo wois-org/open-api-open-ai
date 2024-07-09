@@ -1,4 +1,4 @@
-defmodule Mocks.Thread do
+defmodule OpenAi.Mocks.Thread do
   def object(data) do
     %{
       id: "th_abc123",

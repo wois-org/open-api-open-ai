@@ -1,4 +1,4 @@
-defmodule Mocks.Embedding do
+defmodule OpenAi.Mocks.Embedding do
   def embedding(data) do
     %{
       embedding: [0.1, 0.2, 0.3],

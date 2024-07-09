@@ -1,4 +1,4 @@
-defmodule Mocks.Message do
+defmodule OpenAi.Mocks.Message do
   def object(data) do
     %{
       assistant_id: "a_abc1234",
@@ -27,7 +27,7 @@ defmodule Mocks.Message do
   def attachment(data) do
     %{
       file_id: "f_1234",
-      tools: data |> Map.get(:tools, []) |> Enum.map(&Mocks.Assistant.tool(&1))
+      tools: data |> Map.get(:tools, []) |> Enum.map(&OpenAi.Mocks.Assistant.tool(&1))
     }
     |> Map.merge(data)
   end

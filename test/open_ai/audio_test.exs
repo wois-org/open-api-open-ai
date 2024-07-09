@@ -10,7 +10,7 @@ defmodule OpenAi.AudioTest do
         assert request.method == :post
         assert request.url == "https://api.openai.com/v1/audio/speech"
 
-        {:ok, Mocks.Audio.create_speech()}
+        {:ok, OpenAi.Mocks.Audio.create_speech()}
       end)
 
       {:ok, response} =
@@ -33,7 +33,7 @@ defmodule OpenAi.AudioTest do
         assert request.method == :post
         assert request.url == "https://api.openai.com/v1/audio/transcriptions"
 
-        {:ok, Mocks.Audio.create_transcription_json()}
+        {:ok, OpenAi.Mocks.Audio.create_transcription_json()}
       end)
 
       {:ok, response} =
@@ -57,7 +57,7 @@ defmodule OpenAi.AudioTest do
         assert request.method == :post
         assert request.url == "https://api.openai.com/v1/audio/transcriptions"
 
-        {:ok, Mocks.Audio.create_transcription_verbose_json()}
+        {:ok, OpenAi.Mocks.Audio.create_transcription_verbose_json()}
       end)
 
       {:ok, response} =
@@ -111,7 +111,7 @@ defmodule OpenAi.AudioTest do
         assert request.method == :post
         assert request.url == "https://api.openai.com/v1/audio/translations"
 
-        {:ok, Mocks.Audio.create_translation_json()}
+        {:ok, OpenAi.Mocks.Audio.create_translation_json()}
       end)
 
       {:ok, response} =
@@ -134,7 +134,7 @@ defmodule OpenAi.AudioTest do
         assert request.method == :post
         assert request.url == "https://api.openai.com/v1/audio/translations"
 
-        {:ok, Mocks.Audio.create_translation_verbose_json()}
+        {:ok, OpenAi.Mocks.Audio.create_translation_verbose_json()}
       end)
 
       {:ok, response} =

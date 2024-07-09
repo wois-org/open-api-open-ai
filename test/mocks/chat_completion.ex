@@ -1,4 +1,4 @@
-defmodule Mocks.ChatCompletion do
+defmodule OpenAi.Mocks.ChatCompletion do
   def chat_completion(data) do
     %{
       created: 123,
@@ -11,7 +11,7 @@ defmodule Mocks.ChatCompletion do
     |> Map.merge(data)
     |> Map.merge(%{
       choices: data |> Map.get(:choices, []) |> Enum.map(&chat_completion_choice(&1)),
-      usage: data |> Map.get(:usage, %{}) |> Mocks.Completion.completion_usage()
+      usage: data |> Map.get(:usage, %{}) |> OpenAi.Mocks.Completion.completion_usage()
     })
   end
 

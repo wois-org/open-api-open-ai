@@ -16,7 +16,7 @@ defmodule AssistantsTest do
         assert request.method == :post
         assert request.url == "https://api.openai.com/v1/threads/a-abc123/runs/r-abc123/cancel"
 
-        {:ok, Mocks.Assistant.cancel_run()}
+        {:ok, OpenAi.Mocks.Assistant.cancel_run()}
       end)
 
       {:ok, response} = Assistants.cancel_run("a-abc123", "r-abc123")
@@ -126,7 +126,7 @@ defmodule AssistantsTest do
                  "top_p" => 123
                } = request.body |> Poison.decode!()
 
-        {:ok, Mocks.Assistant.create()}
+        {:ok, OpenAi.Mocks.Assistant.create()}
       end)
 
       {:ok, assistant} =
@@ -208,7 +208,7 @@ defmodule AssistantsTest do
                  "role" => "user"
                } = request.body |> Poison.decode!()
 
-        {:ok, Mocks.Assistant.message_create()}
+        {:ok, OpenAi.Mocks.Assistant.message_create()}
       end)
 
       {:ok, message} =
@@ -306,7 +306,7 @@ defmodule AssistantsTest do
                  "truncation_strategy" => %{"last_messages" => 10, "type" => "auto"}
                } = request.body |> Poison.decode!()
 
-        {:ok, Mocks.Assistant.run_create()}
+        {:ok, OpenAi.Mocks.Assistant.run_create()}
       end)
 
       {:ok, run} =
@@ -483,7 +483,7 @@ defmodule AssistantsTest do
                  "truncation_strategy" => %{"last_messages" => 10, "type" => "auto"}
                } = request.body |> Poison.decode!()
 
-        {:ok, Mocks.Assistant.thread_create()}
+        {:ok, OpenAi.Mocks.Assistant.thread_create()}
       end)
 
       {:ok, thread} =
@@ -596,7 +596,7 @@ defmodule AssistantsTest do
                  "truncation_strategy" => %{"last_messages" => 10, "type" => "auto"}
                } = request.body |> Poison.decode!()
 
-        {:ok, Mocks.Assistant.thread_create_and_run()}
+        {:ok, OpenAi.Mocks.Assistant.thread_create_and_run()}
       end)
 
       {:ok, thread} =
@@ -653,7 +653,7 @@ defmodule AssistantsTest do
         assert request.method == :delete
         assert request.url == "https://api.openai.com/v1/assistants/a-abc123"
 
-        {:ok, Mocks.Assistant.delete()}
+        {:ok, OpenAi.Mocks.Assistant.delete()}
       end)
 
       {:ok, assistant} = Assistants.delete_assistant("a-abc123")
@@ -672,7 +672,7 @@ defmodule AssistantsTest do
         assert request.method == :delete
         assert request.url == "https://api.openai.com/v1/threads/a-abc123/messages/m-abc123"
 
-        {:ok, Mocks.Assistant.delete_message()}
+        {:ok, OpenAi.Mocks.Assistant.delete_message()}
       end)
 
       {:ok, message} = Assistants.delete_message("a-abc123", "m-abc123")
@@ -691,7 +691,7 @@ defmodule AssistantsTest do
         assert request.method == :delete
         assert request.url == "https://api.openai.com/v1/threads/a-abc123"
 
-        {:ok, Mocks.Assistant.delete_thread()}
+        {:ok, OpenAi.Mocks.Assistant.delete_thread()}
       end)
 
       {:ok, thread} = Assistants.delete_thread("a-abc123")
@@ -710,7 +710,7 @@ defmodule AssistantsTest do
         assert request.method == :get
         assert request.url == "https://api.openai.com/v1/assistants/a-abc123"
 
-        {:ok, Mocks.Assistant.get()}
+        {:ok, OpenAi.Mocks.Assistant.get()}
       end)
 
       {:ok, assistant} = Assistants.get_assistant("a-abc123")
@@ -762,7 +762,7 @@ defmodule AssistantsTest do
         assert request.method == :get
         assert request.url == "https://api.openai.com/v1/threads/a-abc123/messages/m-abc123"
 
-        {:ok, Mocks.Assistant.get_message()}
+        {:ok, OpenAi.Mocks.Assistant.get_message()}
       end)
 
       {:ok, message} = Assistants.get_message("a-abc123", "m-abc123")
@@ -792,7 +792,7 @@ defmodule AssistantsTest do
         assert request.method == :get
         assert request.url == "https://api.openai.com/v1/threads/a-abc123/runs/r-abc123"
 
-        {:ok, Mocks.Assistant.get_run()}
+        {:ok, OpenAi.Mocks.Assistant.get_run()}
       end)
 
       {:ok, run} = Assistants.get_run("a-abc123", "r-abc123")
@@ -881,7 +881,7 @@ defmodule AssistantsTest do
         assert request.url ==
                  "https://api.openai.com/v1/threads/a-abc123/runs/r-abc123/steps/s-abc123"
 
-        {:ok, Mocks.Assistant.get_run_step()}
+        {:ok, OpenAi.Mocks.Assistant.get_run_step()}
       end)
 
       {:ok, step} = Assistants.get_run_step("a-abc123", "r-abc123", "s-abc123")
@@ -925,7 +925,7 @@ defmodule AssistantsTest do
         assert request.method == :get
         assert request.url == "https://api.openai.com/v1/threads/a-abc123"
 
-        {:ok, Mocks.Assistant.get_thread()}
+        {:ok, OpenAi.Mocks.Assistant.get_thread()}
       end)
 
       {:ok, thread} = Assistants.get_thread("a-abc123")
@@ -961,7 +961,7 @@ defmodule AssistantsTest do
         assert request.params == [limit: 2]
 
         {:ok,
-         Mocks.Assistant.list([
+         OpenAi.Mocks.Assistant.list([
            %{id: "a_abc1234", name: "Assistant 1"},
            %{id: "a_abc1235", name: "Assistant 2"}
          ])}
@@ -989,7 +989,7 @@ defmodule AssistantsTest do
         assert request.url == "https://api.openai.com/v1/threads/th-abc123/messages"
 
         {:ok,
-         Mocks.Assistant.list_messages([
+         OpenAi.Mocks.Assistant.list_messages([
            %{id: "m_abc1234", content: [%{text: %{value: "Message 1"}}]},
            %{id: "m_abc1235", content: [%{text: %{value: "Message 2"}}]}
          ])}
@@ -1060,7 +1060,7 @@ defmodule AssistantsTest do
         assert request.url ==
                  "https://api.openai.com/v1/threads/th-abc123/runs/r-abc123/steps"
 
-        {:ok, Mocks.Assistant.list_run_steps([%{id: "s_abcd1234"}, %{id: "s_abcd1235"}])}
+        {:ok, OpenAi.Mocks.Assistant.list_run_steps([%{id: "s_abcd1234"}, %{id: "s_abcd1235"}])}
       end)
 
       {:ok, steps} = Assistants.list_run_steps("th-abc123", "r-abc123")
@@ -1085,7 +1085,7 @@ defmodule AssistantsTest do
         assert request.url == "https://api.openai.com/v1/threads/th-abc123/runs"
 
         {:ok,
-         Mocks.Assistant.list_runs([
+         OpenAi.Mocks.Assistant.list_runs([
            %{id: "r_abc1234", status: "completed"},
            %{id: "r_abc1235", status: "completed"}
          ])}
@@ -1139,7 +1139,7 @@ defmodule AssistantsTest do
                  "top_p" => 123
                } = request.body |> Poison.decode!()
 
-        {:ok, Mocks.Assistant.update()}
+        {:ok, OpenAi.Mocks.Assistant.update()}
       end)
 
       {:ok, assistant} =
@@ -1218,7 +1218,7 @@ defmodule AssistantsTest do
                  "metadata" => %{"key" => "value"}
                } = request.body |> Poison.decode!()
 
-        {:ok, Mocks.Assistant.message_update()}
+        {:ok, OpenAi.Mocks.Assistant.message_update()}
       end)
 
       {:ok, message} =
@@ -1255,7 +1255,7 @@ defmodule AssistantsTest do
                  "metadata" => %{"key" => "value"}
                } = request.body |> Poison.decode!()
 
-        {:ok, Mocks.Assistant.run_update()}
+        {:ok, OpenAi.Mocks.Assistant.run_update()}
       end)
 
       {:ok, run} =
@@ -1277,7 +1277,7 @@ defmodule AssistantsTest do
                  "metadata" => %{"key" => "value"}
                } = request.body |> Poison.decode!()
 
-        {:ok, Mocks.Assistant.thread_update()}
+        {:ok, OpenAi.Mocks.Assistant.thread_update()}
       end)
 
       {:ok, thread} =
@@ -1323,7 +1323,7 @@ defmodule AssistantsTest do
                  }
                ] = request.body |> Poison.decode!()
 
-        {:ok, Mocks.Assistant.submit_tool_outputs()}
+        {:ok, OpenAi.Mocks.Assistant.submit_tool_outputs()}
       end)
 
       {:ok, run} =

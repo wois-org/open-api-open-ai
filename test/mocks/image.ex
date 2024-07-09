@@ -1,4 +1,4 @@
-defmodule Mocks.Image do
+defmodule OpenAi.Mocks.Image do
   def image(data) do
     %{
       url: "https://api.openai.com/v1/images/ft:dall-e-2:acemeco:suffix:abc123",
