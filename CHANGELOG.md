@@ -2,6 +2,7 @@
 <!-- next-header -->
 
 ## [Unreleased] - ReleaseDate
+- Fixed mix.exs config to add mocks files to package
 
 ## [0.2.1] - 2024-7-9
 - Fixed mix.exs config to add mocks files to package
