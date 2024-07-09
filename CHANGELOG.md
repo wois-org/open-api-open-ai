@@ -2,6 +2,8 @@
 <!-- next-header -->
 
 ## [Unreleased] - ReleaseDate
+
+## [0.2.1] - 2024-7-9
 - Fixed mix.exs config to add mocks files to package
 
 ## [0.2.0] - 2024-7-9
@@ -33,7 +35,8 @@
 - Written tests for all operations 
 
 <!-- next-url -->
-[Unreleased]: https://github.com/wois-org/open-api-open-ai/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/wois-org/open-api-open-ai/compare/v0.2.1...HEAD
+[0.2.1]: https://github.com/wois-org/open-api-open-ai/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/wois-org/open-api-open-ai/compare/v0.1.6...v0.2.0
 [0.1.6]: https://github.com/wois-org/open-api-open-ai/compare/v0.1.5...v0.1.6
 [0.1.5]: https://github.com/wois-org/open-api-open-ai/compare/v0.1.4...v0.1.5
