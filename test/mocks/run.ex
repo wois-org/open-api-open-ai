@@ -26,7 +26,7 @@ defmodule OpenAi.Mocks.Run do
       metadata: data |> Map.get(:metadata, %{"key" => "value"}),
       required_action: data |> Map.get(:required_action, %{}) |> required_action(),
       response_format:
-        data |> Map.get(:response_format, %{}) |> OpenAi.Mocks.Assistant.response_format(),
+        data |> Map.get(:response_format, "auto") |> OpenAi.Mocks.Assistant.response_format(),
       tool_choice: data |> Map.get(:tool_choice, %{}) |> OpenAi.Mocks.Assistant.tool_choice(),
       tools:
         data

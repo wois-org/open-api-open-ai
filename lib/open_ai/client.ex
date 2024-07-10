@@ -206,14 +206,22 @@ defmodule OpenAi.Client do
   defp collapse_union(union_types, value) do
     value_fields =
       value
+      |> case do
+        v when v |> is_map -> v
+        _ -> %{}
+      end
       |> Map.keys()
       |> Enum.join("")
 
     union_types
-    |> Enum.find(fn {struct, type} ->
-      struct.__fields__(type)
-      |> Enum.reduce("", fn {field, _}, acc -> acc <> (field |> Atom.to_string()) end)
-      |> Kernel.==(value_fields)
+    |> Enum.find(fn
+      {:enum, values} ->
+        Enum.member?(values, value)
+
+      {struct, type} ->
+        struct.__fields__(type)
+        |> Enum.reduce("", fn {field, _}, acc -> acc <> (field |> Atom.to_string()) end)
+        |> Kernel.==(value_fields)
     end)
   end
 end

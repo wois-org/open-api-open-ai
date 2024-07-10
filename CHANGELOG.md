@@ -2,6 +2,8 @@
 <!-- next-header -->
 
 ## [Unreleased] - ReleaseDate
+### Fixed 
+- Union collapse when one of the types is enum and the value should be in it
 
 ## [0.2.3] - 2024-7-10
 ### Fixed

@@ -27,11 +27,15 @@ defmodule OpenAi.Mocks.Assistant do
     })
   end
 
-  def response_format(data) do
+  def response_format(data) when data |> is_map do
     %{
       type: "text"
     }
     |> Map.merge(data)
+  end
+
+  def response_format(data) do
+    data
   end
 
   def tool_resources(data) do

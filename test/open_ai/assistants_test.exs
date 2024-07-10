@@ -53,7 +53,7 @@ defmodule AssistantsTest do
                  },
                  type: "submit_tool_outputs"
                },
-               response_format: %Assistant.ApiResponseFormat{type: "text"},
+               response_format: "auto",
                started_at: 123_456,
                status: "completed",
                temperature: 0.5,
@@ -398,7 +398,7 @@ defmodule AssistantsTest do
                  },
                  type: "submit_tool_outputs"
                },
-               response_format: %Assistant.ApiResponseFormat{type: "text"},
+               response_format: "auto",
                started_at: 123_456,
                status: "completed",
                temperature: 0.5,
@@ -835,7 +835,7 @@ defmodule AssistantsTest do
                  },
                  type: "submit_tool_outputs"
                },
-               response_format: %OpenAi.Assistant.ApiResponseFormat{type: "text"},
+               response_format: "auto",
                started_at: 123_456,
                status: "completed",
                temperature: 0.5,
