@@ -2,6 +2,8 @@
 <!-- next-header -->
 
 ## [Unreleased] - ReleaseDate
+
+## [0.2.3] - 2024-7-10
 ### Fixed
 - Conditionally put body in request based on the request method and if body is present at all
 
@@ -40,7 +42,8 @@
 - Written tests for all operations 
 
 <!-- next-url -->
-[Unreleased]: https://github.com/wois-org/open-api-open-ai/compare/v0.2.2...HEAD
+[Unreleased]: https://github.com/wois-org/open-api-open-ai/compare/v0.2.3...HEAD
+[0.2.3]: https://github.com/wois-org/open-api-open-ai/compare/v0.2.2...v0.2.3
 [0.2.2]: https://github.com/wois-org/open-api-open-ai/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/wois-org/open-api-open-ai/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/wois-org/open-api-open-ai/compare/v0.1.6...v0.2.0
