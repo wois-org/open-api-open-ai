@@ -2,6 +2,8 @@
 <!-- next-header -->
 
 ## [Unreleased] - ReleaseDate
+### Fixed
+- Conditionally put body in request based on the request method and if body is present at all
 
 ## [0.2.2] - 2024-7-9
 - Fixed mix.exs config to add mocks files to package

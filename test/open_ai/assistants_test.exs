@@ -100,7 +100,8 @@ defmodule AssistantsTest do
         {:ok, %HTTPoison.Response{status_code: 400, body: "error canceling run"}}
       end)
 
-      {:error, "Unexpected status code: 400, body: error canceling run"} = Assistants.cancel_run("a-abc123", "r-abc123")
+      {:error, "Unexpected status code: 400, body: error canceling run"} =
+        Assistants.cancel_run("a-abc123", "r-abc123")
     end
   end
 

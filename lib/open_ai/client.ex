@@ -24,13 +24,28 @@ defmodule OpenAi.Client do
     %HTTPoison.Request{
       method: method,
       url: Path.join(Config.base_url(), url),
-      headers: [
-        {"Authorization", "Bearer #{Config.api_key()}"},
-        {"Content-Type", "application/json"}
-      ] ++ Config.http_headers!(),
-      body: params |> Map.get(:body, %{}) |> Poison.encode!(),
+      headers:
+        [
+          {"Authorization", "Bearer #{Config.api_key()}"},
+          {"Content-Type", "application/json"}
+        ] ++ Config.http_headers!(),
       params: params |> Map.get(:query)
     }
+    |> case do
+      %{method: method} = request when method in [:post, :put, :patch, :delete, :options] ->
+        params
+        |> Map.get(:body)
+        |> case do
+          body when body |> is_map or body |> is_list ->
+            request |> Map.put(:body, body |> Poison.encode!())
+
+          _ ->
+            request
+        end
+
+      request ->
+        request
+    end
     |> Config.http_client().request()
     |> transform_to_expected_response(expected_response)
   end
@@ -67,10 +82,14 @@ defmodule OpenAi.Client do
     end
   end
 
-  defp transform_to_expected_response({:ok, %HTTPoison.Response{
-    status_code: response_status_code,
-    body: body
-  }}, _) do
+  defp transform_to_expected_response(
+         {:ok,
+          %HTTPoison.Response{
+            status_code: response_status_code,
+            body: body
+          }},
+         _
+       ) do
     {:error, "Unexpected status code: #{response_status_code}, body: #{body}"}
   end
 
