@@ -30,7 +30,18 @@ defmodule OpenAi.Mocks.Run do
       tool_choice: data |> Map.get(:tool_choice, %{}) |> OpenAi.Mocks.Assistant.tool_choice(),
       tools:
         data
-        |> Map.get(:tools, [%{type: "file_search"}, %{type: "function"}, %{}])
+        |> Map.get(:tools, [
+          %{type: "file_search", file_search: %{max_num_results: 10}},
+          %{
+            type: "function",
+            function: %{
+              description: "Function description",
+              name: "Function name",
+              parameters: %{"key" => "value"}
+            }
+          },
+          %{}
+        ])
         |> Enum.map(&OpenAi.Mocks.Assistant.tool(&1)),
       top_p: 123,
       truncation_strategy:

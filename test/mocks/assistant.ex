@@ -22,7 +22,18 @@ defmodule OpenAi.Mocks.Assistant do
       tool_resources: data |> Map.get(:tool_resources, %{}) |> tool_resources(),
       tools:
         data
-        |> Map.get(:tools, [%{type: "file_search"}, %{type: "function"}, %{}])
+        |> Map.get(:tools, [
+          %{type: "file_search", file_search: %{max_num_results: 10}},
+          %{
+            type: "function",
+            function: %{
+              description: "Function description",
+              name: "Function name",
+              parameters: %{"key" => "value"}
+            }
+          },
+          %{}
+        ])
         |> Enum.map(&tool(&1))
     })
   end
@@ -78,9 +89,10 @@ defmodule OpenAi.Mocks.Assistant do
       type: "file_search"
     }
     |> Map.merge(data)
-    |> Map.merge(%{
-      file_search: data |> Map.get(:file_search, %{}) |> tool_file_search()
-    })
+
+    # |> Map.merge(%{
+    #   file_search: data |> Map.get(:file_search, %{}) |> tool_file_search()
+    # })
   end
 
   def tool(%{type: "function"} = data) do
@@ -88,9 +100,10 @@ defmodule OpenAi.Mocks.Assistant do
       type: "function"
     }
     |> Map.merge(data)
-    |> Map.merge(%{
-      function: data |> Map.get(:function, %{}) |> OpenAi.Mocks.Function.object()
-    })
+
+    # |> Map.merge(%{
+    #   function: data |> Map.get(:function, %{}) |> OpenAi.Mocks.Function.object()
+    # })
   end
 
   def tool(data) do

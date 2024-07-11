@@ -2,6 +2,8 @@
 <!-- next-header -->
 
 ## [Unreleased] - ReleaseDate
+### Fixed
+- Union collapse check if type matches to provided structure 
 
 ## [0.2.4] - 2024-7-10
 ### Fixed 

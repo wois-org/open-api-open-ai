@@ -6,7 +6,6 @@ defmodule AssistantsTest do
   alias OpenAi.Assistant
   alias OpenAi.Message
   alias OpenAi.Run
-  alias OpenAi.Function
   alias OpenAi.Truncation
   alias OpenAi.Thread
 
@@ -293,21 +292,17 @@ defmodule AssistantsTest do
                    "type" => "function"
                  },
                  "tools" => [
-                   %{"file_search" => %{"max_num_results" => 10}, "type" => "file_search"},
-                   %{
-                     "function" => %{
-                       "description" => "Function description",
-                       "name" => "Function name",
-                       "parameters" => %{"key" => "value"}
-                     },
-                     "type" => "function"
-                   },
-                   %{"type" => "code_interpreter"}
+                   %{"file_search" => nil, "type" => "file_search"},
                  ],
                  "truncation_strategy" => %{"last_messages" => 10, "type" => "auto"}
                } = request.body |> Poison.decode!()
 
-        {:ok, OpenAi.Mocks.Assistant.run_create()}
+        {:ok,
+         OpenAi.Mocks.Assistant.run_create(%{
+           tools: [
+             %{type: "file_search"}
+           ]
+         })}
       end)
 
       {:ok, run} =
@@ -350,17 +345,7 @@ defmodule AssistantsTest do
           tools: [
             %Assistant.Tool.File.Search{
               type: "file_search",
-              file_search: %Assistant.Tool.File.SearchFileSearch{max_num_results: 10}
-            },
-            %Assistant.Tool.Function{
-              function: %OpenAi.Function{
-                description: "Function description",
-                name: "Function name",
-                parameters: %{"key" => "value"}
-              },
-              type: "function"
-            },
-            %Assistant.Tool.Code{type: "code_interpreter"}
+            }
           ],
           top_p: 123,
           truncation_strategy: %OpenAi.Truncation{last_messages: 10, type: "auto"}
@@ -410,17 +395,8 @@ defmodule AssistantsTest do
                tools: [
                  %Assistant.Tool.File.Search{
                    type: "file_search",
-                   file_search: %Assistant.Tool.File.SearchFileSearch{max_num_results: 10}
-                 },
-                 %Assistant.Tool.Function{
-                   function: %Function{
-                     description: "Function description",
-                     name: "Function name",
-                     parameters: %{"key" => "value"}
-                   },
-                   type: "function"
-                 },
-                 %Assistant.Tool.Code{type: "code_interpreter"}
+                   file_search: nil
+                 }
                ],
                top_p: 123,
                truncation_strategy: %Truncation{last_messages: 10, type: "auto"},
