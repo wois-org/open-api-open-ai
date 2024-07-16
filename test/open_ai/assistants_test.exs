@@ -292,7 +292,7 @@ defmodule AssistantsTest do
                    "type" => "function"
                  },
                  "tools" => [
-                   %{"file_search" => nil, "type" => "file_search"},
+                   %{"type" => "file_search"}
                  ],
                  "truncation_strategy" => %{"last_messages" => 10, "type" => "auto"}
                } = request.body |> Poison.decode!()
@@ -344,7 +344,7 @@ defmodule AssistantsTest do
           },
           tools: [
             %Assistant.Tool.File.Search{
-              type: "file_search",
+              type: "file_search"
             }
           ],
           top_p: 123,

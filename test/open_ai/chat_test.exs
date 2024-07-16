@@ -14,12 +14,10 @@ defmodule OpenAi.ChatTest do
                  "function_call" => %{"name" => "name"},
                  "functions" => [
                    %{
-                     "description" => nil,
                      "name" => "name",
                      "parameters" => %{"key" => "value"}
                    }
                  ],
-                 "logit_bias" => nil,
                  "logprobs" => 0,
                  "max_tokens" => 60,
                  "messages" => [
@@ -30,8 +28,7 @@ defmodule OpenAi.ChatTest do
                        "name" => "assistant_function_name"
                      },
                      "name" => "assistant_name",
-                     "role" => "assistant",
-                     "tool_calls" => nil
+                     "role" => "assistant"
                    },
                    %{
                      "content" => "function_content",
@@ -56,16 +53,13 @@ defmodule OpenAi.ChatTest do
                  "presence_penalty" => +0.0,
                  "response_format" => %{"type" => "json_object"},
                  "seed" => 123,
-                 "service_tier" => nil,
-                 "stop" => nil,
                  "stream" => false,
                  "stream_options" => %{"include_usage" => false},
                  "temperature" => 0.5,
-                 "tool_choice" => %{"function" => %{"name" => "function_name"}, "type" => nil},
+                 "tool_choice" => %{"function" => %{"name" => "function_name"}},
                  "tools" => [
                    %{
                      "function" => %{
-                       "description" => nil,
                        "name" => "function_name",
                        "parameters" => %{"key" => "value"}
                      },

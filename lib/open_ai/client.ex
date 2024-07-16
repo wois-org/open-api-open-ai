@@ -37,7 +37,12 @@ defmodule OpenAi.Client do
         |> Map.get(:body)
         |> case do
           body when body |> is_map or body |> is_list ->
-            request |> Map.put(:body, body |> Poison.encode!())
+            body =
+              body
+              |> remove_nil_values()
+              |> Poison.encode!()
+
+            request |> Map.put(:body, body)
 
           _ ->
             request
@@ -49,6 +54,28 @@ defmodule OpenAi.Client do
     |> Config.http_client().request()
     |> transform_to_expected_response(expected_response)
   end
+
+  defp remove_nil_values(struct) when struct |> is_struct() do
+    struct
+    |> Map.from_struct()
+    |> remove_nil_values()
+  end
+
+  defp remove_nil_values(map) when map |> is_map do
+    map
+    |> Enum.filter(fn {_, v} -> v != nil end)
+    |> Enum.reduce(%{}, fn {k, v}, acc ->
+      Map.put(acc, k, v |> remove_nil_values())
+    end)
+  end
+
+  defp remove_nil_values(list) when list |> is_list do
+    list
+    |> Enum.filter(fn v -> v != nil end)
+    |> Enum.map(&remove_nil_values/1)
+  end
+
+  defp remove_nil_values(v), do: v
 
   defp transform_to_expected_response(
          {:ok,

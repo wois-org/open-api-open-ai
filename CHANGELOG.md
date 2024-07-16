@@ -2,6 +2,8 @@
 <!-- next-header -->
 
 ## [Unreleased] - ReleaseDate
+### Changed
+- Remove nil values from body of request
 
 ## [0.2.5] - 2024-7-11
 ### Fixed
