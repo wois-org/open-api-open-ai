@@ -2,6 +2,8 @@
 <!-- next-header -->
 
 ## [Unreleased] - ReleaseDate
+
+## [0.3.0] - 2024-7-16
 ### Changed
 - Remove nil values from body of request
 
@@ -52,7 +54,8 @@
 - Written tests for all operations 
 
 <!-- next-url -->
-[Unreleased]: https://github.com/wois-org/open-api-open-ai/compare/v0.2.5...HEAD
+[Unreleased]: https://github.com/wois-org/open-api-open-ai/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/wois-org/open-api-open-ai/compare/v0.2.5...v0.3.0
 [0.2.5]: https://github.com/wois-org/open-api-open-ai/compare/v0.2.4...v0.2.5
 [0.2.4]: https://github.com/wois-org/open-api-open-ai/compare/v0.2.3...v0.2.4
 [0.2.3]: https://github.com/wois-org/open-api-open-ai/compare/v0.2.2...v0.2.3
