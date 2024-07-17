@@ -117,7 +117,17 @@ defmodule OpenAi.Client do
           }},
          _
        ) do
-    {:error, "Unexpected status code: #{response_status_code}, body: #{body}"}
+    body = body
+    |> Poison.decode()
+    |> case do
+      {:ok, res} -> res
+      {:error, _} -> body
+    end
+
+    {:error, %{
+      status_code: response_status_code,
+      body: body
+    }}
   end
 
   defp transform_to_expected_response({:error, %HTTPoison.Error{reason: reason}}, _) do

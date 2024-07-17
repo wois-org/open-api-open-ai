@@ -96,10 +96,15 @@ defmodule AssistantsTest do
 
     test "response error" do
       expect(HTTPoisonMock, :request, fn _request ->
-        {:ok, %HTTPoison.Response{status_code: 400, body: "error canceling run"}}
+        {:ok, %HTTPoison.Response{status_code: 400, body: "{\"message\":\"error canceling run\"}"}}
       end)
 
-      {:error, "Unexpected status code: 400, body: error canceling run"} =
+      {:error, %{
+        status_code: 400,
+        body: %{
+          "message" => "error canceling run"
+        }
+      }} =
         Assistants.cancel_run("a-abc123", "r-abc123")
     end
   end

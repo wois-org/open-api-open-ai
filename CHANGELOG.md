@@ -4,6 +4,9 @@
 ## [Unreleased] - ReleaseDate
 
 ## [0.3.0] - 2024-7-16
+### Improved
+- Error with body and status code will return a map, also will try to convert body to a map
+
 ### Changed
 - Remove nil values from body of request
 
