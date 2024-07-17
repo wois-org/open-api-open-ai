@@ -3,6 +3,8 @@
 
 ## [Unreleased] - ReleaseDate
 
+## [0.3.1] - 2024-7-17
+
 ## [0.3.0] - 2024-7-16
 ### Improved
 - Error with body and status code will return a map, also will try to convert body to a map
@@ -57,7 +59,8 @@
 - Written tests for all operations 
 
 <!-- next-url -->
-[Unreleased]: https://github.com/wois-org/open-api-open-ai/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/wois-org/open-api-open-ai/compare/v0.3.1...HEAD
+[0.3.1]: https://github.com/wois-org/open-api-open-ai/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/wois-org/open-api-open-ai/compare/v0.2.5...v0.3.0
 [0.2.5]: https://github.com/wois-org/open-api-open-ai/compare/v0.2.4...v0.2.5
 [0.2.4]: https://github.com/wois-org/open-api-open-ai/compare/v0.2.3...v0.2.4
