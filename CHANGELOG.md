@@ -4,11 +4,10 @@
 ## [Unreleased] - ReleaseDate
 
 ## [0.3.1] - 2024-7-17
-
-## [0.3.0] - 2024-7-16
 ### Improved
 - Error with body and status code will return a map, also will try to convert body to a map
 
+## [0.3.0] - 2024-7-16
 ### Changed
 - Remove nil values from body of request
 
