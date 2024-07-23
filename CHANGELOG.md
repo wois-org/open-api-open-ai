@@ -2,6 +2,8 @@
 <!-- next-header -->
 
 ## [Unreleased] - ReleaseDate
+
+## [0.3.3] - 2024-7-23
 ### Fixed
 - File upload with multipart form-data
 
@@ -64,7 +66,8 @@
 - Written tests for all operations 
 
 <!-- next-url -->
-[Unreleased]: https://github.com/wois-org/open-api-open-ai/compare/v0.3.2...HEAD
+[Unreleased]: https://github.com/wois-org/open-api-open-ai/compare/v0.3.3...HEAD
+[0.3.3]: https://github.com/wois-org/open-api-open-ai/compare/v0.3.2...v0.3.3
 [0.3.2]: https://github.com/wois-org/open-api-open-ai/compare/v0.3.1...v0.3.2
 [0.3.1]: https://github.com/wois-org/open-api-open-ai/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/wois-org/open-api-open-ai/compare/v0.2.5...v0.3.0
