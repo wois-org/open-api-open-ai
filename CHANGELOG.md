@@ -2,6 +2,8 @@
 <!-- next-header -->
 
 ## [Unreleased] - ReleaseDate
+### Fixed
+- Content type headers for file upload
 
 ## [0.3.1] - 2024-7-17
 ### Improved

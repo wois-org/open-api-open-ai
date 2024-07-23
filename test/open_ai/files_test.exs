@@ -17,6 +17,10 @@ defmodule OpenAi.FilesTest do
 
         assert request.url == "https://api.openai.com/v1/files"
 
+        assert {"Content-Type", "multipart/form-data"} ==
+                 request.headers
+                 |> Enum.find(fn {_name, value} -> value == "multipart/form-data" end)
+
         {:ok, OpenAi.Mocks.File.create()}
       end)
 

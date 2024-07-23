@@ -26,9 +26,10 @@ defmodule OpenAi.Client do
       url: Path.join(Config.base_url(), url),
       headers:
         [
-          {"Authorization", "Bearer #{Config.api_key()}"},
-          {"Content-Type", "application/json"}
-        ] ++ Config.http_headers!(),
+          {"Authorization", "Bearer #{Config.api_key()}"}
+        ]
+        |> Kernel.++(params |> add_content_type_header())
+        |> Kernel.++(Config.http_headers!()),
       params: params |> Map.get(:query)
     }
     |> case do
@@ -53,6 +54,25 @@ defmodule OpenAi.Client do
     end
     |> Config.http_client().request()
     |> transform_to_expected_response(expected_response)
+  end
+
+  defp add_content_type_header(%{request: request} = _params) do
+    request
+    |> Enum.find(fn
+      {"multipart/form-data", _} -> true
+      _ -> false
+    end)
+    |> case do
+      {"multipart/form-data", {_struct, _}} ->
+        [{"Content-Type", "multipart/form-data"}]
+
+      _ ->
+        [{"Content-Type", "application/json"}]
+    end
+  end
+
+  defp add_content_type_header(_) do
+    [{"Content-Type", "application/json"}]
   end
 
   defp remove_nil_values(struct) when struct |> is_struct() do
@@ -117,17 +137,19 @@ defmodule OpenAi.Client do
           }},
          _
        ) do
-    body = body
-    |> Poison.decode()
-    |> case do
-      {:ok, res} -> res
-      {:error, _} -> body
-    end
+    body =
+      body
+      |> Poison.decode()
+      |> case do
+        {:ok, res} -> res
+        {:error, _} -> body
+      end
 
-    {:error, %{
-      status_code: response_status_code,
-      body: body
-    }}
+    {:error,
+     %{
+       status_code: response_status_code,
+       body: body
+     }}
   end
 
   defp transform_to_expected_response({:error, %HTTPoison.Error{reason: reason}}, _) do
