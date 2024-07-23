@@ -10,10 +10,12 @@ defmodule OpenAi.FilesTest do
       expect(HTTPoisonMock, :request, fn request ->
         assert request.method == :post
 
-        assert %{
-                 "file" => "file",
-                 "purpose" => "fine-tune"
-               } = Poison.decode!(request.body)
+        assert {:multipart,
+                [
+                  {:file, "test/fixtures/text.txt",
+                   {"form-data", [name: "file", filename: "text.txt"]}, []},
+                  {"purpose", "fine-tune"}
+                ]} = request.body
 
         assert request.url == "https://api.openai.com/v1/files"
 
@@ -26,7 +28,7 @@ defmodule OpenAi.FilesTest do
 
       {:ok, file} =
         %File.CreateRequest{
-          file: "file",
+          file: "test/fixtures/text.txt",
           purpose: "fine-tune"
         }
         |> Files.create_file()

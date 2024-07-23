@@ -2,6 +2,8 @@
 <!-- next-header -->
 
 ## [Unreleased] - ReleaseDate
+### Fixed
+- File upload with multipart form-data
 
 ## [0.3.2] - 2024-7-23
 ### Fixed
