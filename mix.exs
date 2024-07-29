@@ -12,7 +12,8 @@ defmodule OpenExAi.MixProject do
       deps: deps(),
       docs: docs(),
       aliases: aliases(),
-      package: package()
+      package: package(),
+      test_coverage: [tool: ExCoveralls]
     ]
   end
 
@@ -33,7 +34,8 @@ defmodule OpenExAi.MixProject do
       {:httpoison, "~> 2.0"},
       {:poison, "~> 5.0"},
       {:mox, "~> 1.0", only: :test},
-      {:version_release, "0.5.3", only: :dev, runtime: false}
+      {:version_release, "0.5.3", only: :dev, runtime: false},
+      {:excoveralls, "~> 0.13", only: [:test, :dev]}
     ]
   end
 
