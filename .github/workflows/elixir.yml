@@ -15,8 +15,9 @@ permissions:
   contents: read
 
 jobs:
-  build:
-
+  test:
+    env:
+      MIX_ENV: test
     name: Build and test
     runs-on: ubuntu-latest
 
