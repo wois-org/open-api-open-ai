@@ -2,6 +2,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/wois-org/open-api-open-ai/badge.svg?branch=master)](https://coveralls.io/github/wois-org/open-api-open-ai?branch=master)
 [![Hex.pm](https://img.shields.io/hexpm/v/oapi_open_ai.svg)]()
 [![Hex.pm](https://img.shields.io/hexpm/dt/oapi_open_ai.svg)]()
+[![Hex.pm](https://img.shields.io/hexpm/dw/oapi_open_ai.svg)]()
 
 This library uses an [OpenAPI Code Generator](https://github.com/aj-foster/open-api-generator) that has the flexibility to wrangle the generated code into an ergonomic client.
 
