@@ -43,4 +43,8 @@ defmodule OpenAi.Config do
       headers -> throw("Expected a list of headers, got: #{inspect(headers)}")
     end
   end
+
+  def http_options() do
+    Application.get_env(:oapi_open_ai, :http_options, [])
+  end
 end

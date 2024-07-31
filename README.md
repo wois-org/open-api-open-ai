@@ -34,6 +34,8 @@ config :oapi_open_ai,
 ```
 Note: you can load your os ENV variables in the configuration file, if you set an env variable for API key named `OPENAI_API_KEY` you can get it in the code by doing `System.get_env("OPENAI_API_KEY")`.
 
+More info on possible `http_options` configuration: [HTTPoison.Request](https://hexdocs.pm/httpoison/HTTPoison.Request.html)
+
 ⚠️`config.exs` is compile time, so the `get_env/1` function is executed during the build, if you want to get the env variables during runtime please use `runtime.exs` instead of `config.exs` in your application ([elixir doc ref](https://elixir-lang.org/getting-started/mix-otp/config-and-releases.html#configuration)).
 
 ## Usage

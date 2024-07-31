@@ -30,7 +30,8 @@ defmodule OpenAi.Client do
         ]
         |> Kernel.++(params |> add_content_type_header())
         |> Kernel.++(Config.http_headers!()),
-      params: params |> Map.get(:query)
+      params: params |> Map.get(:query),
+      options: Config.http_options()
     }
     |> attach_body(params)
     |> Config.http_client().request()

@@ -2,6 +2,8 @@
 <!-- next-header -->
 
 ## [Unreleased] - ReleaseDate
+### Added
+- Options configuration for HTTPoison request, that maybe set in configuration.
 
 ## [0.3.3] - 2024-7-23
 ### Fixed
