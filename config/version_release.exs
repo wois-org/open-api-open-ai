@@ -33,5 +33,5 @@ config :version_release,
     replacements: replacements,
     pre_release_replacements: replacements
   },
-  commit_message: "[skip ci][version_release] {{message}}",
+  commit_message: "Version bump {{message}}",
   dev_version: true
