@@ -28,9 +28,9 @@ config :oapi_open_ai,
   # optional, use when required by an OpenAI API beta, e.g.:
   beta: "assistants=v1",
   # optional, HTTP client defaults to HTTPoison, useful for mocking in tests
-  http_client: HTTPoisonMock
+  http_client: HTTPoisonMock,
   # optional, passed to [HTTPoison.Request](https://hexdocs.pm/httpoison/HTTPoison.Request.html) options
-  http_options: [recv_timeout: 30_000],
+  http_options: [recv_timeout: 30_000]
 ```
 Note: you can load your os ENV variables in the configuration file, if you set an env variable for API key named `OPENAI_API_KEY` you can get it in the code by doing `System.get_env("OPENAI_API_KEY")`.
 
