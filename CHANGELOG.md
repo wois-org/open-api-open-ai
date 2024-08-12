@@ -2,6 +2,8 @@
 <!-- next-header -->
 
 ## [Unreleased] - ReleaseDate
+### Fixed
+- VectorStoreFile delete mock
 
 ## [0.4.0] - 2024-7-31
 ### Added

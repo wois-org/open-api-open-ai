@@ -60,7 +60,7 @@ defmodule OpenAi.Mocks.VectorStoreFile do
       body:
         %{
           id: vsf.id,
-          object: "vector_store.file",
+          object: "vector_store.file.deleted",
           deleted: true
         }
         |> Poison.encode!()
