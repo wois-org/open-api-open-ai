@@ -4,11 +4,10 @@ defmodule OpenExAi.MixProject do
   def project do
     [
       app: :oapi_open_ai,
-      version: "0.4.3-alpha.0",
+      version: "0.4.2-alpha.0",
       elixir: "~> 1.16",
       start_permanent: Mix.env() == :prod,
       name: "OpenAI REST API Client",
-      source_url: "https://github.com/wois-org/open-api-open-ai",
       elixirc_paths: elixirc_paths(Mix.env()),
       deps: deps(),
       docs: docs(),
@@ -51,6 +50,8 @@ defmodule OpenExAi.MixProject do
   defp docs() do
     [
       main: "readme",
+      source_url: "https://github.com/wois-org/open-api-open-ai",
+      source_ref: "master",
       extras: [
         "README.md": [title: "Overview"],
         "CHANGELOG.md": [title: "Changelog"],
