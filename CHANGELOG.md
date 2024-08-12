@@ -2,6 +2,8 @@
 <!-- next-header -->
 
 ## [Unreleased] - ReleaseDate
+### Fixed
+- Documentation links to github
 
 ## [0.4.1] - 2024-8-12
 ### Fixed

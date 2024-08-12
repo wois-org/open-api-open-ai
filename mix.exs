@@ -8,6 +8,7 @@ defmodule OpenExAi.MixProject do
       elixir: "~> 1.16",
       start_permanent: Mix.env() == :prod,
       name: "OpenAI REST API Client",
+      source_url: "https://github.com/wois-org/open-api-open-ai",
       elixirc_paths: elixirc_paths(Mix.env()),
       deps: deps(),
       docs: docs(),
@@ -55,6 +56,7 @@ defmodule OpenExAi.MixProject do
         "CHANGELOG.md": [title: "Changelog"],
         "CODE_OF_CONDUCT.md": [title: "Code of Conduct"],
         "CONTRIBUTING.md": [title: "Contributing"],
+        "STYLE_GUIDE.md": [title: "Style Guide"],
         LICENSE: [title: "License"]
       ],
       groups_for_modules: [
