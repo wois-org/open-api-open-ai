@@ -1,4 +1,7 @@
 defmodule OpenAi.Mocks.VectorStore do
+  @moduledoc """
+  Mocks for vector store related responses.
+  """
   def vector_store(data) do
     %{
       id: "vs_abc123",

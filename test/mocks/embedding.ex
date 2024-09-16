@@ -1,4 +1,7 @@
 defmodule OpenAi.Mocks.Embedding do
+  @moduledoc """
+  Mocks for embedding related responses.
+  """
   def embedding(data) do
     %{
       embedding: [0.1, 0.2, 0.3],

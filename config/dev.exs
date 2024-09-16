@@ -77,6 +77,20 @@ config :oapi_generator,
         VectorStore.File.ChunkingStrategy.Auto,
         VectorStore.File.ChunkingStrategy.Other,
 
+        # Administration
+        AuditLog,
+        AuditLog.Actor,
+        AuditLog.ApiKey,
+        AuditLog.Invite,
+        AuditLog.Organization,
+        AuditLog.Project,
+        AuditLog.ServiceAccount,
+        AuditLog.User,
+        Project,
+        Project.ApiKey,
+        Project.ServiceAccount,
+        Project.User,
+
         # Legacy
         Completion,
         Completion.CreateRequest,

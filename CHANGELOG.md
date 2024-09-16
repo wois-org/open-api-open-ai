@@ -1,7 +1,11 @@
 # Changelog
 <!-- next-header -->
 
-## [Unreleased] - ReleaseDate
+### Added
+- Support for streaming operations that provide a streaming function
+- Passing function parameters will be added to to options in a call to openai
+### Fixed
+- Typo `submit_tool_outputs_to_run` instead of `submit_tool_ouputs_to_run`
 
 ## [0.4.3] - 2024-8-12
 ### Fixed

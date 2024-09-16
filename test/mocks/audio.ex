@@ -1,4 +1,7 @@
 defmodule OpenAi.Mocks.Audio do
+  @moduledoc """
+  Mocks for audio related responses.
+  """
   def transcription_verbose_json(data) do
     %{
       duration: "1.0",

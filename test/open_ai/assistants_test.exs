@@ -2,6 +2,7 @@ defmodule AssistantsTest do
   use ExUnit.Case
   import Mox
 
+  alias OpenAi.Mocks
   alias OpenAi.Assistants
   alias OpenAi.Assistant
   alias OpenAi.Message
@@ -414,6 +415,231 @@ defmodule AssistantsTest do
                }
              } = run
     end
+
+    test "Create run with stream" do
+      request_processor = self()
+      response_id = "r_abc123"
+
+      expect(HTTPoisonMock, :request, fn _request ->
+        {:ok, %HTTPoison.AsyncResponse{id: response_id}}
+      end)
+
+      run = Mocks.Run.object(%{}) |> Poison.encode!()
+      run_step = Mocks.Run.step(%{}) |> Poison.encode!()
+      run_step_delta = Mocks.RunStepDelta.object(%{}) |> Poison.encode!()
+      message = Mocks.Message.object(%{}) |> Poison.encode!()
+
+      message_delta_1 =
+        %{delta: %{content: [%{text: %{value: "Can"}}]}}
+        |> Mocks.MessageDelta.object()
+        |> Poison.encode!()
+
+      message_delta_2 =
+        %{delta: %{content: [%{text: %{value: " I"}}]}}
+        |> Mocks.MessageDelta.object()
+        |> Poison.encode!()
+
+      r_created = "event: thread.run.created\ndata: #{run}\n\n"
+      r_queued = "event: thread.run.queued\ndata: #{run}\n\n"
+      r_in_progress = "event: thread.run.in_progress\ndata: #{run}\n\n"
+      rs_created = "event: thread.run.step.created\ndata: #{run_step}\n\n"
+      rs_in_progress = "event: thread.run.step.in_progress\ndata: #{run_step}\n\n"
+      rs_delta = "event: thread.run.step.delta\ndata: #{run_step_delta}\n\n"
+      m_created = "event: thread.message.created\ndata: #{message}\n\n"
+      m_in_progress = "event: thread.message.in_progress\ndata: #{message}\n\n"
+      m_delta_1 = "event: thread.message.delta\ndata: #{message_delta_1}\n\n"
+      m_delta_2 = "event: thread.message.delta\ndata: #{message_delta_2}\n\n"
+      m_completed = "event: thread.message.completed\ndata: #{message}\n\n"
+      rs_completed = "event: thread.run.step.completed\ndata: #{run_step}\n\n"
+      r_completed = "event: thread.run.completed\ndata: #{run}\n\n"
+      e_done = "event: done\ndata: [DONE]\n\n"
+
+      request_processor |> send(%HTTPoison.AsyncStatus{id: response_id, code: 200})
+      request_processor |> send(%HTTPoison.AsyncHeaders{id: response_id, headers: []})
+      request_processor |> send(%HTTPoison.AsyncChunk{id: response_id, chunk: r_created})
+      request_processor |> send(%HTTPoison.AsyncChunk{id: response_id, chunk: r_queued})
+      request_processor |> send(%HTTPoison.AsyncChunk{id: response_id, chunk: r_in_progress})
+      request_processor |> send(%HTTPoison.AsyncChunk{id: response_id, chunk: rs_created})
+      request_processor |> send(%HTTPoison.AsyncChunk{id: response_id, chunk: rs_in_progress})
+      request_processor |> send(%HTTPoison.AsyncChunk{id: response_id, chunk: rs_delta})
+      request_processor |> send(%HTTPoison.AsyncChunk{id: response_id, chunk: m_created})
+      request_processor |> send(%HTTPoison.AsyncChunk{id: response_id, chunk: m_in_progress})
+      request_processor |> send(%HTTPoison.AsyncChunk{id: response_id, chunk: m_delta_1})
+      request_processor |> send(%HTTPoison.AsyncChunk{id: response_id, chunk: m_delta_2})
+      request_processor |> send(%HTTPoison.AsyncChunk{id: response_id, chunk: m_completed})
+      request_processor |> send(%HTTPoison.AsyncChunk{id: response_id, chunk: rs_completed})
+      request_processor |> send(%HTTPoison.AsyncChunk{id: response_id, chunk: r_completed})
+      request_processor |> send(%HTTPoison.AsyncChunk{id: response_id, chunk: e_done})
+      request_processor |> send(%HTTPoison.AsyncEnd{id: response_id})
+
+      assert [
+               {:ok, %{event: "thread.run.created", data: %Run{}}},
+               {:ok, %{event: "thread.run.queued", data: %Run{}}},
+               {:ok, %{event: "thread.run.in_progress", data: %Run{}}},
+               {:ok, %{event: "thread.run.step.created", data: %Run.Step{}}},
+               {:ok, %{event: "thread.run.step.in_progress", data: %Run.Step{}}},
+               {:ok, %{event: "thread.run.step.delta", data: %Run.Step.Delta{}}},
+               {:ok, %{event: "thread.message.created", data: %Message{}}},
+               {:ok, %{event: "thread.message.in_progress", data: %Message{}}},
+               {:ok, %{event: "thread.message.delta", data: %Message.Delta{} = delta_1}},
+               {:ok, %{event: "thread.message.delta", data: %Message.Delta{} = delta_2}},
+               {:ok, %{event: "thread.message.completed", data: %Message{}}},
+               {:ok, %{event: "thread.run.step.completed", data: %Run.Step{}}},
+               {:ok, %{event: "thread.run.completed", data: %Run{}}}
+             ] =
+               Assistants.create_run("th_abc123", %Run.CreateRequest{stream: true},
+                 stream_to: request_processor
+               )
+               |> Enum.into([])
+
+      assert %Message.Delta{
+               id: "" <> _,
+               object: "thread.message.delta",
+               delta: %{
+                 content: [
+                   %{
+                     index: 0,
+                     text: %{
+                       value: "Can"
+                     },
+                     type: "text"
+                   }
+                 ]
+               }
+             } = delta_1
+
+      assert %Message.Delta{
+               id: "" <> _,
+               object: "thread.message.delta",
+               delta: %{
+                 content: [
+                   %{
+                     index: 0,
+                     text: %{
+                       value: " I"
+                     },
+                     type: "text"
+                   }
+                 ]
+               }
+             } = delta_2
+    end
+  end
+
+  test "Create run with stream error" do
+    request_processor = self()
+    response_id = "r_abc123"
+
+    expect(HTTPoisonMock, :request, fn _request ->
+      {:ok, %HTTPoison.AsyncResponse{id: response_id}}
+    end)
+
+    request_processor |> send(%HTTPoison.AsyncStatus{id: response_id, code: 200})
+    request_processor |> send(%HTTPoison.AsyncHeaders{id: response_id, headers: []})
+    request_processor |> send(%HTTPoison.AsyncChunk{id: response_id, chunk: "broken data"})
+    request_processor |> send(%HTTPoison.AsyncEnd{id: response_id})
+
+    assert [
+             {
+               :error,
+               %OpenAi.Client.Stream.Error{
+                 message: "Failed to match event in chunk",
+                 data: "broken data"
+               }
+             }
+           ] =
+             Assistants.create_run("th_abc123", %Run.CreateRequest{stream: true},
+               stream_to: request_processor
+             )
+             |> Enum.into([])
+  end
+
+  test "Stream event split in chunks" do
+    request_processor = self()
+    response_id = "r_abc123"
+
+    expect(HTTPoisonMock, :request, fn _request ->
+      {:ok, %HTTPoison.AsyncResponse{id: response_id}}
+    end)
+
+    run = Mocks.Run.object(%{}) |> Poison.encode!()
+
+    run_created = """
+    event: thread.run.created
+    data: #{run}
+
+    """
+
+    message_delta = """
+    event: thread.message.delta
+    data: #{OpenAi.Mocks.MessageDelta.object(%{delta: %{content: [%{text: %{value: "Can"}}]}}) |> Poison.encode!()}
+
+    """
+
+    chunk_length =
+      run_created
+      |> String.length()
+      |> Integer.floor_div(3)
+
+    {chunk_1, chunk_2} = run_created |> String.split_at(chunk_length)
+    {chunk_2, chunk_3} = chunk_2 |> String.split_at(chunk_length)
+
+    request_processor |> send(%HTTPoison.AsyncStatus{id: response_id, code: 200})
+    request_processor |> send(%HTTPoison.AsyncHeaders{id: response_id, headers: []})
+    request_processor |> send(%HTTPoison.AsyncChunk{id: response_id, chunk: chunk_1})
+    request_processor |> send(%HTTPoison.AsyncChunk{id: response_id, chunk: chunk_2})
+    request_processor |> send(%HTTPoison.AsyncChunk{id: response_id, chunk: chunk_3})
+    request_processor |> send(%HTTPoison.AsyncChunk{id: response_id, chunk: message_delta})
+    request_processor |> send(%HTTPoison.AsyncEnd{id: response_id})
+
+    assert [
+             {:ok, %{event: "thread.run.created", data: %Run{}}},
+             {:ok, %{event: "thread.message.delta", data: %Message.Delta{}}}
+           ] =
+             Assistants.create_run("th_abc123", %Run.CreateRequest{stream: true},
+               stream_to: request_processor
+             )
+             |> Enum.into([])
+  end
+
+  test "two events in one chunk" do
+    request_processor = self()
+    response_id = "r_abc123"
+
+    expect(HTTPoisonMock, :request, fn _request ->
+      {:ok, %HTTPoison.AsyncResponse{id: response_id}}
+    end)
+
+    m_delta_1 =
+      OpenAi.Mocks.MessageDelta.object(%{delta: %{content: [%{text: %{value: "Can"}}]}})
+      |> Poison.encode!()
+
+    m_delta_2 =
+      OpenAi.Mocks.MessageDelta.object(%{delta: %{content: [%{text: %{value: " I"}}]}})
+      |> Poison.encode!()
+
+    message_deltas = """
+    event: thread.message.delta
+    data: #{m_delta_1}
+
+    event: thread.message.delta
+    data: #{m_delta_2}
+
+    """
+
+    request_processor |> send(%HTTPoison.AsyncStatus{id: response_id, code: 200})
+    request_processor |> send(%HTTPoison.AsyncHeaders{id: response_id, headers: []})
+    request_processor |> send(%HTTPoison.AsyncChunk{id: response_id, chunk: message_deltas})
+    request_processor |> send(%HTTPoison.AsyncEnd{id: response_id})
+
+    assert [
+             {:ok, %{event: "thread.message.delta", data: %Message.Delta{}}},
+             {:ok, %{event: "thread.message.delta", data: %Message.Delta{}}}
+           ] =
+             Assistants.create_run("th_abc123", %Run.CreateRequest{stream: true},
+               stream_to: request_processor
+             )
+             |> Enum.into([])
   end
 
   describe "create_thread/1" do
@@ -1311,7 +1537,7 @@ defmodule AssistantsTest do
       end)
 
       {:ok, run} =
-        Assistants.submit_tool_ouputs_to_run("th-abc123", "r-abc123", [
+        Assistants.submit_tool_outputs_to_run("th-abc123", "r-abc123", [
           %Assistant.Tool.Outputs.RunSubmitRequest{
             stream: true,
             tool_outputs: %Assistant.Tool.Outputs.RunSubmitRequest.ToolOutputs{

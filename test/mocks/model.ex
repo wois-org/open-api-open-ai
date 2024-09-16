@@ -1,4 +1,7 @@
 defmodule OpenAi.Mocks.Model do
+  @moduledoc """
+  Mocks for model related responses.
+  """
   def model(data) do
     %{
       id: "davinci",

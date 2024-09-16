@@ -1,4 +1,7 @@
 defmodule OpenAi.Mocks.Batch do
+  @moduledoc """
+  Mocks for batch related responses.
+  """
   def batch(data) do
     %{
       cancelled_at: 123,

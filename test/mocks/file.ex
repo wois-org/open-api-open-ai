@@ -1,4 +1,7 @@
 defmodule OpenAi.Mocks.File do
+  @moduledoc """
+  Mocks for file related responses.
+  """
   def file(data) do
     %{
       bytes: 139_920,

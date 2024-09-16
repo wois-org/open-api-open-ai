@@ -1,4 +1,7 @@
 defmodule OpenAi.Mocks.Message do
+  @moduledoc """
+  Mocks for message related responses.
+  """
   def object(data) do
     %{
       assistant_id: "a_abc1234",

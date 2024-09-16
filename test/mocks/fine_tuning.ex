@@ -1,4 +1,7 @@
 defmodule OpenAi.Mocks.FineTuning do
+  @moduledoc """
+  Mocks for fine tuning related responses.
+  """
   def job(data) do
     %{
       created_at: 163,

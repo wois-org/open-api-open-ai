@@ -1,4 +1,7 @@
 defmodule OpenAi.Mocks.Image do
+  @moduledoc """
+  Mocks for image related responses.
+  """
   def image(data) do
     %{
       url: "https://api.openai.com/v1/images/ft:dall-e-2:acemeco:suffix:abc123",

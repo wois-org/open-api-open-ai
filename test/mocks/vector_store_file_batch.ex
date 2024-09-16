@@ -1,4 +1,7 @@
 defmodule OpenAi.Mocks.VectorStoreFileBatch do
+  @moduledoc """
+  Mocks for vector store file batch related responses.
+  """
   def vector_store_file_batch(data) do
     %{
       id: "vsfb_abc123",

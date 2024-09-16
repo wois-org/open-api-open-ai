@@ -44,7 +44,7 @@ defmodule OpenAi.VectorStores do
   end
 
   @doc """
-  Create a vector store file by attaching a [File](/docs/api-reference/files) to a [vector store](/docs/api-reference/vector-stores/object).
+  Create a vector store file by attaching a [File](https://platform.openai.com/docs/api-reference/files) to a [vector store](https://platform.openai.com/docs/api-reference/vector-stores/object).
   """
   @spec create_vector_store_file(String.t(), OpenAi.VectorStore.File.CreateRequest.t(), keyword) ::
           {:ok, OpenAi.VectorStore.File.t()} | {:error, OpenAi.Error.error()}
@@ -105,7 +105,7 @@ defmodule OpenAi.VectorStores do
   end
 
   @doc """
-  Delete a vector store file. This will remove the file from the vector store but the file itself will not be deleted. To delete the file, use the [delete file](/docs/api-reference/files/delete) endpoint.
+  Delete a vector store file. This will remove the file from the vector store but the file itself will not be deleted. To delete the file, use the [delete file](https://platform.openai.com/docs/api-reference/files/delete) endpoint.
   """
   @spec delete_vector_store_file(String.t(), String.t(), keyword) ::
           {:ok, OpenAi.VectorStore.File.DeleteResponse.t()} | {:error, OpenAi.Error.error()}
@@ -182,13 +182,13 @@ defmodule OpenAi.VectorStores do
   ## Options
 
     * `limit`: A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.
-      
+
     * `order`: Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc` for descending order.
-      
+
     * `after`: A cursor for use in pagination. `after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.
-      
+
     * `before`: A cursor for use in pagination. `before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-      
+
     * `filter`: Filter by file status. One of `in_progress`, `completed`, `failed`, `cancelled`.
 
   """
@@ -215,13 +215,13 @@ defmodule OpenAi.VectorStores do
   ## Options
 
     * `limit`: A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.
-      
+
     * `order`: Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc` for descending order.
-      
+
     * `after`: A cursor for use in pagination. `after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.
-      
+
     * `before`: A cursor for use in pagination. `before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-      
+
     * `filter`: Filter by file status. One of `in_progress`, `completed`, `failed`, `cancelled`.
 
   """
@@ -248,13 +248,13 @@ defmodule OpenAi.VectorStores do
   ## Options
 
     * `limit`: A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.
-      
+
     * `order`: Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc` for descending order.
-      
+
     * `after`: A cursor for use in pagination. `after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.
-      
+
     * `before`: A cursor for use in pagination. `before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-      
+
 
   """
   @spec list_vector_stores(keyword) ::

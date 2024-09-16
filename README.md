@@ -41,11 +41,11 @@ More info on possible `http_options` configuration: [HTTPoison.Request](https://
 ## Usage
 All of the client operations are generated based on the OpenAPI description provided by GitHub.
 
-All the operations are listed in [lib/operations](/lib/operations)
+All the operations are listed in [lib/operations](https://github.com/wois-org/open-api-open-ai/tree/master/lib/operations)
 
 Generally you should expect something like
 ```elixir
-OpenAI.{{Resource}}.{{operation}}(...params...)
+OpenAi.{{Resource}}.{{operation}}(...params...)
 ```
 
 Where:
@@ -53,9 +53,29 @@ Where:
 * {{operation}} is the name of request directed to resource
 * ...params... are the parameters which are required to make a request
 
+Example: 
+- `OpenAi.Assistants.create_assistant/2`
+
 ### Assistants
 Assistants section of documentation does not match 1 to 1 to [OpenAI Api documentation](https://platform.openai.com/docs/api-reference/). This is due to how OpenAPI configuration is written by OpenAI. 
 Resources "Messages", "Runs" and "RunsSteps" are merged into `OpenAi.Assistants`. And "VectorStoresFiles" and "VectorStoresFileBatches" are merged into `OpenAi.VectorStores`.
+
+### Streaming 
+
+Some operations support streaming. To leverage this functionality, add `stream: true` and specify where to stream using `stream_to: self()`, like this:
+
+```elixir
+OpenAi.Assistants.create_run(
+  %OpenAi.Run.CreateRequest{
+    stream: true,
+    ...
+  }, 
+  stream_to: self()
+)
+```
+
+For more information, refer to the `OpenAi.Client.Stream` module.
+
 
 ## Contributing
 

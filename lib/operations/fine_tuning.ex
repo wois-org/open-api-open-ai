@@ -29,7 +29,7 @@ defmodule OpenAi.FineTuning do
 
   Response includes details of the enqueued job including job status and the name of the fine-tuned models once complete.
 
-  [Learn more about fine-tuning](/docs/guides/fine-tuning)
+  [Learn more about fine-tuning](https://platform.openai.com/docs/guides/fine-tuning)
 
   """
   @spec create_fine_tuning_job(OpenAi.FineTuning.Job.CreateRequest.t(), keyword) ::
@@ -134,7 +134,7 @@ defmodule OpenAi.FineTuning do
   @doc """
   Get info about a fine-tuning job.
 
-  [Learn more about fine-tuning](/docs/guides/fine-tuning)
+  [Learn more about fine-tuning](https://platform.openai.com/docs/guides/fine-tuning)
 
   """
   @spec retrieve_fine_tuning_job(String.t(), keyword) ::

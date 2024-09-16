@@ -1,4 +1,7 @@
 defmodule OpenAi.Mocks.Thread do
+  @moduledoc """
+  Mocks for thread related responses.
+  """
   def object(data) do
     %{
       id: "th_abc123",

@@ -1,4 +1,7 @@
 defmodule OpenAi.Mocks.Run do
+  @moduledoc """
+  Mocks for run related responses.
+  """
   def object(data) do
     %{
       assistant_id: "a_abcd1234",

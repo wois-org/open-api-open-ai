@@ -30,7 +30,7 @@ defmodule OpenExAi.MixProject do
       {:credo, "~> 1.7", runtime: false},
       {:dialyxir, "~> 1.0", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.29", only: :dev, runtime: false},
-      {:oapi_generator, "~> 0.1.1", only: :dev, runtime: false},
+      {:oapi_generator, "~> 0.2", only: :dev, runtime: false},
       {:httpoison, "~> 2.0"},
       {:poison, "~> 5.0"},
       {:mox, "~> 1.0", only: :test},
@@ -64,7 +64,8 @@ defmodule OpenExAi.MixProject do
         Client: [
           OpenAi,
           OpenAi.Client,
-          OpenAi.Config
+          OpenAi.Config,
+          OpenAi.Client.Stream
         ],
         Endpoints: [
           OpenAi.Audio,

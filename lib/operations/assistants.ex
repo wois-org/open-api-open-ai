@@ -273,13 +273,13 @@ defmodule OpenAi.Assistants do
   ## Options
 
     * `limit`: A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.
-      
+
     * `order`: Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc` for descending order.
-      
+
     * `after`: A cursor for use in pagination. `after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.
-      
+
     * `before`: A cursor for use in pagination. `before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-      
+
 
   """
   @spec list_assistants(keyword) ::
@@ -305,15 +305,15 @@ defmodule OpenAi.Assistants do
   ## Options
 
     * `limit`: A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.
-      
+
     * `order`: Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc` for descending order.
-      
+
     * `after`: A cursor for use in pagination. `after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.
-      
+
     * `before`: A cursor for use in pagination. `before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-      
+
     * `run_id`: Filter messages by the run ID that generated them.
-      
+
 
   """
   @spec list_messages(String.t(), keyword) ::
@@ -339,13 +339,13 @@ defmodule OpenAi.Assistants do
   ## Options
 
     * `limit`: A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.
-      
+
     * `order`: Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc` for descending order.
-      
+
     * `after`: A cursor for use in pagination. `after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.
-      
+
     * `before`: A cursor for use in pagination. `before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-      
+
 
   """
   @spec list_run_steps(String.t(), String.t(), keyword) ::
@@ -371,13 +371,13 @@ defmodule OpenAi.Assistants do
   ## Options
 
     * `limit`: A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.
-      
+
     * `order`: Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc` for descending order.
-      
+
     * `after`: A cursor for use in pagination. `after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.
-      
+
     * `before`: A cursor for use in pagination. `before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-      
+
 
   """
   @spec list_runs(String.t(), keyword) ::
@@ -481,18 +481,18 @@ defmodule OpenAi.Assistants do
   When a run has the `status: "requires_action"` and `required_action.type` is `submit_tool_outputs`, this endpoint can be used to submit the outputs from the tool calls once they're all completed. All outputs must be submitted in a single request.
 
   """
-  @spec submit_tool_ouputs_to_run(
+  @spec submit_tool_outputs_to_run(
           String.t(),
           String.t(),
           OpenAi.Assistant.Tool.Outputs.RunSubmitRequest.t(),
           keyword
         ) :: {:ok, OpenAi.Run.t()} | {:error, OpenAi.Error.error()}
-  def submit_tool_ouputs_to_run(thread_id, run_id, body, opts \\ []) do
+  def submit_tool_outputs_to_run(thread_id, run_id, body, opts \\ []) do
     client = opts[:client] || @default_client
 
     client.request(%{
       args: [thread_id: thread_id, run_id: run_id, body: body],
-      call: {OpenAi.Assistants, :submit_tool_ouputs_to_run},
+      call: {OpenAi.Assistants, :submit_tool_outputs_to_run},
       url: "/threads/#{thread_id}/runs/#{run_id}/submit_tool_outputs",
       body: body,
       method: :post,

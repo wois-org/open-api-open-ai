@@ -1,4 +1,7 @@
 defmodule OpenAi.Mocks.ChatCompletion do
+  @moduledoc """
+  Mocks for chat completion related responses.
+  """
   def chat_completion(data) do
     %{
       created: 123,
