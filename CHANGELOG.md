@@ -1,6 +1,8 @@
 # Changelog
 <!-- next-header -->
 
+## [Unreleased] - ReleaseDate
+
 ### Added
 - Support for streaming operations that provide a streaming function
 - Passing function parameters will be added to to options in a call to openai
@@ -86,7 +88,8 @@
 - Written tests for all operations 
 
 <!-- next-url -->
-[Unreleased]: https://github.com/wois-org/open-api-open-ai/compare/v0.4.3...HEAD
+[Unreleased]: https://github.com/wois-org/open-api-open-ai/compare/v0.4.4...HEAD
+[0.4.4]: https://github.com/wois-org/open-api-open-ai/compare/v0.4.3...v0.4.4
 [0.4.3]: https://github.com/wois-org/open-api-open-ai/compare/v0.4.2...v0.4.3
 [0.4.2]: https://github.com/wois-org/open-api-open-ai/compare/v0.4.1...v0.4.2
 [0.4.1]: https://github.com/wois-org/open-api-open-ai/compare/v0.4.0...v0.4.1
