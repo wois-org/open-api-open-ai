@@ -1,13 +1,11 @@
 # Changelog
 <!-- next-header -->
-
-## [Unreleased] - ReleaseDate
-
 ### Added
-- Support for streaming operations that provide a streaming function
-- Passing function parameters will be added to to options in a call to openai
+- Support for streaming operations with a dedicated streaming function.
+- Function parameters can now be passed as options in a call to OpenAI.
+
 ### Fixed
-- Typo `submit_tool_outputs_to_run` instead of `submit_tool_ouputs_to_run`
+- Typo in `submit_tool_outputs_to_run` (previously `submit_tool_ouputs_to_run`).
 
 ## [0.4.3] - 2024-8-12
 ### Fixed
@@ -88,8 +86,7 @@
 - Written tests for all operations 
 
 <!-- next-url -->
-[Unreleased]: https://github.com/wois-org/open-api-open-ai/compare/v0.4.4...HEAD
-[0.4.4]: https://github.com/wois-org/open-api-open-ai/compare/v0.4.3...v0.4.4
+[Unreleased]: https://github.com/wois-org/open-api-open-ai/compare/v0.4.3...HEAD
 [0.4.3]: https://github.com/wois-org/open-api-open-ai/compare/v0.4.2...v0.4.3
 [0.4.2]: https://github.com/wois-org/open-api-open-ai/compare/v0.4.1...v0.4.2
 [0.4.1]: https://github.com/wois-org/open-api-open-ai/compare/v0.4.0...v0.4.1
