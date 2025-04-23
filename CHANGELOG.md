@@ -2,6 +2,8 @@
 <!-- next-header -->
 
 ## [Unreleased] - ReleaseDate
+### Added
+- `tool_resources` field to the `CreateRequest` of Run schema, along with its corresponding type and validation, allowing to use a custom vector_store within a run step.
 
 ### Added
 - Support for streaming operations that provide a streaming function
