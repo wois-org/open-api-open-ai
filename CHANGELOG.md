@@ -5,6 +5,10 @@
 ### Added
 - `tool_resources` field to the `CreateRequest` of Run schema, along with its corresponding type and validation, allowing to use a custom vector_store within a run step.
 
+### Fixed
+* typo in object constant for vector store batch schema
+
+## [0.4.4] - 2024-09-16
 ### Added
 - Support for streaming operations that provide a streaming function
 - Passing function parameters will be added to to options in a call to openai
