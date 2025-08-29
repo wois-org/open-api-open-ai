@@ -24,3 +24,11 @@ oapi_open_ai-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+
+.tool-versions
+
+# Elixir tools
+**/.elixir-tools/
+
+# macOS files
+**/.DS_Store
