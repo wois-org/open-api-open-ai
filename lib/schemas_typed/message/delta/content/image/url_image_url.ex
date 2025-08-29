@@ -7,6 +7,7 @@ defmodule OpenAi.Message.Delta.Content.Image.UrlImageUrl do
           detail: String.t()
         }
 
+  @derive {Jason.Encoder, only: [:url, :detail]}
   defstruct [:url, :detail]
 
   @doc false

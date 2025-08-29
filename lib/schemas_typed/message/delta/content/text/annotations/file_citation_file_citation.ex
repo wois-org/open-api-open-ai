@@ -6,7 +6,7 @@ defmodule OpenAi.Message.Delta.Content.Text.Annotations.FileCitationFileCitation
           file_id: String.t(),
           quote: String.t()
         }
-
+  @derive {Jason.Encoder, only: [:file_id, :quote]}
   defstruct [:file_id, :quote]
 
   @doc false

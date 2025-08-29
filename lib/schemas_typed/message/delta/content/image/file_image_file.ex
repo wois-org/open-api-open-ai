@@ -6,7 +6,7 @@ defmodule OpenAi.Message.Delta.Content.Image.FileImageFile do
           file_id: String.t(),
           detail: String.t()
         }
-
+  @derive {Jason.Encoder, only: [:file_id, :detail]}
   defstruct [:file_id, :detail]
 
   @doc false

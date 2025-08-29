@@ -11,7 +11,7 @@ defmodule OpenAi.Message.Delta.Delta do
             | OpenAi.Message.Delta.Content.Text.t()
           ]
         }
-
+  @derive {Jason.Encoder, only: [:index, :role, :content]}
   defstruct [
     :index,
     :role,

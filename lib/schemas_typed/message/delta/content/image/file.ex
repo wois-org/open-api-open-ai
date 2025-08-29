@@ -33,7 +33,7 @@ defmodule OpenAi.Message.Delta.Content.Image.File do
           type: String.t(),
           image_file: OpenAi.Message.Delta.Content.Image.FileImageFile.t()
         }
-
+  @derive {Jason.Encoder, only: [:index, :type, :image_file]}
   defstruct [:index, :type, :image_file]
 
   @doc false

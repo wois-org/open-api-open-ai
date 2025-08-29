@@ -5,7 +5,7 @@ defmodule OpenAi.Message.Delta.Content.Text.Annotations.FilePathFilePath do
   @type t :: %__MODULE__{
           file_path: String.t()
         }
-
+  @derive {Jason.Encoder, only: [:file_path]}
   defstruct [:file_path]
 
   @doc false
