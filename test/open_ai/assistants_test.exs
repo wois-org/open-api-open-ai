@@ -7,11 +7,12 @@ defmodule AssistantsTest do
   alias OpenAi.Assistant
   alias OpenAi.Message
   alias OpenAi.Run
+  alias OpenAi.Response
   alias OpenAi.Truncation
   alias OpenAi.Thread
 
   describe "cancel_run/2" do
-    test "correct paramters" do
+    test "correct parameters" do
       expect(HTTPoisonMock, :request, fn request ->
         assert request.method == :post
         assert request.url == "https://api.openai.com/v1/threads/a-abc123/runs/r-abc123/cancel"
@@ -63,9 +64,9 @@ defmodule AssistantsTest do
                  type: "function"
                },
                tools: [
-                 %Assistant.Tool.File.Search{
+                 %Assistant.Tool.FileSearch{
                    type: "file_search",
-                   file_search: %Assistant.Tool.File.SearchFileSearch{max_num_results: 10}
+                   file_search: %Assistant.Tool.FileSearch.FileSearch{max_num_results: 10}
                  },
                  %Assistant.Tool.Function{
                    function: %OpenAi.Function{
@@ -144,7 +145,7 @@ defmodule AssistantsTest do
           metadata: %{"key" => "value"},
           model: "gpt-4",
           name: "name",
-          response_format: %Assistant.ApiResponseFormat{type: "json_object"},
+          response_format: %Response.Format.Json{type: "json_object"},
           temperature: 0.5,
           tool_resources: %Assistant.CreateRequest.ToolResources{
             code_interpreter: %Assistant.CreateRequest.ToolResources.CodeInterpreter{
@@ -172,7 +173,7 @@ defmodule AssistantsTest do
                model: "gpt-4",
                name: "Assistant name",
                object: "assistant",
-               response_format: %Assistant.ApiResponseFormat{type: "text"},
+               response_format: %Response.Format.Text{type: "text"},
                temperature: 0.5,
                tool_resources: %Assistant.Tool.Resources{
                  code_interpreter: %Assistant.Tool.Resources.CodeInterpreter{
@@ -183,8 +184,8 @@ defmodule AssistantsTest do
                  }
                },
                tools: [
-                 %Assistant.Tool.File.Search{
-                   file_search: %Assistant.Tool.File.SearchFileSearch{
+                 %Assistant.Tool.FileSearch{
+                   file_search: %Assistant.Tool.FileSearch.FileSearch{
                      max_num_results: 10
                    },
                    type: "file_search"
@@ -228,7 +229,7 @@ defmodule AssistantsTest do
                 %Assistant.Tool.Code{
                   type: "code_interpreter"
                 },
-                %Assistant.Tool.File.SearchTypeOnly{
+                %Assistant.Tool.FileSearch.TypeOnly{
                   type: "file_search"
                 }
               ]
@@ -325,7 +326,7 @@ defmodule AssistantsTest do
                     %Assistant.Tool.Code{
                       type: "code_interpreter"
                     },
-                    %Assistant.Tool.File.SearchTypeOnly{
+                    %Assistant.Tool.FileSearch.TypeOnly{
                       type: "file_search"
                     }
                   ]
@@ -343,7 +344,7 @@ defmodule AssistantsTest do
           metadata: %{"key" => "value"},
           model: "gpt-4",
           parallel_tool_calls: true,
-          response_format: %Assistant.ApiResponseFormat{type: "text"},
+          response_format: %Response.Format.Text{type: "text"},
           stream: true,
           temperature: 0.5,
           tool_choice: %Assistant.NamedToolChoice{
@@ -351,7 +352,7 @@ defmodule AssistantsTest do
             type: "function"
           },
           tools: [
-            %Assistant.Tool.File.Search{
+            %Assistant.Tool.FileSearch{
               type: "file_search"
             }
           ],
@@ -401,7 +402,7 @@ defmodule AssistantsTest do
                  type: "function"
                },
                tools: [
-                 %Assistant.Tool.File.Search{
+                 %Assistant.Tool.FileSearch{
                    type: "file_search",
                    file_search: nil
                  }
@@ -708,7 +709,7 @@ defmodule AssistantsTest do
                     %Assistant.Tool.Code{
                       type: "code_interpreter"
                     },
-                    %Assistant.Tool.File.SearchTypeOnly{
+                    %Assistant.Tool.FileSearch.TypeOnly{
                       type: "file_search"
                     }
                   ]
@@ -726,7 +727,7 @@ defmodule AssistantsTest do
           metadata: %{"key" => "value"},
           model: "gpt-4",
           parallel_tool_calls: true,
-          response_format: %Assistant.ApiResponseFormat{type: "text"},
+          response_format: %OpenAi.Response.Format.Text{type: "text"},
           stream: true,
           temperature: 0.5,
           tool_choice: %Assistant.NamedToolChoice{
@@ -734,9 +735,9 @@ defmodule AssistantsTest do
             type: "function"
           },
           tools: [
-            %Assistant.Tool.File.Search{
+            %Assistant.Tool.FileSearch{
               type: "file_search",
-              file_search: %Assistant.Tool.File.SearchFileSearch{max_num_results: 10}
+              file_search: %Assistant.Tool.FileSearch.FileSearch{max_num_results: 10}
             },
             %Assistant.Tool.Function{
               function: %OpenAi.Function{
@@ -818,7 +819,7 @@ defmodule AssistantsTest do
           metadata: %{"key" => "value"},
           model: "gpt-4",
           parallel_tool_calls: true,
-          response_format: %Assistant.ApiResponseFormat{type: "text"},
+          response_format: %OpenAi.Response.Format.Text{type: "text"},
           stream: true,
           temperature: 0.5,
           tool_choice: %Assistant.NamedToolChoice{
@@ -834,9 +835,9 @@ defmodule AssistantsTest do
             }
           },
           tools: [
-            %Assistant.Tool.File.Search{
+            %Assistant.Tool.FileSearch{
               type: "file_search",
-              file_search: %Assistant.Tool.File.SearchFileSearch{max_num_results: 10}
+              file_search: %Assistant.Tool.FileSearch.FileSearch{max_num_results: 10}
             },
             %Assistant.Tool.Function{
               function: %OpenAi.Function{
@@ -934,7 +935,7 @@ defmodule AssistantsTest do
                model: "gpt-4",
                name: "Assistant name",
                object: "assistant",
-               response_format: %OpenAi.Assistant.ApiResponseFormat{type: "text"},
+               response_format: %OpenAi.Response.Format.Text{type: "text"},
                temperature: 0.5,
                tool_resources: %OpenAi.Assistant.Tool.Resources{
                  code_interpreter: %OpenAi.Assistant.Tool.Resources.CodeInterpreter{
@@ -945,8 +946,8 @@ defmodule AssistantsTest do
                  }
                },
                tools: [
-                 %OpenAi.Assistant.Tool.File.Search{
-                   file_search: %OpenAi.Assistant.Tool.File.SearchFileSearch{
+                 %OpenAi.Assistant.Tool.FileSearch{
+                   file_search: %OpenAi.Assistant.Tool.FileSearch.FileSearch{
                      max_num_results: 10
                    },
                    type: "file_search"
@@ -1056,8 +1057,8 @@ defmodule AssistantsTest do
                  type: "function"
                },
                tools: [
-                 %OpenAi.Assistant.Tool.File.Search{
-                   file_search: %OpenAi.Assistant.Tool.File.SearchFileSearch{
+                 %OpenAi.Assistant.Tool.FileSearch{
+                   file_search: %OpenAi.Assistant.Tool.FileSearch.FileSearch{
                      max_num_results: 10
                    },
                    type: "file_search"
@@ -1359,7 +1360,7 @@ defmodule AssistantsTest do
           metadata: %{"key" => "value"},
           model: "gpt-4",
           name: "name",
-          response_format: %Assistant.ApiResponseFormat{type: "json_object"},
+          response_format: %OpenAi.Response.Format.Json{type: "json_object"},
           temperature: 0.5,
           tool_resources: %Assistant.UpdateRequest.ToolResources{
             code_interpreter: %Assistant.UpdateRequest.ToolResources.CodeInterpreter{
@@ -1386,7 +1387,7 @@ defmodule AssistantsTest do
                model: "gpt-4",
                name: "Assistant name",
                object: "assistant",
-               response_format: %Assistant.ApiResponseFormat{type: "text"},
+               response_format: %OpenAi.Response.Format.Text{type: "text"},
                temperature: 0.5,
                tool_resources: %Assistant.Tool.Resources{
                  code_interpreter: %Assistant.Tool.Resources.CodeInterpreter{
@@ -1397,8 +1398,8 @@ defmodule AssistantsTest do
                  }
                },
                tools: [
-                 %Assistant.Tool.File.Search{
-                   file_search: %Assistant.Tool.File.SearchFileSearch{
+                 %Assistant.Tool.FileSearch{
+                   file_search: %Assistant.Tool.FileSearch.FileSearch{
                      max_num_results: 10
                    },
                    type: "file_search"

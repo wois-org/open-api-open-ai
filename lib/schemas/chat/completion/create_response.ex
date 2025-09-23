@@ -27,7 +27,7 @@ defmodule OpenAi.Chat.Completion.CreateResponse do
       id: {:string, :generic},
       model: {:string, :generic},
       object: {:const, "chat.completion"},
-      service_tier: {:enum, ["scale", "default"]},
+      service_tier: {:enum, ["auto", "default", "flex"]},
       system_fingerprint: {:string, :generic},
       usage: {OpenAi.Completion.Usage, :t}
     ]

@@ -13,7 +13,7 @@ defmodule OpenAi.VectorStore.File.LastError do
 
   def __fields__(:t) do
     [
-      code: {:enum, ["internal_error", "file_not_found", "parsing_error", "unhandled_mime_type"]},
+      code: {:enum, ["server_error", "unsupported_file", "invalid_file"]},
       message: {:string, :generic}
     ]
   end

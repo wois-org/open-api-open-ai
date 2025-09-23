@@ -3,7 +3,11 @@ defmodule OpenAi.Run.Step.DetailsToolCallsFileSearch do
   Provides struct and type for a Run.Step.DetailsToolCallsFileSearch
   """
 
-  @type t :: %__MODULE__{file_search: map, id: String.t(), type: String.t()}
+  @type t :: %__MODULE__{
+          file_search: OpenAi.Run.Step.DetailsToolCallsFileSearchFileSearch.t(),
+          id: String.t(),
+          type: String.t()
+        }
 
   defstruct [:file_search, :id, :type]
 
@@ -12,6 +16,10 @@ defmodule OpenAi.Run.Step.DetailsToolCallsFileSearch do
   def __fields__(type \\ :t)
 
   def __fields__(:t) do
-    [file_search: :map, id: {:string, :generic}, type: {:const, "file_search"}]
+    [
+      file_search: {OpenAi.Run.Step.DetailsToolCallsFileSearchFileSearch, :t},
+      id: {:string, :generic},
+      type: {:const, "file_search"}
+    ]
   end
 end

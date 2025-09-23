@@ -3,15 +3,25 @@ defmodule OpenAi.Function do
   Provides struct and type for a Function
   """
 
-  @type t :: %__MODULE__{description: String.t() | nil, name: String.t(), parameters: map | nil}
+  @type t :: %__MODULE__{
+          description: String.t() | nil,
+          name: String.t(),
+          parameters: map | nil,
+          strict: boolean | nil
+        }
 
-  defstruct [:description, :name, :parameters]
+  defstruct [:description, :name, :parameters, :strict]
 
   @doc false
   @spec __fields__(atom) :: keyword
   def __fields__(type \\ :t)
 
   def __fields__(:t) do
-    [description: {:string, :generic}, name: {:string, :generic}, parameters: :map]
+    [
+      description: {:string, :generic},
+      name: {:string, :generic},
+      parameters: :map,
+      strict: :boolean
+    ]
   end
 end

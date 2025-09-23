@@ -43,7 +43,7 @@ defmodule OpenAi.AudioTest do
           model: "stt-1",
           response_format: "json",
           temperature: 0.5,
-          "timestamp_granularities[]": ["word"]
+          timestamp_granularities: ["word"]
         }
         |> Audio.create_transcription()
 
@@ -67,12 +67,12 @@ defmodule OpenAi.AudioTest do
           model: "stt-1",
           response_format: "verbose_json",
           temperature: 0.5,
-          "timestamp_granularities[]": ["word"]
+          timestamp_granularities: ["word"]
         }
         |> Audio.create_transcription()
 
       assert %Audio.Transcription.CreateResponse.VerboseJson{
-               duration: "1.0",
+               duration: 1.0,
                segments: [
                  %OpenAi.Audio.Transcription.Segment{
                    text: "Hello, world!",
@@ -148,7 +148,7 @@ defmodule OpenAi.AudioTest do
         |> Audio.create_translation()
 
       assert %Audio.Translation.CreateResponse.VerboseJson{
-               duration: "1.0",
+               duration: 1.0,
                language: "en",
                segments: [
                  %OpenAi.Audio.Transcription.Segment{

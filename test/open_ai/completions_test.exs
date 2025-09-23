@@ -49,7 +49,7 @@ defmodule OpenAi.CompletionsTest do
           seed: 123,
           stop: ["stop"],
           stream: true,
-          stream_options: %Chat.Completion.StreamOptions{
+          stream_options: %Chat.Completion.Stream.Options{
             include_usage: false
           },
           suffix: "suffix",

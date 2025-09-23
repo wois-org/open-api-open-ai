@@ -6,6 +6,8 @@ defmodule OpenAi.FineTuning.Job.CreateRequest do
   @type t :: %__MODULE__{
           hyperparameters: OpenAi.FineTuning.Job.CreateRequest.Hyperparameters.t() | nil,
           integrations: [OpenAi.FineTuning.Job.CreateRequest.Integrations.t()] | nil,
+          metadata: map | nil,
+          method: OpenAi.FineTuning.Method.t() | nil,
           model: String.t(),
           seed: integer | nil,
           suffix: String.t() | nil,
@@ -16,6 +18,8 @@ defmodule OpenAi.FineTuning.Job.CreateRequest do
   defstruct [
     :hyperparameters,
     :integrations,
+    :metadata,
+    :method,
     :model,
     :seed,
     :suffix,
@@ -31,7 +35,11 @@ defmodule OpenAi.FineTuning.Job.CreateRequest do
     [
       hyperparameters: {OpenAi.FineTuning.Job.CreateRequest.Hyperparameters, :t},
       integrations: [{OpenAi.FineTuning.Job.CreateRequest.Integrations, :t}],
-      model: {:union, enum: ["babbage-002", "davinci-002", "gpt-3.5-turbo"], string: :generic},
+      metadata: :map,
+      method: {OpenAi.FineTuning.Method, :t},
+      model:
+        {:union,
+         enum: ["babbage-002", "davinci-002", "gpt-3.5-turbo", "gpt-4o-mini"], string: :generic},
       seed: :integer,
       suffix: {:string, :generic},
       training_file: {:string, :generic},

@@ -6,7 +6,7 @@ defmodule OpenAi.Message.Attachment do
   @type t :: %__MODULE__{
           file_id: String.t() | nil,
           tools:
-            [OpenAi.Assistant.Tool.Code.t() | OpenAi.Assistant.Tool.File.SearchTypeOnly.t()] | nil
+            [OpenAi.Assistant.Tool.Code.t() | OpenAi.Assistant.Tool.FileSearch.TypeOnly.t()] | nil
         }
 
   defstruct [:file_id, :tools]
@@ -19,7 +19,7 @@ defmodule OpenAi.Message.Attachment do
     [
       file_id: {:string, :generic},
       tools: [
-        union: [{OpenAi.Assistant.Tool.Code, :t}, {OpenAi.Assistant.Tool.File.SearchTypeOnly, :t}]
+        union: [{OpenAi.Assistant.Tool.Code, :t}, {OpenAi.Assistant.Tool.FileSearch.TypeOnly, :t}]
       ]
     ]
   end

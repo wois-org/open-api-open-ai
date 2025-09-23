@@ -8,16 +8,21 @@ defmodule OpenAi.Assistant do
           description: String.t() | nil,
           id: String.t(),
           instructions: String.t() | nil,
-          metadata: map | nil,
+          metadata: map,
           model: String.t(),
           name: String.t() | nil,
           object: String.t(),
-          response_format: OpenAi.Assistant.ApiResponseFormat.t() | String.t() | nil,
+          response_format:
+            OpenAi.Response.Format.Json.t()
+            | OpenAi.Response.Format.JsonSchema.t()
+            | OpenAi.Response.Format.Text.t()
+            | String.t()
+            | nil,
           temperature: number | nil,
           tool_resources: OpenAi.Assistant.Tool.Resources.t() | nil,
           tools: [
             OpenAi.Assistant.Tool.Code.t()
-            | OpenAi.Assistant.Tool.File.Search.t()
+            | OpenAi.Assistant.Tool.FileSearch.t()
             | OpenAi.Assistant.Tool.Function.t()
           ],
           top_p: number | nil
@@ -54,13 +59,19 @@ defmodule OpenAi.Assistant do
       name: {:string, :generic},
       object: {:const, "assistant"},
       response_format:
-        {:union, [{OpenAi.Assistant.ApiResponseFormat, :t}, enum: ["none", "auto"]]},
+        {:union,
+         [
+           {OpenAi.Response.Format.Json, :t},
+           {OpenAi.Response.Format.JsonSchema, :t},
+           {OpenAi.Response.Format.Text, :t},
+           const: "auto"
+         ]},
       temperature: :number,
       tool_resources: {OpenAi.Assistant.Tool.Resources, :t},
       tools: [
         union: [
           {OpenAi.Assistant.Tool.Code, :t},
-          {OpenAi.Assistant.Tool.File.Search, :t},
+          {OpenAi.Assistant.Tool.FileSearch, :t},
           {OpenAi.Assistant.Tool.Function, :t}
         ]
       ],
