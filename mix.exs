@@ -1,4 +1,5 @@
 defmodule OpenExAi.MixProject do
+  alias OpenAi.Realtime
   use Mix.Project
 
   def project do
@@ -70,25 +71,62 @@ defmodule OpenExAi.MixProject do
           OpenAi.Config,
           OpenAi.Client.Stream
         ],
-        Endpoints: [
+        "Responses API": [
+          OpenAi.Responses,
+          OpenAi.Conversations
+        ],
+        Webhooks: [],
+        "Platform APIs": [
           OpenAi.Audio,
-          OpenAi.Chat,
+          OpenAi.Images,
           OpenAi.Embeddings,
+          OpenAi.Evals,
           OpenAi.FineTuning,
+          OpenAi.Grades,
           OpenAi.Batch,
           OpenAi.Files,
-          OpenAi.Images,
           OpenAi.Models,
           OpenAi.Moderations
         ],
-        Assistants: [
-          OpenAi.Assistants,
-          "OpenAi.Messages",
-          "OpenAi.Runs",
-          "OpenAi.RunsSteps",
+        "Vector Stores": [
           OpenAi.VectorStores,
           "OpenAi.VectorStoresFiles",
           "OpenAi.VectorStoresFileBatches"
+        ],
+        Containers: [
+          "OpenAi.Containers",
+          "OpenAi.ContainerFiles",
+        ],
+        Realtime: [
+          OpenAi.Realtime,
+          "OpenAi.ClientSecrets",
+          "OpenAi.ClientEvents",
+          "OpenAi.ServerEvents"
+        ],
+        "Chat Completions": [
+          OpenAi.Chat
+        ],
+        Assistants: [
+          OpenAi.Assistants,
+          "OpenAi.Threads",
+          "OpenAi.Messages",
+          "OpenAi.Runs",
+          "OpenAi.RunsSteps",
+          "OpenAi.Streaming"
+        ],
+        Administration: [
+          OpenAi.Operations,
+          OpenAi.AdminApiKey,
+          OpenAi.Invites,
+          OpenAi.Users,
+          OpenAi.Projects,
+          OpenAi.Project.User,
+          OpenAi.Project.ServiceAccount,
+          OpenAi.Project.ApiKey,
+          OpenAi.Project.RateLimit,
+          OpenAi.AuditLogs,
+          OpenAi.Usage,
+          OpenAi.Certificates
         ],
         Legacy: [
           OpenAi.Completions,

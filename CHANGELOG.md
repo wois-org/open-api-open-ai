@@ -3,6 +3,12 @@
 ### Added
 - Support for streaming operations with a dedicated streaming function.
 - Function parameters can now be passed as options in a call to OpenAI.
+- New OpenAI APIs
+    - Audio (Speech to text)
+    - Evals (Test and improve model outputs through evaluations.)
+    - Responses (Most advanced interface for generating model responses.)
+    - AuditLog (Logs of user actions and configuration changes within this organization.)
+    - Usage (Detailed insights into your activity)
 
 ### Fixed
 - Typo in `submit_tool_outputs_to_run` (previously `submit_tool_ouputs_to_run`).
