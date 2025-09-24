@@ -8,7 +8,7 @@ defmodule OpenAi.Assistants do
   @doc """
   Cancels a run that is `in_progress`.
   """
-  @spec cancel_run(String.t(), String.t(), keyword) ::
+  @spec cancel_run(thread_id :: String.t(), run_id :: String.t(), opts :: keyword) ::
           {:ok, OpenAi.Run.t()} | {:error, OpenAi.Error.error()}
   def cancel_run(thread_id, run_id, opts \\ []) do
     client = opts[:client] || @default_client
@@ -26,7 +26,7 @@ defmodule OpenAi.Assistants do
   @doc """
   Create an assistant with a model and instructions.
   """
-  @spec create_assistant(OpenAi.Assistant.CreateRequest.t(), keyword) ::
+  @spec create_assistant(body :: OpenAi.Assistant.CreateRequest.t(), opts :: keyword) ::
           {:ok, OpenAi.Assistant.t()} | {:error, OpenAi.Error.error()}
   def create_assistant(body, opts \\ []) do
     client = opts[:client] || @default_client
@@ -46,8 +46,11 @@ defmodule OpenAi.Assistants do
   @doc """
   Create a message.
   """
-  @spec create_message(String.t(), OpenAi.Message.CreateRequest.t(), keyword) ::
-          {:ok, OpenAi.Message.t()} | {:error, OpenAi.Error.error()}
+  @spec create_message(
+          thread_id :: String.t(),
+          body :: OpenAi.Message.CreateRequest.t(),
+          opts :: keyword
+        ) :: {:ok, OpenAi.Message.t()} | {:error, OpenAi.Error.error()}
   def create_message(thread_id, body, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -65,11 +68,20 @@ defmodule OpenAi.Assistants do
 
   @doc """
   Create a run.
+
+  ## Options
+
+    * `include[]`: A list of additional fields to include in the response. Currently the only supported value is `step_details.tool_calls[*].file_search.results[*].content` to fetch the file search result content.
+      
+      See the [file search tool documentation](/docs/assistants/tools/file-search#customizing-file-search-settings) for more information.
+      
+
   """
-  @spec create_run(String.t(), OpenAi.Run.CreateRequest.t(), keyword) ::
+  @spec create_run(thread_id :: String.t(), body :: OpenAi.Run.CreateRequest.t(), opts :: keyword) ::
           {:ok, OpenAi.Run.t()} | {:error, OpenAi.Error.error()}
   def create_run(thread_id, body, opts \\ []) do
     client = opts[:client] || @default_client
+    query = Keyword.take(opts, [:"include[]"])
 
     client.request(%{
       args: [thread_id: thread_id, body: body],
@@ -77,6 +89,7 @@ defmodule OpenAi.Assistants do
       url: "/threads/#{thread_id}/runs",
       body: body,
       method: :post,
+      query: query,
       request: [{"application/json", {OpenAi.Run.CreateRequest, :t}}],
       response: [{200, {OpenAi.Run, :t}}],
       opts: opts
@@ -86,7 +99,7 @@ defmodule OpenAi.Assistants do
   @doc """
   Create a thread.
   """
-  @spec create_thread(OpenAi.Thread.CreateRequest.t(), keyword) ::
+  @spec create_thread(body :: OpenAi.Thread.CreateRequest.t(), opts :: keyword) ::
           {:ok, OpenAi.Thread.t()} | {:error, OpenAi.Error.error()}
   def create_thread(body, opts \\ []) do
     client = opts[:client] || @default_client
@@ -106,7 +119,7 @@ defmodule OpenAi.Assistants do
   @doc """
   Create a thread and run it in one request.
   """
-  @spec create_thread_and_run(OpenAi.Thread.CreateAndRunRequest.t(), keyword) ::
+  @spec create_thread_and_run(body :: OpenAi.Thread.CreateAndRunRequest.t(), opts :: keyword) ::
           {:ok, OpenAi.Run.t()} | {:error, OpenAi.Error.error()}
   def create_thread_and_run(body, opts \\ []) do
     client = opts[:client] || @default_client
@@ -126,7 +139,7 @@ defmodule OpenAi.Assistants do
   @doc """
   Delete an assistant.
   """
-  @spec delete_assistant(String.t(), keyword) ::
+  @spec delete_assistant(assistant_id :: String.t(), opts :: keyword) ::
           {:ok, OpenAi.Assistant.DeleteResponse.t()} | {:error, OpenAi.Error.error()}
   def delete_assistant(assistant_id, opts \\ []) do
     client = opts[:client] || @default_client
@@ -144,7 +157,7 @@ defmodule OpenAi.Assistants do
   @doc """
   Deletes a message.
   """
-  @spec delete_message(String.t(), String.t(), keyword) ::
+  @spec delete_message(thread_id :: String.t(), message_id :: String.t(), opts :: keyword) ::
           {:ok, OpenAi.Message.DeleteResponse.t()} | {:error, OpenAi.Error.error()}
   def delete_message(thread_id, message_id, opts \\ []) do
     client = opts[:client] || @default_client
@@ -162,7 +175,7 @@ defmodule OpenAi.Assistants do
   @doc """
   Delete a thread.
   """
-  @spec delete_thread(String.t(), keyword) ::
+  @spec delete_thread(thread_id :: String.t(), opts :: keyword) ::
           {:ok, OpenAi.Thread.DeleteResponse.t()} | {:error, OpenAi.Error.error()}
   def delete_thread(thread_id, opts \\ []) do
     client = opts[:client] || @default_client
@@ -180,7 +193,7 @@ defmodule OpenAi.Assistants do
   @doc """
   Retrieves an assistant.
   """
-  @spec get_assistant(String.t(), keyword) ::
+  @spec get_assistant(assistant_id :: String.t(), opts :: keyword) ::
           {:ok, OpenAi.Assistant.t()} | {:error, OpenAi.Error.error()}
   def get_assistant(assistant_id, opts \\ []) do
     client = opts[:client] || @default_client
@@ -198,7 +211,7 @@ defmodule OpenAi.Assistants do
   @doc """
   Retrieve a message.
   """
-  @spec get_message(String.t(), String.t(), keyword) ::
+  @spec get_message(thread_id :: String.t(), message_id :: String.t(), opts :: keyword) ::
           {:ok, OpenAi.Message.t()} | {:error, OpenAi.Error.error()}
   def get_message(thread_id, message_id, opts \\ []) do
     client = opts[:client] || @default_client
@@ -216,7 +229,7 @@ defmodule OpenAi.Assistants do
   @doc """
   Retrieves a run.
   """
-  @spec get_run(String.t(), String.t(), keyword) ::
+  @spec get_run(thread_id :: String.t(), run_id :: String.t(), opts :: keyword) ::
           {:ok, OpenAi.Run.t()} | {:error, OpenAi.Error.error()}
   def get_run(thread_id, run_id, opts \\ []) do
     client = opts[:client] || @default_client
@@ -233,17 +246,31 @@ defmodule OpenAi.Assistants do
 
   @doc """
   Retrieves a run step.
+
+  ## Options
+
+    * `include[]`: A list of additional fields to include in the response. Currently the only supported value is `step_details.tool_calls[*].file_search.results[*].content` to fetch the file search result content.
+      
+      See the [file search tool documentation](/docs/assistants/tools/file-search#customizing-file-search-settings) for more information.
+      
+
   """
-  @spec get_run_step(String.t(), String.t(), String.t(), keyword) ::
-          {:ok, OpenAi.Run.Step.t()} | {:error, OpenAi.Error.error()}
+  @spec get_run_step(
+          thread_id :: String.t(),
+          run_id :: String.t(),
+          step_id :: String.t(),
+          opts :: keyword
+        ) :: {:ok, OpenAi.Run.Step.t()} | {:error, OpenAi.Error.error()}
   def get_run_step(thread_id, run_id, step_id, opts \\ []) do
     client = opts[:client] || @default_client
+    query = Keyword.take(opts, [:"include[]"])
 
     client.request(%{
       args: [thread_id: thread_id, run_id: run_id, step_id: step_id],
       call: {OpenAi.Assistants, :get_run_step},
       url: "/threads/#{thread_id}/runs/#{run_id}/steps/#{step_id}",
       method: :get,
+      query: query,
       response: [{200, {OpenAi.Run.Step, :t}}],
       opts: opts
     })
@@ -252,7 +279,7 @@ defmodule OpenAi.Assistants do
   @doc """
   Retrieves a thread.
   """
-  @spec get_thread(String.t(), keyword) ::
+  @spec get_thread(thread_id :: String.t(), opts :: keyword) ::
           {:ok, OpenAi.Thread.t()} | {:error, OpenAi.Error.error()}
   def get_thread(thread_id, opts \\ []) do
     client = opts[:client] || @default_client
@@ -273,16 +300,16 @@ defmodule OpenAi.Assistants do
   ## Options
 
     * `limit`: A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.
-
+      
     * `order`: Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc` for descending order.
-
+      
     * `after`: A cursor for use in pagination. `after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.
-
-    * `before`: A cursor for use in pagination. `before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-
+      
+    * `before`: A cursor for use in pagination. `before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+      
 
   """
-  @spec list_assistants(keyword) ::
+  @spec list_assistants(opts :: keyword) ::
           {:ok, OpenAi.Assistant.ListResponse.t()} | {:error, OpenAi.Error.error()}
   def list_assistants(opts \\ []) do
     client = opts[:client] || @default_client
@@ -305,18 +332,18 @@ defmodule OpenAi.Assistants do
   ## Options
 
     * `limit`: A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.
-
+      
     * `order`: Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc` for descending order.
-
+      
     * `after`: A cursor for use in pagination. `after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.
-
-    * `before`: A cursor for use in pagination. `before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-
+      
+    * `before`: A cursor for use in pagination. `before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+      
     * `run_id`: Filter messages by the run ID that generated them.
-
+      
 
   """
-  @spec list_messages(String.t(), keyword) ::
+  @spec list_messages(thread_id :: String.t(), opts :: keyword) ::
           {:ok, OpenAi.Message.ListResponse.t()} | {:error, OpenAi.Error.error()}
   def list_messages(thread_id, opts \\ []) do
     client = opts[:client] || @default_client
@@ -339,20 +366,24 @@ defmodule OpenAi.Assistants do
   ## Options
 
     * `limit`: A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.
-
+      
     * `order`: Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc` for descending order.
-
+      
     * `after`: A cursor for use in pagination. `after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.
-
-    * `before`: A cursor for use in pagination. `before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-
+      
+    * `before`: A cursor for use in pagination. `before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+      
+    * `include[]`: A list of additional fields to include in the response. Currently the only supported value is `step_details.tool_calls[*].file_search.results[*].content` to fetch the file search result content.
+      
+      See the [file search tool documentation](/docs/assistants/tools/file-search#customizing-file-search-settings) for more information.
+      
 
   """
-  @spec list_run_steps(String.t(), String.t(), keyword) ::
+  @spec list_run_steps(thread_id :: String.t(), run_id :: String.t(), opts :: keyword) ::
           {:ok, OpenAi.Run.Step.ListResponse.t()} | {:error, OpenAi.Error.error()}
   def list_run_steps(thread_id, run_id, opts \\ []) do
     client = opts[:client] || @default_client
-    query = Keyword.take(opts, [:after, :before, :limit, :order])
+    query = Keyword.take(opts, [:after, :before, :"include[]", :limit, :order])
 
     client.request(%{
       args: [thread_id: thread_id, run_id: run_id],
@@ -371,16 +402,16 @@ defmodule OpenAi.Assistants do
   ## Options
 
     * `limit`: A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.
-
+      
     * `order`: Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc` for descending order.
-
+      
     * `after`: A cursor for use in pagination. `after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.
-
-    * `before`: A cursor for use in pagination. `before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-
+      
+    * `before`: A cursor for use in pagination. `before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+      
 
   """
-  @spec list_runs(String.t(), keyword) ::
+  @spec list_runs(thread_id :: String.t(), opts :: keyword) ::
           {:ok, OpenAi.Run.ListResponse.t()} | {:error, OpenAi.Error.error()}
   def list_runs(thread_id, opts \\ []) do
     client = opts[:client] || @default_client
@@ -400,8 +431,11 @@ defmodule OpenAi.Assistants do
   @doc """
   Modifies an assistant.
   """
-  @spec modify_assistant(String.t(), OpenAi.Assistant.UpdateRequest.t(), keyword) ::
-          {:ok, OpenAi.Assistant.t()} | {:error, OpenAi.Error.error()}
+  @spec modify_assistant(
+          assistant_id :: String.t(),
+          body :: OpenAi.Assistant.UpdateRequest.t(),
+          opts :: keyword
+        ) :: {:ok, OpenAi.Assistant.t()} | {:error, OpenAi.Error.error()}
   def modify_assistant(assistant_id, body, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -420,8 +454,12 @@ defmodule OpenAi.Assistants do
   @doc """
   Modifies a message.
   """
-  @spec modify_message(String.t(), String.t(), OpenAi.Message.UpdateRequest.t(), keyword) ::
-          {:ok, OpenAi.Message.t()} | {:error, OpenAi.Error.error()}
+  @spec modify_message(
+          thread_id :: String.t(),
+          message_id :: String.t(),
+          body :: OpenAi.Message.UpdateRequest.t(),
+          opts :: keyword
+        ) :: {:ok, OpenAi.Message.t()} | {:error, OpenAi.Error.error()}
   def modify_message(thread_id, message_id, body, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -440,8 +478,12 @@ defmodule OpenAi.Assistants do
   @doc """
   Modifies a run.
   """
-  @spec modify_run(String.t(), String.t(), OpenAi.Run.UpdateRequest.t(), keyword) ::
-          {:ok, OpenAi.Run.t()} | {:error, OpenAi.Error.error()}
+  @spec modify_run(
+          thread_id :: String.t(),
+          run_id :: String.t(),
+          body :: OpenAi.Run.UpdateRequest.t(),
+          opts :: keyword
+        ) :: {:ok, OpenAi.Run.t()} | {:error, OpenAi.Error.error()}
   def modify_run(thread_id, run_id, body, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -460,8 +502,11 @@ defmodule OpenAi.Assistants do
   @doc """
   Modifies a thread.
   """
-  @spec modify_thread(String.t(), OpenAi.Thread.UpdateRequest.t(), keyword) ::
-          {:ok, OpenAi.Thread.t()} | {:error, OpenAi.Error.error()}
+  @spec modify_thread(
+          thread_id :: String.t(),
+          body :: OpenAi.Thread.UpdateRequest.t(),
+          opts :: keyword
+        ) :: {:ok, OpenAi.Thread.t()} | {:error, OpenAi.Error.error()}
   def modify_thread(thread_id, body, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -482,10 +527,10 @@ defmodule OpenAi.Assistants do
 
   """
   @spec submit_tool_outputs_to_run(
-          String.t(),
-          String.t(),
-          OpenAi.Assistant.Tool.Outputs.RunSubmitRequest.t(),
-          keyword
+          thread_id :: String.t(),
+          run_id :: String.t(),
+          body :: OpenAi.Assistant.Tool.Outputs.RunSubmitRequest.t(),
+          opts :: keyword
         ) :: {:ok, OpenAi.Run.t()} | {:error, OpenAi.Error.error()}
   def submit_tool_outputs_to_run(thread_id, run_id, body, opts \\ []) do
     client = opts[:client] || @default_client

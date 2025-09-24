@@ -28,8 +28,9 @@ defmodule OpenAi.Client.Value do
   def transform(v, {:union, types}) when is_list(v) and is_list(types),
     do: Client.List.transform(v, types)
 
-  def transform(v, type),
-    do: {:error, "Failed to transform value: #{inspect(v)} to type: #{inspect(type)}"}
+  def transform(v, type) do
+    {:error, "Failed to transform value: #{inspect(v)} to type: #{inspect(type)}"}
+  end
 
   defp in_enum(value, enum) do
     if Enum.member?(enum, value) do
@@ -51,8 +52,14 @@ defmodule OpenAi.Client.Value do
 
     union_types
     |> Enum.find(fn
+      :integer ->
+        value |> is_integer()
+
       {:enum, values} ->
         Enum.member?(values, value)
+
+      {:const, const} ->
+        const == value
 
       {struct, type} ->
         struct_fields = struct.__fields__(type)

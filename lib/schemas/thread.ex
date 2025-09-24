@@ -6,7 +6,7 @@ defmodule OpenAi.Thread do
   @type t :: %__MODULE__{
           created_at: integer,
           id: String.t(),
-          metadata: map | nil,
+          metadata: map,
           object: String.t(),
           tool_resources: OpenAi.Thread.ToolResources.t() | nil
         }

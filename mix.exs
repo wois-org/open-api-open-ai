@@ -1,10 +1,11 @@
 defmodule OpenExAi.MixProject do
+  alias OpenAi.Realtime
   use Mix.Project
 
   def project do
     [
       app: :oapi_open_ai,
-      version: "0.4.5-alpha.0",
+      version: "1.0.0",
       elixir: "~> 1.16",
       start_permanent: Mix.env() == :prod,
       name: "OpenAI REST API Client",
@@ -30,7 +31,9 @@ defmodule OpenExAi.MixProject do
       {:credo, "~> 1.7", runtime: false},
       {:dialyxir, "~> 1.0", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.29", only: :dev, runtime: false},
-      {:oapi_generator, "~> 0.2", only: :dev, runtime: false},
+      # {:oapi_generator, "~> 0.2", only: :dev, runtime: false},
+      # {:oapi_generator, git: "git@github.com:aj-foster/open-api-generator.git", branch: "main", only: :dev, runtime: false},
+      {:oapi_generator, path: "../wois/open-api-generator", only: :dev},
       {:httpoison, "~> 2.0"},
       {:poison, "~> 5.0"},
       {:mox, "~> 1.0", only: :test},
@@ -43,7 +46,8 @@ defmodule OpenExAi.MixProject do
 
   defp aliases do
     [
-      generate: ["api.gen default ./config/openai.yaml"]
+      generate: ["api.gen default ./config/openai.yaml"],
+      gen_base: ["api.gen base ./config/openai.yaml"]
     ]
   end
 
@@ -67,25 +71,62 @@ defmodule OpenExAi.MixProject do
           OpenAi.Config,
           OpenAi.Client.Stream
         ],
-        Endpoints: [
+        "Responses API": [
+          OpenAi.Responses,
+          OpenAi.Conversations
+        ],
+        Webhooks: [],
+        "Platform APIs": [
           OpenAi.Audio,
-          OpenAi.Chat,
+          OpenAi.Images,
           OpenAi.Embeddings,
+          OpenAi.Evals,
           OpenAi.FineTuning,
+          OpenAi.Grades,
           OpenAi.Batch,
           OpenAi.Files,
-          OpenAi.Images,
           OpenAi.Models,
           OpenAi.Moderations
         ],
-        Assistants: [
-          OpenAi.Assistants,
-          "OpenAi.Messages",
-          "OpenAi.Runs",
-          "OpenAi.RunsSteps",
+        "Vector Stores": [
           OpenAi.VectorStores,
           "OpenAi.VectorStoresFiles",
           "OpenAi.VectorStoresFileBatches"
+        ],
+        Containers: [
+          "OpenAi.Containers",
+          "OpenAi.ContainerFiles",
+        ],
+        Realtime: [
+          OpenAi.Realtime,
+          "OpenAi.ClientSecrets",
+          "OpenAi.ClientEvents",
+          "OpenAi.ServerEvents"
+        ],
+        "Chat Completions": [
+          OpenAi.Chat
+        ],
+        Assistants: [
+          OpenAi.Assistants,
+          "OpenAi.Threads",
+          "OpenAi.Messages",
+          "OpenAi.Runs",
+          "OpenAi.RunsSteps",
+          "OpenAi.Streaming"
+        ],
+        Administration: [
+          OpenAi.Operations,
+          OpenAi.AdminApiKey,
+          OpenAi.Invites,
+          OpenAi.Users,
+          OpenAi.Projects,
+          OpenAi.Project.User,
+          OpenAi.Project.ServiceAccount,
+          OpenAi.Project.ApiKey,
+          OpenAi.Project.RateLimit,
+          OpenAi.AuditLogs,
+          OpenAi.Usage,
+          OpenAi.Certificates
         ],
         Legacy: [
           OpenAi.Completions,

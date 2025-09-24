@@ -5,13 +5,15 @@ defmodule OpenAi.FineTuning.Job.Event do
 
   @type t :: %__MODULE__{
           created_at: integer,
+          data: map | nil,
           id: String.t(),
           level: String.t(),
           message: String.t(),
-          object: String.t()
+          object: String.t(),
+          type: String.t() | nil
         }
 
-  defstruct [:created_at, :id, :level, :message, :object]
+  defstruct [:created_at, :data, :id, :level, :message, :object, :type]
 
   @doc false
   @spec __fields__(atom) :: keyword
@@ -20,10 +22,12 @@ defmodule OpenAi.FineTuning.Job.Event do
   def __fields__(:t) do
     [
       created_at: :integer,
+      data: :map,
       id: {:string, :generic},
       level: {:enum, ["info", "warn", "error"]},
       message: {:string, :generic},
-      object: {:const, "fine_tuning.job.event"}
+      object: {:const, "fine_tuning.job.event"},
+      type: {:enum, ["message", "metrics"]}
     ]
   end
 end

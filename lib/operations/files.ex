@@ -8,16 +8,16 @@ defmodule OpenAi.Files do
   @doc """
   Upload a file that can be used across various endpoints. Individual files can be up to 512 MB, and the size of all files uploaded by one organization can be up to 100 GB.
 
-  The Assistants API supports files up to 2 million tokens and of specific file types. See the [Assistants Tools guide](https://platform.openai.com/docs/assistants/tools) for details.
+  The Assistants API supports files up to 2 million tokens and of specific file types. See the [Assistants Tools guide](/docs/assistants/tools) for details.
 
-  The Fine-tuning API only supports `.jsonl` files. The input also has certain required formats for fine-tuning [chat](https://platform.openai.com/docs/api-reference/fine-tuning/chat-input) or [completions](https://platform.openai.com/docs/api-reference/fine-tuning/completions-input) models.
+  The Fine-tuning API only supports `.jsonl` files. The input also has certain required formats for fine-tuning [chat](/docs/api-reference/fine-tuning/chat-input) or [completions](/docs/api-reference/fine-tuning/completions-input) models.
 
-  The Batch API only supports `.jsonl` files up to 100 MB in size. The input also has a specific required [format](https://platform.openai.com/docs/api-reference/batch/request-input).
+  The Batch API only supports `.jsonl` files up to 200 MB in size. The input also has a specific required [format](/docs/api-reference/batch/request-input).
 
   Please [contact us](https://help.openai.com/) if you need to increase these storage limits.
 
   """
-  @spec create_file(OpenAi.File.CreateRequest.t(), keyword) ::
+  @spec create_file(body :: OpenAi.File.CreateRequest.t(), opts :: keyword) ::
           {:ok, OpenAi.File.t()} | {:error, OpenAi.Error.error()}
   def create_file(body, opts \\ []) do
     client = opts[:client] || @default_client
@@ -37,7 +37,7 @@ defmodule OpenAi.Files do
   @doc """
   Delete a file.
   """
-  @spec delete_file(String.t(), keyword) ::
+  @spec delete_file(file_id :: String.t(), opts :: keyword) ::
           {:ok, OpenAi.File.DeleteResponse.t()} | {:error, OpenAi.Error.error()}
   def delete_file(file_id, opts \\ []) do
     client = opts[:client] || @default_client
@@ -55,7 +55,8 @@ defmodule OpenAi.Files do
   @doc """
   Returns the contents of the specified file.
   """
-  @spec download_file(String.t(), keyword) :: {:ok, String.t()} | {:error, OpenAi.Error.error()}
+  @spec download_file(file_id :: String.t(), opts :: keyword) ::
+          {:ok, String.t()} | {:error, OpenAi.Error.error()}
   def download_file(file_id, opts \\ []) do
     client = opts[:client] || @default_client
 
@@ -70,18 +71,24 @@ defmodule OpenAi.Files do
   end
 
   @doc """
-  Returns a list of files that belong to the user's organization.
+  Returns a list of files.
 
   ## Options
 
     * `purpose`: Only return files with the given purpose.
+    * `limit`: A limit on the number of objects to be returned. Limit can range between 1 and 10,000, and the default is 10,000.
+      
+    * `order`: Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc` for descending order.
+      
+    * `after`: A cursor for use in pagination. `after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.
+      
 
   """
-  @spec list_files(keyword) ::
+  @spec list_files(opts :: keyword) ::
           {:ok, OpenAi.File.ListResponse.t()} | {:error, OpenAi.Error.error()}
   def list_files(opts \\ []) do
     client = opts[:client] || @default_client
-    query = Keyword.take(opts, [:purpose])
+    query = Keyword.take(opts, [:after, :limit, :order, :purpose])
 
     client.request(%{
       args: [],
@@ -97,7 +104,7 @@ defmodule OpenAi.Files do
   @doc """
   Returns information about a specific file.
   """
-  @spec retrieve_file(String.t(), keyword) ::
+  @spec retrieve_file(file_id :: String.t(), opts :: keyword) ::
           {:ok, OpenAi.File.t()} | {:error, OpenAi.Error.error()}
   def retrieve_file(file_id, opts \\ []) do
     client = opts[:client] || @default_client

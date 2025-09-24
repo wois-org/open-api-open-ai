@@ -3,7 +3,7 @@ defmodule OpenAi.Chat.Completion.Request.SystemMessage do
   Provides struct and type for a Chat.Completion.Request.SystemMessage
   """
 
-  @type t :: %__MODULE__{content: String.t(), name: String.t() | nil, role: String.t()}
+  @type t :: %__MODULE__{content: String.t() | [map], name: String.t() | nil, role: String.t()}
 
   defstruct [:content, :name, :role]
 
@@ -12,6 +12,10 @@ defmodule OpenAi.Chat.Completion.Request.SystemMessage do
   def __fields__(type \\ :t)
 
   def __fields__(:t) do
-    [content: {:string, :generic}, name: {:string, :generic}, role: {:const, "system"}]
+    [
+      content: {:union, [{:string, :generic}, [:map]]},
+      name: {:string, :generic},
+      role: {:const, "system"}
+    ]
   end
 end
