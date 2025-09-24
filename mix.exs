@@ -5,7 +5,7 @@ defmodule OpenExAi.MixProject do
   def project do
     [
       app: :oapi_open_ai,
-      version: "0.4.5-alpha.0",
+      version: "1.0.0",
       elixir: "~> 1.16",
       start_permanent: Mix.env() == :prod,
       name: "OpenAI REST API Client",

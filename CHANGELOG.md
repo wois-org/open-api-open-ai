@@ -1,6 +1,8 @@
 # Changelog
 <!-- next-header -->
+
 ## [Unreleased] - ReleaseDate
+## [1.0.0] - 2025-9-24
 
 ### Breaking change
 - `OpenAi.Assistant.Tool.File.Search` Module renamed to `OpenAi.Assistant.Tool.FileSearch`
@@ -115,7 +117,8 @@
 - Written tests for all operations 
 
 <!-- next-url -->
-[Unreleased]: https://github.com/wois-org/open-api-open-ai/compare/v0.4.5...HEAD
+[Unreleased]: https://github.com/wois-org/open-api-open-ai/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/wois-org/open-api-open-ai/compare/v0.4.5...v1.0.0
 [0.4.5]: https://github.com/wois-org/open-api-open-ai/compare/v0.4.4...v0.4.5
 [0.4.4]: https://github.com/wois-org/open-api-open-ai/compare/v0.4.3...v0.4.4
 [0.4.3]: https://github.com/wois-org/open-api-open-ai/compare/v0.4.2...v0.4.3
