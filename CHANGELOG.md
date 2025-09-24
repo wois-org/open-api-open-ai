@@ -36,8 +36,6 @@
 ### Fixed
 - Typo in `submit_tool_outputs_to_run` (previously `submit_tool_ouputs_to_run`).
 
-## [0.4.5] - 2024-9-16
-## [0.4.4] - 2024-9-16
 ## [0.4.3] - 2024-8-12
 ### Fixed
 - Documentation github branch
@@ -118,9 +116,7 @@
 
 <!-- next-url -->
 [Unreleased]: https://github.com/wois-org/open-api-open-ai/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/wois-org/open-api-open-ai/compare/v0.4.5...v1.0.0
-[0.4.5]: https://github.com/wois-org/open-api-open-ai/compare/v0.4.4...v0.4.5
-[0.4.4]: https://github.com/wois-org/open-api-open-ai/compare/v0.4.3...v0.4.4
+[1.0.0]: https://github.com/wois-org/open-api-open-ai/compare/v0.4.3...v1.0.0
 [0.4.3]: https://github.com/wois-org/open-api-open-ai/compare/v0.4.2...v0.4.3
 [0.4.2]: https://github.com/wois-org/open-api-open-ai/compare/v0.4.1...v0.4.2
 [0.4.1]: https://github.com/wois-org/open-api-open-ai/compare/v0.4.0...v0.4.1
