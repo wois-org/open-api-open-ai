@@ -10,7 +10,7 @@ defmodule OpenAi.VectorStore do
           file_counts: OpenAi.VectorStore.File.Counts.t(),
           id: String.t(),
           last_active_at: integer | nil,
-          metadata: map | nil,
+          metadata: map,
           name: String.t(),
           object: String.t(),
           status: String.t(),

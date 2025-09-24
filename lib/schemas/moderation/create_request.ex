@@ -3,7 +3,7 @@ defmodule OpenAi.Moderation.CreateRequest do
   Provides struct and type for a Moderation.CreateRequest
   """
 
-  @type t :: %__MODULE__{input: String.t() | [String.t()], model: String.t() | nil}
+  @type t :: %__MODULE__{input: String.t() | [map] | [String.t()], model: String.t() | nil}
 
   defstruct [:input, :model]
 
@@ -13,9 +13,16 @@ defmodule OpenAi.Moderation.CreateRequest do
 
   def __fields__(:t) do
     [
-      input: {:union, [{:string, :generic}, [string: :generic]]},
+      input: {:union, [{:string, :generic}, [:map], [string: :generic]]},
       model:
-        {:union, enum: ["text-moderation-latest", "text-moderation-stable"], string: :generic}
+        {:union,
+         enum: [
+           "omni-moderation-latest",
+           "omni-moderation-2024-09-26",
+           "text-moderation-latest",
+           "text-moderation-stable"
+         ],
+         string: :generic}
     ]
   end
 end

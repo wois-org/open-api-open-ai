@@ -8,7 +8,7 @@ defmodule OpenAi.Audio do
   @doc """
   Generates audio from the input text.
   """
-  @spec create_speech(OpenAi.Audio.Speech.CreateRequest.t(), keyword) ::
+  @spec create_speech(body :: OpenAi.Audio.Speech.CreateRequest.t(), opts :: keyword) ::
           {:ok, String.t()} | {:error, OpenAi.Error.error()}
   def create_speech(body, opts \\ []) do
     client = opts[:client] || @default_client
@@ -28,10 +28,15 @@ defmodule OpenAi.Audio do
   @doc """
   Transcribes audio into the input language.
   """
-  @spec create_transcription(OpenAi.Audio.Transcription.CreateRequest.t(), keyword) ::
+  @spec create_transcription(
+          body :: OpenAi.Audio.Transcription.CreateRequest.t(),
+          opts :: keyword
+        ) ::
           {:ok,
            OpenAi.Audio.Transcription.CreateResponse.Json.t()
-           | OpenAi.Audio.Transcription.CreateResponse.VerboseJson.t()}
+           | OpenAi.Audio.Transcription.CreateResponse.VerboseJson.t()
+           | OpenAi.Audio.Transcription.Text.DeltaEvent.t()
+           | OpenAi.Audio.Transcription.Text.DoneEvent.t()}
           | {:error, OpenAi.Error.error()}
   def create_transcription(body, opts \\ []) do
     client = opts[:client] || @default_client
@@ -48,7 +53,9 @@ defmodule OpenAi.Audio do
          {:union,
           [
             {OpenAi.Audio.Transcription.CreateResponse.Json, :t},
-            {OpenAi.Audio.Transcription.CreateResponse.VerboseJson, :t}
+            {OpenAi.Audio.Transcription.CreateResponse.VerboseJson, :t},
+            {OpenAi.Audio.Transcription.Text.DeltaEvent, :t},
+            {OpenAi.Audio.Transcription.Text.DoneEvent, :t}
           ]}}
       ],
       opts: opts
@@ -58,7 +65,7 @@ defmodule OpenAi.Audio do
   @doc """
   Translates audio into English.
   """
-  @spec create_translation(OpenAi.Audio.Translation.CreateRequest.t(), keyword) ::
+  @spec create_translation(body :: OpenAi.Audio.Translation.CreateRequest.t(), opts :: keyword) ::
           {:ok,
            OpenAi.Audio.Translation.CreateResponse.Json.t()
            | OpenAi.Audio.Translation.CreateResponse.VerboseJson.t()}

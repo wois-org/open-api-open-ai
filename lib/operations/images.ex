@@ -6,9 +6,10 @@ defmodule OpenAi.Images do
   @default_client OpenAi.Client
 
   @doc """
-  Creates an image given a prompt.
+  Creates an image given a prompt. [Learn more](/docs/guides/images).
+
   """
-  @spec create_image(OpenAi.Image.CreateRequest.t(), keyword) ::
+  @spec create_image(body :: OpenAi.Image.CreateRequest.t(), opts :: keyword) ::
           {:ok, OpenAi.Image.Response.t()} | {:error, OpenAi.Error.error()}
   def create_image(body, opts \\ []) do
     client = opts[:client] || @default_client
@@ -26,9 +27,9 @@ defmodule OpenAi.Images do
   end
 
   @doc """
-  Creates an edited or extended image given an original image and a prompt.
+  Creates an edited or extended image given one or more source images and a prompt. This endpoint only supports `gpt-image-1` and `dall-e-2`.
   """
-  @spec create_image_edit(OpenAi.Image.EditCreateRequest.t(), keyword) ::
+  @spec create_image_edit(body :: OpenAi.Image.EditCreateRequest.t(), opts :: keyword) ::
           {:ok, OpenAi.Image.Response.t()} | {:error, OpenAi.Error.error()}
   def create_image_edit(body, opts \\ []) do
     client = opts[:client] || @default_client
@@ -46,9 +47,9 @@ defmodule OpenAi.Images do
   end
 
   @doc """
-  Creates a variation of a given image.
+  Creates a variation of a given image. This endpoint only supports `dall-e-2`.
   """
-  @spec create_image_variation(OpenAi.Image.VariationCreateRequest.t(), keyword) ::
+  @spec create_image_variation(body :: OpenAi.Image.VariationCreateRequest.t(), opts :: keyword) ::
           {:ok, OpenAi.Image.Response.t()} | {:error, OpenAi.Error.error()}
   def create_image_variation(body, opts \\ []) do
     client = opts[:client] || @default_client

@@ -6,6 +6,7 @@ defmodule OpenAi.File do
   @type t :: %__MODULE__{
           bytes: integer,
           created_at: integer,
+          expires_at: integer | nil,
           filename: String.t(),
           id: String.t(),
           object: String.t(),
@@ -14,7 +15,17 @@ defmodule OpenAi.File do
           status_details: String.t() | nil
         }
 
-  defstruct [:bytes, :created_at, :filename, :id, :object, :purpose, :status, :status_details]
+  defstruct [
+    :bytes,
+    :created_at,
+    :expires_at,
+    :filename,
+    :id,
+    :object,
+    :purpose,
+    :status,
+    :status_details
+  ]
 
   @doc false
   @spec __fields__(atom) :: keyword
@@ -24,6 +35,7 @@ defmodule OpenAi.File do
     [
       bytes: :integer,
       created_at: :integer,
+      expires_at: :integer,
       filename: {:string, :generic},
       id: {:string, :generic},
       object: {:const, "file"},

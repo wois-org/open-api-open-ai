@@ -6,9 +6,11 @@ defmodule OpenAi.Moderations do
   @default_client OpenAi.Client
 
   @doc """
-  Classifies if text is potentially harmful.
+  Classifies if text and/or image inputs are potentially harmful. Learn
+  more in the [moderation guide](/docs/guides/moderation).
+
   """
-  @spec create_moderation(OpenAi.Moderation.CreateRequest.t(), keyword) ::
+  @spec create_moderation(body :: OpenAi.Moderation.CreateRequest.t(), opts :: keyword) ::
           {:ok, OpenAi.Moderation.CreateResponse.t()} | {:error, OpenAi.Error.error()}
   def create_moderation(body, opts \\ []) do
     client = opts[:client] || @default_client

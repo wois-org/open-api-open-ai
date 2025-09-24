@@ -10,13 +10,14 @@ defmodule OpenAi.Message do
           content: [
             OpenAi.Message.Content.Image.File.t()
             | OpenAi.Message.Content.Image.Url.t()
+            | OpenAi.Message.Content.Refusal.t()
             | OpenAi.Message.Content.Text.t()
           ],
           created_at: integer,
           id: String.t(),
           incomplete_at: integer | nil,
           incomplete_details: OpenAi.Message.IncompleteDetails.t() | nil,
-          metadata: map | nil,
+          metadata: map,
           object: String.t(),
           role: String.t(),
           run_id: String.t() | nil,
@@ -54,6 +55,7 @@ defmodule OpenAi.Message do
         union: [
           {OpenAi.Message.Content.Image.File, :t},
           {OpenAi.Message.Content.Image.Url, :t},
+          {OpenAi.Message.Content.Refusal, :t},
           {OpenAi.Message.Content.Text, :t}
         ]
       ],

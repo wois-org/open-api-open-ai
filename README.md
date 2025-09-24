@@ -1,6 +1,7 @@
 # OpenAi REST API Client for Elixir
 [![Coverage Status](https://coveralls.io/repos/github/wois-org/open-api-open-ai/badge.svg?branch=master)](https://coveralls.io/github/wois-org/open-api-open-ai?branch=master)
-[![Hex.pm Vesion](https://img.shields.io/hexpm/v/oapi_open_ai.svg)]()
+[![HexDocs.pm Documentation](https://img.shields.io/badge/hex-docs-dearkgreen.svg)](https://hexdocs.pm/oapi_open_ai/readme.html)
+[![Hex.pm Version](https://img.shields.io/hexpm/v/oapi_open_ai.svg)](https://hex.pm/packages/oapi_open_ai)
 [![Hex.pm Downloads](https://img.shields.io/hexpm/dt/oapi_open_ai.svg)]()
 [![Hex.pm Downloads/week](https://img.shields.io/hexpm/dw/oapi_open_ai.svg)]()
 

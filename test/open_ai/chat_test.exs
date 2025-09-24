@@ -128,12 +128,12 @@ defmodule OpenAi.ChatTest do
           n: 1,
           parallel_tool_calls: false,
           presence_penalty: 0.0,
-          response_format: %Chat.Completion.Request.CreateResponseFormat{
+          response_format: %OpenAi.Response.Format.Json{
             type: "json_object"
           },
           seed: 123,
           stream: false,
-          stream_options: %Chat.Completion.StreamOptions{
+          stream_options: %Chat.Completion.Stream.Options{
             include_usage: false
           },
           temperature: 0.5,
@@ -194,9 +194,9 @@ defmodule OpenAi.ChatTest do
                    },
                    message: %OpenAi.Chat.Completion.Response.Message{
                      content: "choice message content",
-                     function_call: %OpenAi.Chat.Completion.Response.MessageFunctionCall{
-                       arguments: "m_function_arguments",
-                       name: "m_function_name"
+                     function_call: %{
+                       "arguments" => "m_function_arguments",
+                       "name" => "m_function_name"
                      },
                      role: "assistant",
                      tool_calls: [
@@ -244,9 +244,9 @@ defmodule OpenAi.ChatTest do
                    },
                    message: %OpenAi.Chat.Completion.Response.Message{
                      content: "choice message content",
-                     function_call: %OpenAi.Chat.Completion.Response.MessageFunctionCall{
-                       arguments: "m_function_arguments",
-                       name: "m_function_name"
+                     function_call: %{
+                       "arguments" => "m_function_arguments",
+                       "name" => "m_function_name"
                      },
                      role: "assistant",
                      tool_calls: [

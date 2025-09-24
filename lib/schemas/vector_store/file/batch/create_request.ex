@@ -4,6 +4,7 @@ defmodule OpenAi.VectorStore.File.Batch.CreateRequest do
   """
 
   @type t :: %__MODULE__{
+          attributes: OpenAi.VectorStore.File.Attributes.t() | nil,
           chunking_strategy:
             OpenAi.VectorStore.File.ChunkingStrategy.Auto.RequestParam.t()
             | OpenAi.VectorStore.File.ChunkingStrategy.Static.RequestParam.t()
@@ -11,7 +12,7 @@ defmodule OpenAi.VectorStore.File.Batch.CreateRequest do
           file_ids: [String.t()]
         }
 
-  defstruct [:chunking_strategy, :file_ids]
+  defstruct [:attributes, :chunking_strategy, :file_ids]
 
   @doc false
   @spec __fields__(atom) :: keyword
@@ -19,6 +20,7 @@ defmodule OpenAi.VectorStore.File.Batch.CreateRequest do
 
   def __fields__(:t) do
     [
+      attributes: {OpenAi.VectorStore.File.Attributes, :t},
       chunking_strategy:
         {:union,
          [

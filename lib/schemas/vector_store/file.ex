@@ -4,6 +4,7 @@ defmodule OpenAi.VectorStore.File do
   """
 
   @type t :: %__MODULE__{
+          attributes: OpenAi.VectorStore.File.Attributes.t() | nil,
           chunking_strategy:
             OpenAi.VectorStore.File.ChunkingStrategy.Other.ResponseParam.t()
             | OpenAi.VectorStore.File.ChunkingStrategy.Static.ResponseParam.t()
@@ -18,6 +19,7 @@ defmodule OpenAi.VectorStore.File do
         }
 
   defstruct [
+    :attributes,
     :chunking_strategy,
     :created_at,
     :id,
@@ -34,6 +36,7 @@ defmodule OpenAi.VectorStore.File do
 
   def __fields__(:t) do
     [
+      attributes: {OpenAi.VectorStore.File.Attributes, :t},
       chunking_strategy:
         {:union,
          [

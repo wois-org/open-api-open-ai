@@ -4,7 +4,7 @@ defmodule OpenAi.Mocks.Audio do
   """
   def transcription_verbose_json(data) do
     %{
-      duration: "1.0",
+      duration: 1.0,
       language: "en",
       segments: [
         %{
@@ -39,7 +39,7 @@ defmodule OpenAi.Mocks.Audio do
 
   def translation_verbose_json(data) do
     %{
-      duration: "1.0",
+      duration: 1.0,
       language: "en",
       segments: [
         %{
@@ -72,7 +72,8 @@ defmodule OpenAi.Mocks.Audio do
       status_code: 200,
       body:
         %{
-          text: "Hello, world!"
+          text: "Hello, world!",
+          logprobs: []
         }
         |> Map.merge(data)
         |> Poison.encode!()

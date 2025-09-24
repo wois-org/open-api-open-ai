@@ -3,15 +3,21 @@ defmodule OpenAi.Audio.Transcription.CreateResponse.Json do
   Provides struct and type for a Audio.Transcription.CreateResponse.Json
   """
 
-  @type t :: %__MODULE__{text: String.t()}
+  @type t :: %__MODULE__{
+          logprobs: [OpenAi.Audio.Transcription.CreateResponse.JsonLogprobs.t()] | nil,
+          text: String.t()
+        }
 
-  defstruct [:text]
+  defstruct [:logprobs, :text]
 
   @doc false
   @spec __fields__(atom) :: keyword
   def __fields__(type \\ :t)
 
   def __fields__(:t) do
-    [text: {:string, :generic}]
+    [
+      logprobs: [{OpenAi.Audio.Transcription.CreateResponse.JsonLogprobs, :t}],
+      text: {:string, :generic}
+    ]
   end
 end
