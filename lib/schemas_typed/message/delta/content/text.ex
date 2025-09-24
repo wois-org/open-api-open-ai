@@ -35,7 +35,7 @@ defmodule OpenAi.Message.Delta.Content.Text do
           type: String.t(),
           text: OpenAi.Message.Delta.Content.Text.Text.t()
         }
-
+  @derive {Jason.Encoder, only: [:index, :type, :text]}
   defstruct [:index, :type, :text]
 
   @doc false

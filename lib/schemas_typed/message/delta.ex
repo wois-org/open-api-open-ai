@@ -58,7 +58,7 @@ defmodule OpenAi.Message.Delta do
           object: String.t(),
           delta: OpenAi.Message.Delta.Delta.t()
         }
-
+  @derive {Jason.Encoder, only: [:id, :object, :delta]}
   defstruct [
     :id,
     :object,

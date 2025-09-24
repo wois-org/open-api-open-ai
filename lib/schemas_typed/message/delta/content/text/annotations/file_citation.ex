@@ -44,7 +44,7 @@ defmodule OpenAi.Message.Delta.Content.Text.Annotations.FileCitation do
           start_index: integer(),
           end_index: integer()
         }
-
+  @derive {Jason.Encoder, only: [:index, :type, :text, :file_citation, :start_index, :end_index]}
   defstruct [:index, :type, :text, :file_citation, :start_index, :end_index]
 
   @doc false

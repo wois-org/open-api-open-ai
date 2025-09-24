@@ -9,7 +9,7 @@ defmodule OpenAi.Message.Delta.Content.Text.Text do
             | OpenAi.Message.Delta.Content.Text.Annotations.FilePath.t()
           ]
         }
-
+  @derive {Jason.Encoder, only: [:value, :annotations]}
   defstruct [:value, :annotations]
 
   @doc false

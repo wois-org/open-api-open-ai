@@ -33,7 +33,7 @@ defmodule OpenAi.Message.Delta.Content.Image.Url do
           type: String.t(),
           image_url: OpenAi.Message.Delta.Content.Image.UrlImageUrl.t()
         }
-
+  @derive {Jason.Encoder, only: [:index, :type, :image_url]}
   defstruct [:index, :type, :image_url]
 
   @doc false

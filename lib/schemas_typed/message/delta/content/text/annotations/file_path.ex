@@ -40,7 +40,7 @@ defmodule OpenAi.Message.Delta.Content.Text.Annotations.FilePath do
           start_index: integer(),
           end_index: integer()
         }
-
+  @derive {Jason.Encoder, only: [:index, :type, :text, :file_path, :start_index, :end_index]}
   defstruct [:index, :type, :text, :file_path, :start_index, :end_index]
 
   @doc false
