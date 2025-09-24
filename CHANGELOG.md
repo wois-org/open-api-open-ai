@@ -1,14 +1,34 @@
 # Changelog
 <!-- next-header -->
+### Breaking change
+- `OpenAi.Assistant.Tool.File.Search` Module renamed to `OpenAi.Assistant.Tool.FileSearch`
+- `OpenAi.Assistant.Tool.File.SearchFileSearch` Module renamed to `OpenAi.Assistant.Tool.FileSearch.FileSearch`
+- `OpenAi.Assistant.Tool.File.SearchTypeOnly` Module renamed to `OpenAi.Assistant.Tool.FileSearch.TypeOnly`
+- `"timestamp_granularities[]"` field of `OpenAi.Audio.Transcription.CreateRequest` renamed to `timestamp_granularities` 
+- `duration` field of `OpenAi.Audio.Transcription.CreateResponse.VerboseJson` is now a number instead of string.
+- `response_format` field of `Chat.Completion.CreateRequest` is now union of type `OpenAi.Response.Format.*` instead of `Chat.Completion.Request.CreateResponseFormat`
+- `Chat.Completion.StreamOptions` renamed to `Chat.Completion.Stream.Options`
+
 ### Added
 - Support for streaming operations with a dedicated streaming function.
 - Function parameters can now be passed as options in a call to OpenAI.
 - New OpenAI APIs
-    - Audio (Speech to text)
-    - Evals (Test and improve model outputs through evaluations.)
     - Responses (Most advanced interface for generating model responses.)
+    - Audio (Speech to text.)
+    - Evals (Test and improve model outputs through evaluations.)
     - AuditLog (Logs of user actions and configuration changes within this organization.)
-    - Usage (Detailed insights into your activity)
+    - Usage (Detailed insights into your activity.)
+    - Certificates (Manage Mutual TLS certificates across your organization and projects.)
+    - Invites (Invite and manage invitations for an organization.)
+    - Operations (Admin API keys enable Organization Owners to programmatically manage various aspects of their organization, including users, projects, and API keys.)
+    - Projects (Manage the projects within an orgnanization includes creation, updating, and archiving or projects.)
+    - Realtime (Communicate with a multimodal model in real time over low latency interfaces like WebRTC, WebSocket, and SIP.)
+    - Uploads (Creates an intermediate Upload object that you can add Parts to.)
+    - Users (Lists all of the users in the organization.)
+- Extended chat completion with additional CRUD functions.
+- Extended fine tuning with additional CRUD functions, for checkpoint permission.
+- Extended vector store with additional file re lated functions
+
 
 ### Fixed
 - Typo in `submit_tool_outputs_to_run` (previously `submit_tool_ouputs_to_run`).
