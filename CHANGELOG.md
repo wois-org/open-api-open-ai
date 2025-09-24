@@ -1,13 +1,14 @@
 # Changelog
 <!-- next-header -->
 ## [Unreleased] - ReleaseDate
+
 ### Breaking change
 - `OpenAi.Assistant.Tool.File.Search` Module renamed to `OpenAi.Assistant.Tool.FileSearch`
 - `OpenAi.Assistant.Tool.File.SearchFileSearch` Module renamed to `OpenAi.Assistant.Tool.FileSearch.FileSearch`
 - `OpenAi.Assistant.Tool.File.SearchTypeOnly` Module renamed to `OpenAi.Assistant.Tool.FileSearch.TypeOnly`
 - `"timestamp_granularities[]"` field of `OpenAi.Audio.Transcription.CreateRequest` renamed to `timestamp_granularities` 
 - `duration` field of `OpenAi.Audio.Transcription.CreateResponse.VerboseJson` is now a number instead of string.
-- `response_format` field of `Chat.Completion.CreateRequest` is now union of type `OpenAi.Response.Format.*` instead of `Chat.Completion.Request.CreateResponseFormat`
+- `response_format` field of `Chat.Completion.CreateRequest` is now union of type `OpenAi.Response.Format._` instead of `Chat.Completion.Request.CreateResponseFormat`
 - `Chat.Completion.StreamOptions` renamed to `Chat.Completion.Stream.Options`
 
 ### Added
@@ -22,18 +23,19 @@
     - Certificates (Manage Mutual TLS certificates across your organization and projects.)
     - Invites (Invite and manage invitations for an organization.)
     - Operations (Admin API keys enable Organization Owners to programmatically manage various aspects of their organization, including users, projects, and API keys.)
-    - Projects (Manage the projects within an orgnanization includes creation, updating, and archiving or projects.)
-    - Realtime (Communicate with a multimodal model in real time over low latency interfaces like WebRTC, WebSocket, and SIP.)
+    - Projects (Manage the projects within an organization includes creation, updating, and archiving or projects.)
+    - Realtime (Communicate with a multi-modal model in real time over low latency interfaces like WebRTC, WebSocket, and SIP.)
     - Uploads (Creates an intermediate Upload object that you can add Parts to.)
     - Users (Lists all of the users in the organization.)
 - Extended chat completion with additional CRUD functions.
 - Extended fine tuning with additional CRUD functions, for checkpoint permission.
 - Extended vector store with additional file re lated functions
 
-
 ### Fixed
 - Typo in `submit_tool_outputs_to_run` (previously `submit_tool_ouputs_to_run`).
 
+## [0.4.5] - 2024-9-16
+## [0.4.4] - 2024-9-16
 ## [0.4.3] - 2024-8-12
 ### Fixed
 - Documentation github branch
@@ -113,7 +115,9 @@
 - Written tests for all operations 
 
 <!-- next-url -->
-[Unreleased]: https://github.com/wois-org/open-api-open-ai/compare/v0.4.3...HEAD
+[Unreleased]: https://github.com/wois-org/open-api-open-ai/compare/v0.4.5...HEAD
+[0.4.5]: https://github.com/wois-org/open-api-open-ai/compare/v0.4.4...v0.4.5
+[0.4.4]: https://github.com/wois-org/open-api-open-ai/compare/v0.4.3...v0.4.4
 [0.4.3]: https://github.com/wois-org/open-api-open-ai/compare/v0.4.2...v0.4.3
 [0.4.2]: https://github.com/wois-org/open-api-open-ai/compare/v0.4.1...v0.4.2
 [0.4.1]: https://github.com/wois-org/open-api-open-ai/compare/v0.4.0...v0.4.1
