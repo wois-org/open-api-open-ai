@@ -14,7 +14,7 @@ jobs:
   test:
     env:
       MIX_ENV: test
-    name: Build and test
+    name: Test
     runs-on: ubuntu-latest
 
     steps:
