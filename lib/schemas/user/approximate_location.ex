@@ -1,0 +1,29 @@
+defmodule OpenAi.User.ApproximateLocation do
+  @moduledoc """
+  Provides struct and type for a User.ApproximateLocation
+  """
+
+  @type t :: %__MODULE__{
+          city: String.t() | nil,
+          country: String.t() | nil,
+          region: String.t() | nil,
+          timezone: String.t() | nil,
+          type: String.t()
+        }
+
+  defstruct [:city, :country, :region, :timezone, :type]
+
+  @doc false
+  @spec __fields__(atom) :: keyword
+  def __fields__(type \\ :t)
+
+  def __fields__(:t) do
+    [
+      city: {:union, [{:string, :generic}, :null]},
+      country: {:union, [{:string, :generic}, :null]},
+      region: {:union, [{:string, :generic}, :null]},
+      timezone: {:union, [{:string, :generic}, :null]},
+      type: {:const, "approximate"}
+    ]
+  end
+end

@@ -4,7 +4,7 @@ defmodule OpenAi.Audio.Translation.CreateResponse.VerboseJson do
   """
 
   @type t :: %__MODULE__{
-          duration: String.t(),
+          duration: number,
           language: String.t(),
           segments: [OpenAi.Audio.Transcription.Segment.t()] | nil,
           text: String.t()
@@ -18,7 +18,7 @@ defmodule OpenAi.Audio.Translation.CreateResponse.VerboseJson do
 
   def __fields__(:t) do
     [
-      duration: {:string, :generic},
+      duration: :number,
       language: {:string, :generic},
       segments: [{OpenAi.Audio.Transcription.Segment, :t}],
       text: {:string, :generic}

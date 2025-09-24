@@ -16,12 +16,16 @@ defmodule OpenAi.Run do
           last_error: OpenAi.Run.LastError.t() | nil,
           max_completion_tokens: integer | nil,
           max_prompt_tokens: integer | nil,
-          metadata: map | nil,
+          metadata: map,
           model: String.t(),
           object: String.t(),
           parallel_tool_calls: boolean,
           required_action: OpenAi.Run.RequiredAction.t() | nil,
-          response_format: OpenAi.Assistant.ApiResponseFormat.t() | String.t(),
+          response_format:
+            OpenAi.Response.Format.Json.t()
+            | OpenAi.Response.Format.JsonSchema.t()
+            | OpenAi.Response.Format.Text.t()
+            | String.t(),
           started_at: integer | nil,
           status: String.t(),
           temperature: number | nil,
@@ -29,7 +33,7 @@ defmodule OpenAi.Run do
           tool_choice: OpenAi.Assistant.NamedToolChoice.t() | String.t(),
           tools: [
             OpenAi.Assistant.Tool.Code.t()
-            | OpenAi.Assistant.Tool.File.Search.t()
+            | OpenAi.Assistant.Tool.FileSearch.t()
             | OpenAi.Assistant.Tool.Function.t()
           ],
           top_p: number | nil,
@@ -91,7 +95,13 @@ defmodule OpenAi.Run do
       parallel_tool_calls: :boolean,
       required_action: {OpenAi.Run.RequiredAction, :t},
       response_format:
-        {:union, [{OpenAi.Assistant.ApiResponseFormat, :t}, enum: ["none", "auto"]]},
+        {:union,
+         [
+           {OpenAi.Response.Format.Json, :t},
+           {OpenAi.Response.Format.JsonSchema, :t},
+           {OpenAi.Response.Format.Text, :t},
+           const: "auto"
+         ]},
       started_at: :integer,
       status:
         {:enum,
@@ -113,7 +123,7 @@ defmodule OpenAi.Run do
       tools: [
         union: [
           {OpenAi.Assistant.Tool.Code, :t},
-          {OpenAi.Assistant.Tool.File.Search, :t},
+          {OpenAi.Assistant.Tool.FileSearch, :t},
           {OpenAi.Assistant.Tool.Function, :t}
         ]
       ],

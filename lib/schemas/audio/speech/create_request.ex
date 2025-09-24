@@ -5,13 +5,14 @@ defmodule OpenAi.Audio.Speech.CreateRequest do
 
   @type t :: %__MODULE__{
           input: String.t(),
+          instructions: String.t() | nil,
           model: String.t(),
           response_format: String.t() | nil,
           speed: number | nil,
           voice: String.t()
         }
 
-  defstruct [:input, :model, :response_format, :speed, :voice]
+  defstruct [:input, :instructions, :model, :response_format, :speed, :voice]
 
   @doc false
   @spec __fields__(atom) :: keyword
@@ -20,10 +21,26 @@ defmodule OpenAi.Audio.Speech.CreateRequest do
   def __fields__(:t) do
     [
       input: {:string, :generic},
-      model: {:union, enum: ["tts-1", "tts-1-hd"], string: :generic},
+      instructions: {:string, :generic},
+      model: {:union, enum: ["tts-1", "tts-1-hd", "gpt-4o-mini-tts"], string: :generic},
       response_format: {:enum, ["mp3", "opus", "aac", "flac", "wav", "pcm"]},
       speed: :number,
-      voice: {:enum, ["alloy", "echo", "fable", "onyx", "nova", "shimmer"]}
+      voice:
+        {:union,
+         enum: [
+           "alloy",
+           "ash",
+           "ballad",
+           "coral",
+           "echo",
+           "fable",
+           "onyx",
+           "nova",
+           "sage",
+           "shimmer",
+           "verse"
+         ],
+         string: :generic}
     ]
   end
 end

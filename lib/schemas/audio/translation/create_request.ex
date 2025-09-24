@@ -22,7 +22,7 @@ defmodule OpenAi.Audio.Translation.CreateRequest do
       file: {:string, :generic},
       model: {:union, const: "whisper-1", string: :generic},
       prompt: {:string, :generic},
-      response_format: {:string, :generic},
+      response_format: {:enum, ["json", "text", "srt", "verbose_json", "vtt"]},
       temperature: :number
     ]
   end

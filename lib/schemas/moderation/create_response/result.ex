@@ -5,11 +5,13 @@ defmodule OpenAi.Moderation.CreateResponse.Result do
 
   @type t :: %__MODULE__{
           categories: OpenAi.Moderation.CreateResponse.Result.Categories.t(),
+          category_applied_input_types:
+            OpenAi.Moderation.CreateResponse.Result.CategoryAppliedInputTypes.t(),
           category_scores: OpenAi.Moderation.CreateResponse.Result.CategoryScores.t(),
           flagged: boolean
         }
 
-  defstruct [:categories, :category_scores, :flagged]
+  defstruct [:categories, :category_applied_input_types, :category_scores, :flagged]
 
   @doc false
   @spec __fields__(atom) :: keyword
@@ -18,6 +20,8 @@ defmodule OpenAi.Moderation.CreateResponse.Result do
   def __fields__(:t) do
     [
       categories: {OpenAi.Moderation.CreateResponse.Result.Categories, :t},
+      category_applied_input_types:
+        {OpenAi.Moderation.CreateResponse.Result.CategoryAppliedInputTypes, :t},
       category_scores: {OpenAi.Moderation.CreateResponse.Result.CategoryScores, :t},
       flagged: :boolean
     ]

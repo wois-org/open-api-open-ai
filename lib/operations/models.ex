@@ -8,7 +8,7 @@ defmodule OpenAi.Models do
   @doc """
   Delete a fine-tuned model. You must have the Owner role in your organization to delete a model.
   """
-  @spec delete_model(String.t(), keyword) ::
+  @spec delete_model(model :: String.t(), opts :: keyword) ::
           {:ok, OpenAi.Model.DeleteResponse.t()} | {:error, OpenAi.Error.error()}
   def delete_model(model, opts \\ []) do
     client = opts[:client] || @default_client
@@ -26,7 +26,7 @@ defmodule OpenAi.Models do
   @doc """
   Lists the currently available models, and provides basic information about each one such as the owner and availability.
   """
-  @spec list_models(keyword) ::
+  @spec list_models(opts :: keyword) ::
           {:ok, OpenAi.Model.ListResponse.t()} | {:error, OpenAi.Error.error()}
   def list_models(opts \\ []) do
     client = opts[:client] || @default_client
@@ -44,7 +44,7 @@ defmodule OpenAi.Models do
   @doc """
   Retrieves a model instance, providing basic information about the model such as the owner and permissioning.
   """
-  @spec retrieve_model(String.t(), keyword) ::
+  @spec retrieve_model(model :: String.t(), opts :: keyword) ::
           {:ok, OpenAi.Model.t()} | {:error, OpenAi.Error.error()}
   def retrieve_model(model, opts \\ []) do
     client = opts[:client] || @default_client

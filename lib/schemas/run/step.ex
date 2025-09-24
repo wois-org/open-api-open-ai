@@ -12,7 +12,7 @@ defmodule OpenAi.Run.Step do
           failed_at: integer | nil,
           id: String.t(),
           last_error: OpenAi.Run.Step.LastError.t() | nil,
-          metadata: map | nil,
+          metadata: map,
           object: String.t(),
           run_id: String.t(),
           status: String.t(),

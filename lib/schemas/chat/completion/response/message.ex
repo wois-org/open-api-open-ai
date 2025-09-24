@@ -4,13 +4,16 @@ defmodule OpenAi.Chat.Completion.Response.Message do
   """
 
   @type t :: %__MODULE__{
+          annotations: [map] | nil,
+          audio: map | nil,
           content: String.t() | nil,
-          function_call: OpenAi.Chat.Completion.Response.MessageFunctionCall.t() | nil,
+          function_call: map | nil,
+          refusal: String.t() | nil,
           role: String.t(),
           tool_calls: [OpenAi.Chat.Completion.MessageTool.Call.t()] | nil
         }
 
-  defstruct [:content, :function_call, :role, :tool_calls]
+  defstruct [:annotations, :audio, :content, :function_call, :refusal, :role, :tool_calls]
 
   @doc false
   @spec __fields__(atom) :: keyword
@@ -18,8 +21,11 @@ defmodule OpenAi.Chat.Completion.Response.Message do
 
   def __fields__(:t) do
     [
+      annotations: [:map],
+      audio: :map,
       content: {:string, :generic},
-      function_call: {OpenAi.Chat.Completion.Response.MessageFunctionCall, :t},
+      function_call: :map,
+      refusal: {:string, :generic},
       role: {:const, "assistant"},
       tool_calls: [{OpenAi.Chat.Completion.MessageTool.Call, :t}]
     ]

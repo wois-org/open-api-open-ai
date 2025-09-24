@@ -8,7 +8,7 @@ defmodule OpenAi.Embeddings do
   @doc """
   Creates an embedding vector representing the input text.
   """
-  @spec create_embedding(OpenAi.Embedding.CreateRequest.t(), keyword) ::
+  @spec create_embedding(body :: OpenAi.Embedding.CreateRequest.t(), opts :: keyword) ::
           {:ok, OpenAi.Embedding.CreateResponse.t()} | {:error, OpenAi.Error.error()}
   def create_embedding(body, opts \\ []) do
     client = opts[:client] || @default_client
