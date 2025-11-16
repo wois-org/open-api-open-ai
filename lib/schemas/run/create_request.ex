@@ -23,6 +23,7 @@ defmodule OpenAi.Run.CreateRequest do
           stream: boolean | nil,
           temperature: number | nil,
           tool_choice: OpenAi.Assistant.NamedToolChoice.t() | String.t() | nil,
+          tool_resources: OpenAi.Assistant.Tool.Resource.t() | nil,
           tools:
             [
               OpenAi.Assistant.Tool.Code.t()
@@ -48,6 +49,7 @@ defmodule OpenAi.Run.CreateRequest do
     :response_format,
     :stream,
     :temperature,
+    :tool_resources,
     :tool_choice,
     :tools,
     :top_p,
@@ -120,6 +122,7 @@ defmodule OpenAi.Run.CreateRequest do
          ]},
       stream: :boolean,
       temperature: :number,
+      tool_resources: {OpenAi.Assistant.Tool.Resources, :t},
       tool_choice:
         {:union, [{OpenAi.Assistant.NamedToolChoice, :t}, enum: ["none", "auto", "required"]]},
       tools: [

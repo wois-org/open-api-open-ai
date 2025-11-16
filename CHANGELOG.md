@@ -2,6 +2,11 @@
 <!-- next-header -->
 
 ## [Unreleased] - ReleaseDate
+### Added
+- `tool_resources` field to the `CreateRequest` of Run schema, along with its corresponding type and validation, allowing to use a custom vector_store within a run step.
+
+### Fixed
+* typo in object constant for vector store batch schema
 ## [1.0.0] - 2025-9-24
 
 ### Breaking change

@@ -5,7 +5,7 @@ defmodule OpenAi.Mocks.VectorStoreFileBatch do
   def vector_store_file_batch(data) do
     %{
       id: "vsfb_abc123",
-      object: "vector_store.files_batch",
+      object: "vector_store.file_batch",
       created_at: 1_699_061_776,
       vector_store_id: "vs_abc123",
       status: "in_progress",

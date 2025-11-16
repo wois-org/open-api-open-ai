@@ -23,7 +23,7 @@ defmodule OpenAi.VectorStore.File.Batch do
       created_at: :integer,
       file_counts: {OpenAi.VectorStore.File.Batch.FileCounts, :t},
       id: {:string, :generic},
-      object: {:const, "vector_store.files_batch"},
+      object: {:const, "vector_store.file_batch"},
       status: {:enum, ["in_progress", "completed", "cancelled", "failed"]},
       vector_store_id: {:string, :generic}
     ]
