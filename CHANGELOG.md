@@ -2,6 +2,8 @@
 <!-- next-header -->
 
 ## [Unreleased] - ReleaseDate
+
+## [1.0.1] - 2025-11-27
 ### Fixed
 - Parsing replies of "Responses" API that do not match object description
 - Added couple of tests for create_response/1 and delete_response/1. Along with supporting mocks
@@ -119,7 +121,8 @@
 - Written tests for all operations 
 
 <!-- next-url -->
-[Unreleased]: https://github.com/wois-org/open-api-open-ai/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/wois-org/open-api-open-ai/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/wois-org/open-api-open-ai/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/wois-org/open-api-open-ai/compare/v0.4.3...v1.0.0
 [0.4.3]: https://github.com/wois-org/open-api-open-ai/compare/v0.4.2...v0.4.3
 [0.4.2]: https://github.com/wois-org/open-api-open-ai/compare/v0.4.1...v0.4.2
