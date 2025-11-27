@@ -50,6 +50,14 @@ defmodule OpenAi.Client.Value do
       |> Map.keys()
       |> Enum.join("")
 
+    value_object =
+      value
+      |> is_map()
+      |> case do
+        true -> {:const, value |> Map.get("object")}
+        false -> nil
+      end
+
     union_types
     |> Enum.find(fn
       :integer ->
@@ -62,11 +70,14 @@ defmodule OpenAi.Client.Value do
         const == value
 
       {struct, type} ->
-        struct_fields = struct.__fields__(type)
+        struct_fields =
+          struct.__fields__(type)
+
+        struct_object = struct_fields |> Keyword.get(:object)
 
         struct_fields
         |> Enum.find(fn {field, _} -> field == :type end)
-        |> struct_matches?(value, {struct_fields, value_fields})
+        |> struct_matches?(value, {value_object, struct_object, struct_fields, value_fields})
     end)
   end
 
@@ -79,8 +90,9 @@ defmodule OpenAi.Client.Value do
   defp struct_matches?({:type, {:const, type}}, %{"type" => t}, _), do: t == type
   defp struct_matches?({:type, {:const, type}}, v, _) when v |> is_binary, do: v == type
   defp struct_matches?({:type, {:const, _type}}, _, _), do: false
+  defp struct_matches?(_, _, {{:const, vo}, {:const, so}, _, _}) when vo == so, do: true
 
-  defp struct_matches?(_, _, {struct_fields, value_fields}) do
+  defp struct_matches?(_, _, {_, _, struct_fields, value_fields}) do
     struct_fields
     |> Enum.reduce("", fn {field, _}, acc -> acc <> (field |> Atom.to_string()) end)
     |> Kernel.==(value_fields)

@@ -1,5 +1,4 @@
 defmodule OpenExAi.MixProject do
-  alias OpenAi.Realtime
   use Mix.Project
 
   def project do
@@ -31,9 +30,9 @@ defmodule OpenExAi.MixProject do
       {:credo, "~> 1.7", runtime: false},
       {:dialyxir, "~> 1.0", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.29", only: :dev, runtime: false},
-      # {:oapi_generator, "~> 0.2", only: :dev, runtime: false},
+      {:oapi_generator, "~> 0.2", only: :dev, runtime: false},
       # {:oapi_generator, git: "git@github.com:aj-foster/open-api-generator.git", branch: "main", only: :dev, runtime: false},
-      {:oapi_generator, path: "../wois/open-api-generator", only: :dev},
+      # {:oapi_generator, path: "../wois/open-api-generator", only: :dev},
       {:httpoison, "~> 2.0"},
       {:poison, "~> 5.0"},
       {:mox, "~> 1.0", only: :test},
@@ -95,7 +94,7 @@ defmodule OpenExAi.MixProject do
         ],
         Containers: [
           "OpenAi.Containers",
-          "OpenAi.ContainerFiles",
+          "OpenAi.ContainerFiles"
         ],
         Realtime: [
           OpenAi.Realtime,

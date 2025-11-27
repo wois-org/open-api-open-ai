@@ -85,7 +85,7 @@ Please consider these when creating issues or opening pull requests:
 
 * If the generated code is out of date, the fix may be as simple as:
   1. Updating OpenAI yaml configuration in /config/openai.yaml 
-    Its possible to get new config from [OpenAI GiHub](https://github.com/openai/openai-openapi/blob/master/openapi.yaml)
+    Its possible to get new config from [OpenAI GiHub](https://github.com/openai/openai-openapi)
   2. Running `mix generate`.
 * If the client isn't working as expected, the fix may be more involved and require careful thought and versioning.
 

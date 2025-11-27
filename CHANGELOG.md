@@ -2,6 +2,10 @@
 <!-- next-header -->
 
 ## [Unreleased] - ReleaseDate
+### Fixed
+- Parsing replies of "Responses" API that do not match object description
+- Added couple of tests for create_response/1 and delete_response/1. Along with supporting mocks
+
 ## [1.0.0] - 2025-9-24
 
 ### Breaking change
