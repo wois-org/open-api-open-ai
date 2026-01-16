@@ -2,6 +2,8 @@
 <!-- next-header -->
 
 ## [Unreleased] - ReleaseDate
+
+## [1.0.2] - 2026-1-16
 ### Fixed
 - Handling response with generic string in union type
 
@@ -123,7 +125,8 @@
 - Written tests for all operations 
 
 <!-- next-url -->
-[Unreleased]: https://github.com/wois-org/open-api-open-ai/compare/v1.0.1...HEAD
+[Unreleased]: https://github.com/wois-org/open-api-open-ai/compare/v1.0.2...HEAD
+[1.0.2]: https://github.com/wois-org/open-api-open-ai/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/wois-org/open-api-open-ai/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/wois-org/open-api-open-ai/compare/v0.4.3...v1.0.0
 [0.4.3]: https://github.com/wois-org/open-api-open-ai/compare/v0.4.2...v0.4.3
