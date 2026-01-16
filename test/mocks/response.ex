@@ -1,4 +1,7 @@
 defmodule OpenAi.Mocks.Response do
+  @moduledoc """
+  Mocks for response related responses.
+  """
   def object(data) do
     %{
       background: false,

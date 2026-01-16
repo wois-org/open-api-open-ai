@@ -2,6 +2,8 @@
 <!-- next-header -->
 
 ## [Unreleased] - ReleaseDate
+### Fixed
+- Handling response with generic string in union type
 
 ## [1.0.1] - 2025-11-27
 ### Fixed

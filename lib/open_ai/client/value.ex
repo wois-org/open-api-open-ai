@@ -69,6 +69,9 @@ defmodule OpenAi.Client.Value do
       {:const, const} ->
         const == value
 
+      {:string, :generic} ->
+        value
+
       {struct, type} ->
         struct_fields =
           struct.__fields__(type)

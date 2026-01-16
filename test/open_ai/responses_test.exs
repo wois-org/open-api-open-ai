@@ -88,6 +88,48 @@ defmodule OpenAi.ResponsesTest do
     end
   end
 
+  test "with web search tool response" do
+    expect(HTTPoisonMock, :request, fn request ->
+      assert request.method == :post
+      assert request.url == "https://api.openai.com/v1/responses"
+
+      {:ok,
+       OpenAi.Mocks.Responses.create_response(%{
+         "tools" => [
+           %{
+             "search_context_size" => "medium",
+             "type" => "web_search_preview",
+             "user_location" => %{
+               "country" => "US",
+               "type" => "approximate"
+             }
+           }
+         ]
+       })}
+    end)
+
+    assert {:ok,
+            %OpenAi.Response{
+              tools: [
+                %OpenAi.Response.WebSearch.PreviewTool{
+                  search_context_size: "medium",
+                  type: "web_search_preview",
+                  user_location: %OpenAi.User.ApproximateLocation{
+                    country: "US",
+                    type: "approximate"
+                  }
+                }
+              ]
+            }} =
+             %Response.Create{
+               stream: false,
+               instructions: "Tell me about this website",
+               model: "gpt-4o-mini",
+               input: "https://example.com"
+             }
+             |> Responses.create_response()
+  end
+
   describe "delete_response/1" do
     test "correct parameters" do
       expect(HTTPoisonMock, :request, fn request ->
@@ -97,6 +139,7 @@ defmodule OpenAi.ResponsesTest do
         {:ok, OpenAi.Mocks.Responses.delete_response()}
       end)
 
+      # TODO improve this test when OpenAI will fix specs
       assert "resp_XXXX" |> Responses.delete_response() |> inspect() =~ "\"deleted\" => true"
     end
   end
